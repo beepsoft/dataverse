@@ -1012,6 +1012,18 @@
                                             <container>solr</container>
                                             <container>postgresql</container>
                                         </dependsOn>
+                                        <wait>
+                                            <http>
+                                                <url>http://localhost:8080/robots.txt</url>
+                                                <method>GET</method>
+                                                <status>200..399</status>
+                                            </http>
+                                            <log>dataverse was successfully deployed</log>
+                                            <time>180000</time>
+                                            <exec>
+                                                <postStart>/opt/payara/scripts/bootstrap-job.sh</postStart>
+                                            </exec>
+                                        </wait>
                                     </run>
                                 </image>
                                 <!-- Solr K8s image -->
