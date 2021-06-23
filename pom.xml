@@ -999,10 +999,17 @@
                                         <env>
                                             <DATAVERSE_DB_USER>dataverse</DATAVERSE_DB_USER>
                                             <DATAVERSE_DB_PASSWORD>changeme</DATAVERSE_DB_PASSWORD>
+                                            <ENABLE_JDWP>1</ENABLE_JDWP>
+                                            <ENABLE_JREBEL>1</ENABLE_JREBEL>
                                         </env>
                                         <hostname>dataverse</hostname>
                                         <ports>
+                                            <!-- Usual HTTP access -->
                                             <port>8080:8080</port>
+                                            <!-- JDWP for remote debugging -->
+                                            <port>9009:9009</port>
+                                            <!-- JMX remote monitoring -->
+                                            <port>8686:8686</port>
                                         </ports>
                                         <network>
                                             <mode>custom</mode>
