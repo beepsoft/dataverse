@@ -2,7 +2,8 @@ name: Shellcheck
 on:
     pull_request:
         paths:
-            - "**.sh"
+            - "conf/container/**.sh"
+            - "conf/solr/**.sh"
 jobs:
     shellcheck:
         name: Shellcheck
