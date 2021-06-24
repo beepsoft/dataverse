@@ -1065,7 +1065,7 @@
                                         </network>
                                     </run>
                                 </image>
-                                <!-- Postgresql Image (no build, run only -->
+                                <!-- Postgresql Image (no build, run only) -->
                                 <image>
                                     <alias>postgresql</alias>
                                     <name>postgres:${postgresql.server.version}</name>
@@ -1079,6 +1079,27 @@
                                             <POSTGRES_USER>${ct.run.db.user}</POSTGRES_USER>
                                             <POSTGRES_PASSWORD>${ct.run.db.pass}</POSTGRES_PASSWORD>
                                         </env>
+                                    </run>
+                                </image>
+                                <!-- MailHog Fake SMTP Server (no build, run only) -->
+                                <image>
+                                    <alias>mailhog</alias>
+                                    <name>mailhog/mailhog:v1.0.1</name>
+                                    <run>
+                                        <hostname>postfix</hostname>
+                                        <env>
+                                            <MH_HOSTNAME>postfix</MH_HOSTNAME>
+                                            <MH_STORAGE>memory</MH_STORAGE>
+                                            <MH_SMTP_BIND_ADDR>0.0.0.0:25</MH_SMTP_BIND_ADDR>
+                                        </env>
+                                        <ports>
+                                            <!-- Web UI & REST API for retrieved mails -->
+                                            <port>8025:8025</port>
+                                        </ports>
+                                        <network>
+                                            <mode>custom</mode>
+                                            <name>dataverse</name>
+                                        </network>
                                     </run>
                                 </image>
                             </images>
