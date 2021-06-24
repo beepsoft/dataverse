@@ -71,6 +71,7 @@ ARG ASADMIN="${PAYARA_DIR}/bin/asadmin --user=${ADMIN_USER} --passwordfile=${PAS
 ### PART 1: SYSTEM ###
 USER root
 WORKDIR /
+SHELL ["/bin/bash", "-euo", "pipefail", "-c"]
 RUN true && \
     # Create pathes
     mkdir -p ${HOME_DIR} ${PAYARA_DIR} ${DEPLOY_DIR} ${CONFIG_DIR} ${SCRIPT_DIR} && \
@@ -83,10 +84,11 @@ RUN true && \
     chown -R payara: ${HOME_DIR} && \
     chown -R payara: ${DATA_DIR} ${METADATA_DIR} ${DOCROOT_DIR} ${SECRETS_DIR} ${DUMPS_DIR}
 
+# Installing the packages in an extra container layer for better caching
 RUN true && \
     # Install packages
     apt-get update -q && \
-    apt-get install -qqy ${PKGS} && \
+    apt-get install -qqy --no-install-recommends ${PKGS} && \
 
     # Download & check esh template script
     curl -sSfL -o /usr/bin/esh https://raw.githubusercontent.com/jirutka/esh/v${ESH_VERSION}/esh && \
@@ -125,7 +127,8 @@ COPY --chown=payara:payara maven/scripts/system ${SCRIPT_DIR}/
 # Configure the domain to be container and production ready
 RUN true && \
     # Set admin password
-    echo "AS_ADMIN_PASSWORD=\nAS_ADMIN_NEWPASSWORD=${ADMIN_PASSWORD}" > /tmp/password-change-file.txt && \
+    echo "AS_ADMIN_PASSWORD=" > /tmp/password-change-file.txt && \
+    echo "AS_ADMIN_NEWPASSWORD=${ADMIN_PASSWORD}" >> /tmp/password-change-file.txt && \
     echo "AS_ADMIN_PASSWORD=${ADMIN_PASSWORD}" >> ${PASSWORD_FILE}  && \
     asadmin --user=${ADMIN_USER} --passwordfile=/tmp/password-change-file.txt change-admin-password --domain_name=${DOMAIN_NAME} && \
     # Start domain for configuration
@@ -205,6 +208,7 @@ RUN ln -s ${DEPLOY_DIR}/dataverse/supplements/jhove.conf ${PAYARA_DIR}/glassfish
 COPY --chown=payara:payara maven/scripts/app ${SCRIPT_DIR}/
 RUN chmod +x ${SCRIPT_DIR}/*
 
-# Set the entrypoint
+# Set the entrypoint to tini (as a process supervisor)
 ENTRYPOINT ["/usr/bin/tini", "--"]
-CMD "${SCRIPT_DIR}/entrypoint.sh"
+# JSON syntax should be used, but bypassed shell. Thus re-add expansion via shell exec.
+CMD ["sh", "-c", "${SCRIPT_DIR}/entrypoint.sh"]
