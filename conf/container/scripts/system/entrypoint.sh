@@ -6,7 +6,7 @@
 #
 ##########################################################################################################
 
-for f in ${SCRIPT_DIR}/init_* ${SCRIPT_DIR}/init.d/*; do
+for f in "${SCRIPT_DIR}"/init_* "${SCRIPT_DIR}"/init.d/*; do
       case "$f" in
         *.sh)  echo "[Entrypoint] running $f"; . "$f" ;;
         *)     echo "[Entrypoint] ignoring $f" ;;
@@ -14,4 +14,4 @@ for f in ${SCRIPT_DIR}/init_* ${SCRIPT_DIR}/init.d/*; do
       echo
 done
 
-exec ${SCRIPT_DIR}/startInForeground.sh $PAYARA_ARGS
+exec "${SCRIPT_DIR}"/startInForeground.sh "${PAYARA_ARGS}"

@@ -10,7 +10,8 @@
 # Fail on any error
 set -euo pipefail
 # Include some sane defaults
-. ${SCRIPT_DIR}/default.config
+# shellcheck disable=SC1091
+. "${SCRIPT_DIR}"/default.config
 DATAVERSE_SERVICE_HOST=${DATAVERSE_SERVICE_HOST:-"dataverse"}
 DATAVERSE_SERVICE_PORT_HTTP=${DATAVERSE_SERVICE_PORT_HTTP:-"8080"}
 DATAVERSE_URL=${DATAVERSE_URL:-"http://${DATAVERSE_SERVICE_HOST}:${DATAVERSE_SERVICE_PORT_HTTP}"}
@@ -28,11 +29,11 @@ fi
 # Load dataverseAdmin password if present
 if [ -s "${SECRETS_DIR}/admin/password" ]; then
   echo "Loading admin password from secret file."
-  ADMIN_PASSWORD=`cat ${SECRETS_DIR}/admin/password`
+  ADMIN_PASSWORD=$(cat "${SECRETS_DIR}"/admin/password)
 fi
 
 # 2) Initialize common data structures to make Dataverse usable
-cd ${DEPLOY_DIR}/dataverse/supplements
+cd "${DEPLOY_DIR}"/dataverse/supplements
 # 2a) Patch load scripts with k8s based URL
 sed -i -e "s#localhost:8080#${DATAVERSE_SERVICE_HOST}:${DATAVERSE_SERVICE_PORT_HTTP}#" setup-*.sh
 # 2b) Patch user and root dataverse JSON with contact email
@@ -46,15 +47,15 @@ curl -sS -X PUT -d "${SOLR_K8S_HOST}:8983" "${DATAVERSE_URL}/api/admin/settings/
 
 # 5.) Provision builtin users key to enable creation of more builtin users
 if [ -s "${SECRETS_DIR}/api/userskey" ]; then
-  curl -sS -X PUT -d "`cat ${SECRETS_DIR}/api/userskey`" "${DATAVERSE_URL}/api/admin/settings/BuiltinUsers.KEY"
+  curl -sS -X PUT -d "$(cat "${SECRETS_DIR}"/api/userskey)" "${DATAVERSE_URL}/api/admin/settings/BuiltinUsers.KEY"
 else
   curl -sS -X DELETE "${DATAVERSE_URL}/api/admin/settings/BuiltinUsers.KEY"
 fi
 
 # 6.) Block access to the API endpoints, but allow for request with key from secret
-curl -sS -X PUT -d "`cat ${SECRETS_DIR}/api/key`" "${DATAVERSE_URL}/api/admin/settings/:BlockedApiKey"
+curl -sS -X PUT -d "$(cat "${SECRETS_DIR}"/api/key)" "${DATAVERSE_URL}/api/admin/settings/:BlockedApiKey"
 curl -sS -X PUT -d unblock-key "${DATAVERSE_URL}/api/admin/settings/:BlockedApiPolicy"
 curl -sS -X PUT -d admin,test "${DATAVERSE_URL}/api/admin/settings/:BlockedApiEndpoints"
 
 # Initial configuration of Dataverse
-exec ${SCRIPT_DIR}/config-job.sh
+exec "${SCRIPT_DIR}"/config-job.sh

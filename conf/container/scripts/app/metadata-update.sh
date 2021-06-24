@@ -18,10 +18,10 @@ if [ ! -s "${SECRETS_DIR}/api/key" ]; then
   echo "No API key present. Failing."
   exit 126
 fi
-API_KEY=`cat ${SECRETS_DIR}/api/key`
+API_KEY=$(cat "${SECRETS_DIR}"/api/key)
 
 # Find all TSV files
-TSVS=`find "${METADATA_DIR}" "${HOME_DIR}" -maxdepth 5 -iname '*.tsv'`
+TSVS=$(find "${METADATA_DIR}" "${HOME_DIR}" -maxdepth 5 -iname '*.tsv')
 
 # Check for builtin blocks to be present
 BUILTIN=("astrophysics.tsv" "biomedical.tsv" "citation.tsv" "geospatial.tsv" "journals.tsv" "social_science.tsv")
@@ -45,7 +45,7 @@ fi
 # Load metadata blocks
 while IFS= read -r TSV; do
   echo -n "Loading ${TSV}: "
-  OUTPUT=`curl -sS -f -H "Content-type: text/tab-separated-values" -X POST --data-binary "@${TSV}" "${DATAVERSE_URL}/api/admin/datasetfield/load?unblock-key=${API_KEY}" 2>&1 || echo -n ""`
+  OUTPUT=$(curl -sS -f -H "Content-type: text/tab-separated-values" -X POST --data-binary "@${TSV}" "${DATAVERSE_URL}/api/admin/datasetfield/load?unblock-key=${API_KEY}" 2>&1 || echo -n "")
   echo "$OUTPUT" | jq -rM '.status' 2>/dev/null || echo -e 'FAILED\n' "$OUTPUT"
 done <<< "${TSVS}"
 
@@ -55,5 +55,5 @@ echo "Firing webhook for Solr update. Response following:"
 echo "--------------"
 curl --header "Content-Type: application/json" \
      --request POST -sS -f \
-     --data "`jq -Mn --arg key "${API_KEY}" --arg url "${DATAVERSE_URL}" '{ "api_key": $key, "dataverse_url": $url }'`" \
+     --data "$(jq -Mn --arg key "${API_KEY}" --arg url "${DATAVERSE_URL}" '{ "api_key": $key, "dataverse_url": $url }')" \
      "${SOLR_URL}"
