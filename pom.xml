@@ -974,6 +974,8 @@
                 <ct.build.solr.name>gdcc/solr-k8s:${project.version}</ct.build.solr.name>
                 <ct.run.jdwp>1</ct.run.jdwp>
                 <ct.run.jrebel>0</ct.run.jrebel>
+                <ct.run.db.user>dataverse</ct.run.db.user>
+                <ct.run.db.pass>changeme</ct.run.db.pass>
             </properties>
             <build>
                 <plugins>
@@ -999,11 +1001,12 @@
                                     </build>
                                     <run>
                                         <env>
-                                            <DATAVERSE_DB_USER>dataverse</DATAVERSE_DB_USER>
-                                            <DATAVERSE_DB_PASSWORD>changeme</DATAVERSE_DB_PASSWORD>
+                                            <DATAVERSE_DB_USER>${ct.run.db.user}</DATAVERSE_DB_USER>
+                                            <DATAVERSE_DB_PASSWORD>${ct.run.db.pass}</DATAVERSE_DB_PASSWORD>
                                             <ENABLE_JDWP>${ct.run.jdwp}</ENABLE_JDWP>
                                             <ENABLE_JREBEL>${ct.run.jrebel}</ENABLE_JREBEL>
                                         </env>
+                                        <envPropertyFile>${project.basedir}/conf/container/docker-run/env</envPropertyFile>
                                         <hostname>dataverse</hostname>
                                         <ports>
                                             <!-- Usual HTTP access -->
@@ -1021,6 +1024,11 @@
                                             <container>solr</container>
                                             <container>postgresql</container>
                                         </dependsOn>
+                                        <volumes>
+                                            <bind>
+                                                <volume>${project.basedir}/conf/container/docker-run/secrets:/secrets</volume>
+                                            </bind>
+                                        </volumes>
                                         <wait>
                                             <http>
                                                 <url>http://localhost:8080/robots.txt</url>
@@ -1068,8 +1076,8 @@
                                             <name>dataverse</name>
                                         </network>
                                         <env>
-                                            <POSTGRES_USER>dataverse</POSTGRES_USER>
-                                            <POSTGRES_PASSWORD>changeme</POSTGRES_PASSWORD>
+                                            <POSTGRES_USER>${ct.run.db.user}</POSTGRES_USER>
+                                            <POSTGRES_PASSWORD>${ct.run.db.pass}</POSTGRES_PASSWORD>
                                         </env>
                                     </run>
                                 </image>
