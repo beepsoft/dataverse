@@ -166,7 +166,10 @@ RUN true && \
     ${ASADMIN} create-system-properties jersey.config.client.connectTimeout="300000" && \
 
     ### DATAVERSE APPLICATION SPECIFICS
+    # Configure the MicroProfile directory config source to point to /secrets
     ${ASADMIN} set-config-dir --directory=${SECRETS_DIR} && \
+    # Make request timeouts configurable via MPCONFIG (default to 900 secs = 15 min)
+    ${ASADMIN} set 'server-config.network-config.protocols.protocol.http-listener-1.http.request-timeout-seconds=${MPCONFIG=dataverse.http.timeout:900}' && \
     # TODO: what of the below 3 items can be deleted for container usage?
     ${ASADMIN} create-network-listener --protocol=http-listener-1 --listenerport=8009 --jkenabled=true jk-connector && \
     ${ASADMIN} set server-config.network-config.protocols.protocol.http-listener-1.http.comet-support-enabled=true && \
