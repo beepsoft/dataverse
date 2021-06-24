@@ -968,10 +968,12 @@
             <id>ct</id>
             <properties>
                 <skipUnitTests>true</skipUnitTests>
-                <app.build.skip>false</app.build.skip>
-                <solr.build.skip>false</solr.build.skip>
-                <app.image.name>gdcc/dataverse-k8s:${project.version}</app.image.name>
-                <solr.image.name>gdcc/solr-k8s:${project.version}</solr.image.name>
+                <ct.build.app.skip>false</ct.build.app.skip>
+                <ct.build.app.name>gdcc/dataverse-k8s:${project.version}</ct.build.app.name>
+                <ct.build.solr.skip>false</ct.build.solr.skip>
+                <ct.build.solr.name>gdcc/solr-k8s:${project.version}</ct.build.solr.name>
+                <ct.run.jdwp>1</ct.run.jdwp>
+                <ct.run.jrebel>0</ct.run.jrebel>
             </properties>
             <build>
                 <plugins>
@@ -984,9 +986,9 @@
                                 <!-- Dataverse K8s image -->
                                 <image>
                                     <alias>dataverse</alias>
-                                    <name>${app.image.name}</name>
+                                    <name>${ct.build.app.name}</name>
                                     <build>
-                                        <skip>${app.build.skip}</skip>
+                                        <skip>${ct.build.app.skip}</skip>
                                         <dockerFile>${project.basedir}/conf/container/Dockerfile</dockerFile>
                                         <filter>@</filter>
                                         <assembly>
@@ -999,8 +1001,8 @@
                                         <env>
                                             <DATAVERSE_DB_USER>dataverse</DATAVERSE_DB_USER>
                                             <DATAVERSE_DB_PASSWORD>changeme</DATAVERSE_DB_PASSWORD>
-                                            <ENABLE_JDWP>1</ENABLE_JDWP>
-                                            <ENABLE_JREBEL>1</ENABLE_JREBEL>
+                                            <ENABLE_JDWP>${ct.run.jdwp}</ENABLE_JDWP>
+                                            <ENABLE_JREBEL>${ct.run.jrebel}</ENABLE_JREBEL>
                                         </env>
                                         <hostname>dataverse</hostname>
                                         <ports>
@@ -1036,9 +1038,9 @@
                                 <!-- Solr K8s image -->
                                 <image>
                                     <alias>solr</alias>
-                                    <name>${solr.image.name}</name>
+                                    <name>${ct.build.solr.name}</name>
                                     <build>
-                                        <skip>${solr.build.skip}</skip>
+                                        <skip>${ct.build.solr.skip}</skip>
                                         <dockerFile>${project.basedir}/conf/solr/Dockerfile</dockerFile>
                                         <filter>@</filter>
                                         <assembly>
