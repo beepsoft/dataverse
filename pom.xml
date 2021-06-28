@@ -968,10 +968,14 @@
             <id>ct</id>
             <properties>
                 <skipUnitTests>true</skipUnitTests>
+                <ct.build.registry>ghcr.io</ct.build.registry>
+                <ct.build.tag>${project.version}</ct.build.tag>
                 <ct.build.app.skip>false</ct.build.app.skip>
-                <ct.build.app.name>gdcc/dataverse-k8s:${project.version}</ct.build.app.name>
+                <ct.build.app.tag>${ct.build.tag}</ct.build.app.tag>
+                <ct.build.app.name>gdcc/dataverse-k8s:${ct.build.app.tag}</ct.build.app.name>
                 <ct.build.solr.skip>false</ct.build.solr.skip>
-                <ct.build.solr.name>gdcc/solr-k8s:${project.version}</ct.build.solr.name>
+                <ct.build.solr.tag>${ct.build.tag}</ct.build.solr.tag>
+                <ct.build.solr.name>gdcc/solr-k8s:${ct.build.solr.tag}</ct.build.solr.name>
                 <ct.run.jdwp>1</ct.run.jdwp>
                 <ct.run.jrebel>0</ct.run.jrebel>
                 <ct.run.db.user>dataverse</ct.run.db.user>
@@ -1016,6 +1020,7 @@
                                 <image>
                                     <alias>dataverse</alias>
                                     <name>${ct.build.app.name}</name>
+                                    <registry>${ct.build.registry}</registry>
                                     <build>
                                         <skip>${ct.build.app.skip}</skip>
                                         <dockerFile>${project.basedir}/conf/container/Dockerfile</dockerFile>
@@ -1074,6 +1079,7 @@
                                 <image>
                                     <alias>solr</alias>
                                     <name>${ct.build.solr.name}</name>
+                                    <registry>${ct.build.registry}</registry>
                                     <build>
                                         <skip>${ct.build.solr.skip}</skip>
                                         <dockerFile>${project.basedir}/conf/solr/Dockerfile</dockerFile>
