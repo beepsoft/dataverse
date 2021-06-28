@@ -6,7 +6,17 @@
 
 FROM solr:@solr.version@
 
-LABEL maintainer="FDM FZJ <forschungsdaten@fz-juelich.de>"
+LABEL org.opencontainers.image.created="@git.build.time@" \
+      org.opencontainers.image.authors="Research Data Management at FZJ <forschungsdaten@fz-juelich.de>" \
+      org.opencontainers.image.url="https://k8s-docs.gdcc.io" \
+      org.opencontainers.image.documentation="https://k8s-docs.gdcc.io" \
+      org.opencontainers.image.source="https://github.com/gdcc/dataverse/tree/develop%2Bct/conf/solr" \
+      org.opencontainers.image.version="@project.version@" \
+      org.opencontainers.image.revision="@git.commit.id.abbrev@" \
+      org.opencontainers.image.vendor="Global Dataverse Community Consortium" \
+      org.opencontainers.image.licenses="Apache-2.0" \
+      org.opencontainers.image.title="solr-k8s :: Dataverse-ready Solr" \
+      org.opencontainers.image.description="This container image provides a Dataverse-ready Solr Search Index."
 
 ENV SOLR_OPTS="-Dsolr.jetty.request.header.size=102400" \
     COLLECTION="collection1" \
