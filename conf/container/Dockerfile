@@ -20,18 +20,6 @@
 #
 FROM openjdk:11-jre
 
-LABEL org.opencontainers.image.created="@git.build.time@" \
-      org.opencontainers.image.authors="Research Data Management at FZJ <forschungsdaten@fz-juelich.de>" \
-      org.opencontainers.image.url="https://k8s-docs.gdcc.io" \
-      org.opencontainers.image.documentation="https://k8s-docs.gdcc.io" \
-      org.opencontainers.image.source="https://github.com/gdcc/dataverse/tree/develop%2Bct/conf/container" \
-      org.opencontainers.image.version="@project.version@" \
-      org.opencontainers.image.revision="@git.commit.id.abbrev@" \
-      org.opencontainers.image.vendor="Global Dataverse Community Consortium" \
-      org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.title="dataverse-k8s :: Dataverse containerized" \
-      org.opencontainers.image.description="This container image provides the research data repository software Dataverse in a box."
-
 # Default payara ports to expose
 # 4848: admin console
 # 9009: debug port (JPDA)
@@ -227,3 +215,15 @@ RUN chmod +x ${SCRIPT_DIR}/*
 ENTRYPOINT ["/usr/bin/tini", "--"]
 # JSON syntax should be used, but bypassed shell. Thus re-add expansion via shell exec.
 CMD ["sh", "-c", "${SCRIPT_DIR}/entrypoint.sh"]
+
+LABEL org.opencontainers.image.created="@git.build.time@" \
+      org.opencontainers.image.authors="Research Data Management at FZJ <forschungsdaten@fz-juelich.de>" \
+      org.opencontainers.image.url="https://k8s-docs.gdcc.io" \
+      org.opencontainers.image.documentation="https://k8s-docs.gdcc.io" \
+      org.opencontainers.image.source="https://github.com/gdcc/dataverse/tree/develop%2Bct/conf/container" \
+      org.opencontainers.image.version="@project.version@" \
+      org.opencontainers.image.revision="@git.commit.id.abbrev@" \
+      org.opencontainers.image.vendor="Global Dataverse Community Consortium" \
+      org.opencontainers.image.licenses="Apache-2.0" \
+      org.opencontainers.image.title="dataverse-k8s :: Dataverse containerized" \
+      org.opencontainers.image.description="This container image provides the research data repository software Dataverse in a box."
