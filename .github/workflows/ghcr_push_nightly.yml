@@ -2,9 +2,17 @@
 name: Container Images
 
 on:
-    - push
-    - pull_request
-    # TODO: maybe add timer based trigger here to push most recent builds.
+    push:
+        branches:
+            - 'develop+ct'
+        paths-ignore:
+            - 'doc/**'
+    pull_request:
+        branches:
+            - 'develop+ct'
+        paths-ignore:
+            - 'doc/**'
+
 
 env:
     REGISTRY: ghcr.io
@@ -38,11 +46,11 @@ jobs:
 
             - name: Log in to the Container registry
               uses: docker/login-action@v1
-              if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop+ct' }}
+              if: ${{ github.event_name == 'push' }}
               with:
                   registry: ${{ env.REGISTRY }}
                   username: ${{ github.actor }}
                   password: ${{ secrets.GITHUB_TOKEN }}
             - name: Push Docker image
-              if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop+ct' }}
+              if: ${{ github.event_name == 'push' }}
               run: mvn -Pct docker:push -Dct.build.tag="${IMAGE_TAG}" -Dct.build.registry="${REGISTRY}"
