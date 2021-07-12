@@ -4,12 +4,12 @@ name: Container Images
 on:
     push:
         branches:
-            - 'develop+ct'
+            - 'develop\+ct'
         paths-ignore:
             - 'doc/**'
     pull_request:
         branches:
-            - 'develop+ct'
+            - 'develop\+ct'
         paths-ignore:
             - 'doc/**'
 
