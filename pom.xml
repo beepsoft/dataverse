@@ -978,6 +978,7 @@
                 <ct.build.solr.name>gdcc/solr-k8s:${ct.build.solr.tag}</ct.build.solr.name>
                 <ct.run.jdwp>1</ct.run.jdwp>
                 <ct.run.jrebel>0</ct.run.jrebel>
+                <ct.run.it>0</ct.run.it>
                 <ct.run.db.user>dataverse</ct.run.db.user>
                 <ct.run.db.pass>changeme</ct.run.db.pass>
             </properties>
@@ -1035,6 +1036,7 @@
                                         <env>
                                             <DATAVERSE_DB_USER>${ct.run.db.user}</DATAVERSE_DB_USER>
                                             <DATAVERSE_DB_PASSWORD>${ct.run.db.pass}</DATAVERSE_DB_PASSWORD>
+                                            <ENABLE_INTEGRATION_TESTS>${ct.run.it}}</ENABLE_INTEGRATION_TESTS>
                                             <ENABLE_JDWP>${ct.run.jdwp}</ENABLE_JDWP>
                                             <ENABLE_JREBEL>${ct.run.jrebel}</ENABLE_JREBEL>
                                         </env>

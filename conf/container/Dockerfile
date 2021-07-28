@@ -54,6 +54,7 @@ ENV PATH="${PATH}:${PAYARA_DIR}/bin" \
     ENABLE_DUMPS=0 \
     JVM_DUMPS_ARGS="-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=\${ENV=DUMPS_DIR}" \
     # Documenting development options (see init_3_enabledev.sh)
+    ENABLE_INTEGRATION_TESTS=0 \
     ENABLE_JMX=0 \
     ENABLE_JDWP=0 \
     ENABLE_JREBEL=0 \

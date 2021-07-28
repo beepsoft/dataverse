@@ -16,6 +16,8 @@ ENABLE_JMX=${ENABLE_JMX:-0}
 ENABLE_JDWP=${ENABLE_JDWP:-0}
 ENABLE_JREBEL=${ENABLE_JREBEL:-0}
 
+# ENABLE_INTEGRATION_TESTS is not used here, but in bootstrap-job.sh for configuration bits necessary to run integration tests
+
 DV_PREBOOT=${PAYARA_DIR}/dataverse_preboot
 echo "# Dataverse preboot configuration for Payara" > "${DV_PREBOOT}"
 

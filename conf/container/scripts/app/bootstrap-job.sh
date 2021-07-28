@@ -46,16 +46,22 @@ sed -i -e "s#dataverse@mailinator.com#${CONTACT_MAIL}#" data/user-admin.json
 curl -sS -X PUT -d "${SOLR_K8S_HOST}:8983" "${DATAVERSE_URL}/api/admin/settings/:SolrHostColonPort"
 
 # 5.) Provision builtin users key to enable creation of more builtin users
-if [ -s "${SECRETS_DIR}/api/userskey" ]; then
-  curl -sS -X PUT -d "$(cat "${SECRETS_DIR}"/api/userskey)" "${DATAVERSE_URL}/api/admin/settings/BuiltinUsers.KEY"
-else
-  curl -sS -X DELETE "${DATAVERSE_URL}/api/admin/settings/BuiltinUsers.KEY"
+#     Hint: if we want to enable IT tests, let's stick the default from setup-all.sh (burrito).
+#     Otherwise: no secret present means disable builtin users by deleting the key.
+if [ "${ENABLE_INTEGRATION_TESTS}" = "0" ]; then
+  if [ -s "${SECRETS_DIR}/api/userskey" ]; then
+    curl -sS -X PUT -d "$(cat "${SECRETS_DIR}"/api/userskey)" "${DATAVERSE_URL}/api/admin/settings/BuiltinUsers.KEY"
+  else
+    curl -sS -X DELETE "${DATAVERSE_URL}/api/admin/settings/BuiltinUsers.KEY"
+  fi
 fi
 
 # 6.) Block access to the API endpoints, but allow for request with key from secret
-curl -sS -X PUT -d "$(cat "${SECRETS_DIR}"/api/key)" "${DATAVERSE_URL}/api/admin/settings/:BlockedApiKey"
-curl -sS -X PUT -d unblock-key "${DATAVERSE_URL}/api/admin/settings/:BlockedApiPolicy"
-curl -sS -X PUT -d admin,test "${DATAVERSE_URL}/api/admin/settings/:BlockedApiEndpoints"
+if [ "${ENABLE_INTEGRATION_TESTS}" = "0" ]; then
+  curl -sS -X PUT -d "$(cat "${SECRETS_DIR}"/api/key)" "${DATAVERSE_URL}/api/admin/settings/:BlockedApiKey"
+  curl -sS -X PUT -d unblock-key "${DATAVERSE_URL}/api/admin/settings/:BlockedApiPolicy"
+  curl -sS -X PUT -d admin,test "${DATAVERSE_URL}/api/admin/settings/:BlockedApiEndpoints"
+fi
 
 # Initial configuration of Dataverse
 exec "${SCRIPT_DIR}"/config-job.sh
