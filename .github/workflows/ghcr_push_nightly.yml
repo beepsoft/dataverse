@@ -58,10 +58,10 @@ jobs:
         needs: build
         runs-on: ubuntu-latest
         permissions:
-            contents: read
-            packages: read
-
+            security-events: write
         steps:
+            - name: Checkout repository
+              uses: actions/checkout@v2
             - name: Download Dataverse image
               uses: ishworkh/docker-image-artifact-download@v1
               with:
