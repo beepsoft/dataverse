@@ -1,4 +1,4 @@
-name: Container
+name: Reviewdog
 on:
     pull_request:
         paths:
@@ -6,7 +6,7 @@ on:
             - "conf/solr/Dockerfile"
 jobs:
     hadolint:
-        name: Hadolint
+        name: Hadolint (Dockerfile linting)
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2

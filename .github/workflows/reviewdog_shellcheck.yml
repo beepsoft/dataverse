@@ -1,4 +1,4 @@
-name: Shellcheck
+name: Reviewdog
 on:
     pull_request:
         paths:
