@@ -984,6 +984,7 @@
             </properties>
             <build>
                 <plugins>
+                    <!-- This will get the current commit id to include in image tags of container builds -->
                     <plugin>
                         <groupId>pl.project13.maven</groupId>
                         <artifactId>git-commit-id-plugin</artifactId>
@@ -1001,6 +1002,33 @@
                             <dateFormatTimeZone>UTC</dateFormatTimeZone>
                             <abbrevLength>8</abbrevLength>
                         </configuration>
+                    </plugin>
+                    <!-- Retrieve Payara Server as a dependency and cache it via Maven -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <version>3.2.0</version>
+                        <executions>
+                            <execution>
+                                <id>unpack</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>unpack</goal>
+                                </goals>
+                                <configuration>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>fish.payara.distributions</groupId>
+                                            <artifactId>payara</artifactId>
+                                            <version>${payara.version}</version>
+                                            <type>zip</type>
+                                            <overWrite>false</overWrite>
+                                            <outputDirectory>${project.build.directory}</outputDirectory>
+                                        </artifactItem>
+                                    </artifactItems>
+                                </configuration>
+                            </execution>
+                        </executions>
                     </plugin>
                     <plugin>
                         <groupId>io.fabric8</groupId>
