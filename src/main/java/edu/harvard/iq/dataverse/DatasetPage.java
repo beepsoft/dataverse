@@ -332,6 +332,7 @@ public class DatasetPage implements java.io.Serializable {
     private List<SelectItem> linkingDVSelectItems;
     private Dataverse linkingDataverse;
     private Dataverse selectedHostDataverse;
+    private Boolean hasDataversesToChoose;
 
     public Dataverse getSelectedHostDataverse() {
         return selectedHostDataverse;
@@ -1781,6 +1782,22 @@ public class DatasetPage implements java.io.Serializable {
         this.dataverseTemplates = dataverseTemplates;
     }
 
+    public boolean isHasDataversesToChoose() {
+
+        if (this.hasDataversesToChoose == null) {
+            var user = this.session.getUser();
+            if (!user.isAuthenticated()) {
+                this.hasDataversesToChoose = false;
+            } else {
+                var req = dvRequestService.getDataverseRequest();
+                var permissionBit = 1 << Permission.AddDataset.ordinal();
+                var authenticatedUser = (AuthenticatedUser) user;
+                this.hasDataversesToChoose = permissionService.hasMultiplePermittedCollections(req, authenticatedUser, permissionBit);
+            }
+        }
+        return this.hasDataversesToChoose;
+    }
+
     public Template getDefaultTemplate() {
         return defaultTemplate;
     }
@@ -2118,6 +2135,10 @@ public class DatasetPage implements java.io.Serializable {
 
             if (retrieveDatasetVersionResponse != null && !retrieveDatasetVersionResponse.wasRequestedVersionRetrieved()) {
                 //msg("checkit " + retrieveDatasetVersionResponse.getDifferentVersionMessage());
+                if ("DRAFT".equals(version)) {
+                    // redirect to the latest published instead:
+                    return "/dataset.xhtml?persistentId=" + dataset.getGlobalId().asString() + "&faces-redirect=true";
+                }
                 JsfHelper.addWarningMessage(retrieveDatasetVersionResponse.getDifferentVersionMessage());//BundleUtil.getStringFromBundle("dataset.message.metadataSuccess"));
             }
 
@@ -6227,6 +6248,7 @@ public class DatasetPage implements java.io.Serializable {
 
     private String termsOfAccess;
     private boolean fileAccessRequest;
+    private boolean publishDisclaimerAcknowledged;
 
     public String getTermsOfAccess() {
         return termsOfAccess;
@@ -6242,6 +6264,14 @@ public class DatasetPage implements java.io.Serializable {
 
     public void setFileAccessRequest(boolean fileAccessRequest) {
         this.fileAccessRequest = fileAccessRequest;
+    }
+
+    public boolean isPublishDisclaimerAcknowledged() {
+        return publishDisclaimerAcknowledged || !settingsWrapper.isHasPublishDatasetDisclaimerText();
+    }
+
+    public void setPublishDisclaimerAcknowledged(boolean publishDisclaimerAcknowledged) {
+        this.publishDisclaimerAcknowledged = publishDisclaimerAcknowledged;
     }
 
     // wrapper method to see if the file has been deleted (or replaced) in the current version
