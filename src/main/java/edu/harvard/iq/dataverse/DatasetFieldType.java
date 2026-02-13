@@ -4,15 +4,10 @@ import edu.harvard.iq.dataverse.search.SolrField;
 import edu.harvard.iq.dataverse.util.BundleUtil;
 import edu.harvard.iq.dataverse.util.json.JsonLDTerm;
 
-import java.util.Collection;
+import java.util.*;
 
 import java.io.Serializable;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.MissingResourceException;
+
 import jakarta.faces.model.SelectItem;
 import jakarta.persistence.*;
 
@@ -646,4 +641,22 @@ public class DatasetFieldType implements Serializable, Comparable<DatasetFieldTy
     public String toString() {
         return "[DatasetFieldType name:" + getName() + " id:" + getId() + "]";
     }
+
+    // CEDAR specific
+
+    @Transient
+    private List<ControlledVocabularyValue> externalVocabularyValues = new ArrayList<>();
+
+    public List<ControlledVocabularyValue> getExternalVocabularyValues() {
+        return externalVocabularyValues;
+    }
+
+    public void setExternalVocabularyValues(List<ControlledVocabularyValue> externalVocabularyValues) {
+        this.externalVocabularyValues = externalVocabularyValues;
+    }
+
+    public boolean hasExternalVocabularyValues() {
+        return !externalVocabularyValues.isEmpty();
+    }
+
 }

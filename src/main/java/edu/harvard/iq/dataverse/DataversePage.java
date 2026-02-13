@@ -1,9 +1,12 @@
 package edu.harvard.iq.dataverse;
 
 import edu.harvard.iq.dataverse.UserNotification.Type;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.harvard.iq.dataverse.authorization.Permission;
 import edu.harvard.iq.dataverse.authorization.users.AuthenticatedUser;
 import edu.harvard.iq.dataverse.authorization.users.User;
+import edu.harvard.iq.dataverse.cedar.CedarServiceBean;
+import edu.harvard.iq.dataverse.cedar.CedarTemplateErrorsException;
 import edu.harvard.iq.dataverse.dataaccess.DataAccess;
 import edu.harvard.iq.dataverse.dataset.DatasetUtil;
 import edu.harvard.iq.dataverse.dataverse.DataverseUtil;
@@ -122,6 +125,8 @@ public class DataversePage implements java.io.Serializable {
     PidProviderFactoryBean pidProviderFactoryBean;
     @EJB
     CacheFactoryBean cacheFactory;
+    @EJB
+    CedarServiceBean cedarService;
 
     private Dataverse dataverse = new Dataverse();  
 
@@ -141,6 +146,12 @@ public class DataversePage implements java.io.Serializable {
     private List<SelectItem> linkingDVSelectItems;
     private Dataverse linkingDataverse;
     private List<ControlledVocabularyValue> selectedSubjects;
+
+    private String cedarTemplateJson;
+    private String cedarTemplateName;
+    private String cedarTemplateIdentifier;
+    private String cedarTemplateDescription;
+    private String cedarTemplateParseError;
 
     public List<ControlledVocabularyValue> getSelectedSubjects() {
         return selectedSubjects;
@@ -1357,6 +1368,112 @@ public class DataversePage implements java.io.Serializable {
                 dsft.isInclude(), 
                 dsft.getLocalDisplayOnCreate()
             ));
+        }
+    }
+
+    // CEDAR Template Import
+
+    public String getCedarTemplateJson() {
+        return cedarTemplateJson;
+    }
+
+    public void setCedarTemplateJson(String cedarTemplateJson) {
+        this.cedarTemplateJson = cedarTemplateJson;
+    }
+
+    public String getCedarTemplateName() {
+        return cedarTemplateName;
+    }
+
+    public String getCedarTemplateIdentifier() {
+        return cedarTemplateIdentifier;
+    }
+
+    public String getCedarTemplateDescription() {
+        return cedarTemplateDescription;
+    }
+
+    public String getCedarTemplateParseError() {
+        return cedarTemplateParseError;
+    }
+
+    public String getCedarImportButtonLabel() {
+        if (cedarTemplateName != null && !cedarTemplateName.trim().isEmpty()) {
+            return BundleUtil.getStringFromBundle("dataverse.cedarImport.importNamed", List.of(cedarTemplateName));
+        }
+        return BundleUtil.getStringFromBundle("dataverse.cedarImport.import");
+    }
+
+    public void parseCedarTemplateJson() {
+        cedarTemplateName = null;
+        cedarTemplateIdentifier = null;
+        cedarTemplateDescription = null;
+        cedarTemplateParseError = null;
+
+        if (cedarTemplateJson == null || cedarTemplateJson.trim().isEmpty()) {
+            return;
+        }
+
+        try {
+            var root = new ObjectMapper().readTree(cedarTemplateJson);
+            var nameNode = root.get("schema:name");
+            var identifierNode = root.get("schema:identifier");
+            var descriptionNode = root.get("schema:description");
+
+            cedarTemplateName = nameNode != null && !nameNode.isNull() ? nameNode.asText() : null;
+            cedarTemplateIdentifier = identifierNode != null && !identifierNode.isNull() ? identifierNode.asText() : null;
+            cedarTemplateDescription = descriptionNode != null && !descriptionNode.isNull() ? descriptionNode.asText() : null;
+        } catch (Exception e) {
+            cedarTemplateParseError = BundleUtil.getStringFromBundle("dataverse.cedarImport.parseError");
+        }
+    }
+
+    public void importCedarTemplate() {
+        if (session.getUser() == null || !session.getUser().isSuperuser()) {
+            JsfHelper.addErrorMessage(BundleUtil.getStringFromBundle("dataverse.cedarImport.superuserOnly"));
+            return;
+        }
+
+        if (dataverse == null || dataverse.getId() == null || dataverse.getAlias() == null) {
+            JsfHelper.addErrorMessage(BundleUtil.getStringFromBundle("dataverse.cedarImport.noDataverse"));
+            return;
+        }
+
+        if (cedarTemplateJson == null || cedarTemplateJson.trim().isEmpty()) {
+            JsfHelper.addErrorMessage(BundleUtil.getStringFromBundle("dataverse.cedarImport.empty"));
+            return;
+        }
+
+        try {
+            if (cedarTemplateName == null && cedarTemplateIdentifier == null && cedarTemplateDescription == null) {
+                parseCedarTemplateJson();
+            }
+            if (cedarTemplateParseError != null) {
+                JsfHelper.addErrorMessage(cedarTemplateParseError);
+                return;
+            }
+            cedarService.createOrUpdateMdbFromCedarTemplate(dataverse.getAlias(), cedarTemplateJson, false);
+            String metadataBlockName = new ObjectMapper().readTree(cedarTemplateJson).get("schema:identifier").textValue();
+            cedarService.updateMetadataBlockInNewTransaction(dataverse.getAlias(), metadataBlockName);
+            dataverse = dataverseService.find(dataverse.getId());
+            refreshAllMetadataBlocks();
+            String displayName = cedarTemplateName != null && !cedarTemplateName.trim().isEmpty()
+                    ? cedarTemplateName
+                    : metadataBlockName;
+            cedarTemplateJson = "";
+            cedarTemplateName = null;
+            cedarTemplateIdentifier = null;
+            cedarTemplateDescription = null;
+            cedarTemplateParseError = null;
+            JsfHelper.addSuccessMessage(BundleUtil.getStringFromBundle("dataverse.cedarImport.successNamed", List.of(displayName)));
+        } catch (CedarTemplateErrorsException cte) {
+            JsfHelper.addErrorMessage(BundleUtil.getStringFromBundle("dataverse.cedarImport.failure") + " " + cte.getErrors().toJson());
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "CEDAR template import failed", e);
+            String msg = e.getMessage() == null
+                    ? BundleUtil.getStringFromBundle("dataverse.cedarImport.failure")
+                    : e.getMessage();
+            JsfHelper.addErrorMessage(msg);
         }
     }
 }

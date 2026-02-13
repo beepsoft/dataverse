@@ -1,0 +1,62 @@
+/**
+ * This work was implemented by HUN-REN SZTAKI DSD (https://dsd.sztaki.hu) and sponsored by the
+ * Hungarian national research data project HUN-REN ARP (https://researchdata.hu/en).
+ *
+ * @author Balazs E. Pataki (pataki@sztaki.hu)
+ * @author Norbert Finta (finta@sztaki.hu)
+ */
+package edu.harvard.iq.dataverse.cedar;
+
+import edu.harvard.iq.dataverse.util.json.NullSafeJsonBuilder;
+
+import jakarta.json.Json;
+import jakarta.json.JsonArrayBuilder;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class CedarTemplateErrors {
+    public ArrayList<String> unprocessableElements = new ArrayList<>();
+    public ArrayList<String> invalidNames = new ArrayList<>();
+    public HashMap<String, DatasetFieldTypeOverride> incompatiblePairs = new HashMap<>();
+
+    public ArrayList<String> errors = new ArrayList<>();
+    
+    public ArrayList<String> warnings = new ArrayList<>();
+
+    public CedarTemplateErrors() {
+    }
+
+    public jakarta.json.JsonObject toJson() {
+        NullSafeJsonBuilder builder = NullSafeJsonBuilder.jsonObjectBuilder();
+
+        if (!unprocessableElements.isEmpty()) {
+            JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
+            unprocessableElements.forEach(jsonArrayBuilder::add);
+            builder.add("unprocessableElements", jsonArrayBuilder);
+        }
+
+        if (!invalidNames.isEmpty()) {
+            JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
+            invalidNames.forEach(jsonArrayBuilder::add);
+            builder.add("invalidNames", jsonArrayBuilder);
+        }
+
+        if (!errors.isEmpty()) {
+            JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
+            errors.forEach(jsonArrayBuilder::add);
+            builder.add("errors", jsonArrayBuilder);
+        }
+
+
+        return builder.build();
+    }
+    
+    public jakarta.json.JsonArray warningsAsJson() {
+        JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
+        if (!warnings.isEmpty()) {
+            warnings.forEach(jsonArrayBuilder::add);
+        }
+
+        return jsonArrayBuilder.build();
+    }
+}

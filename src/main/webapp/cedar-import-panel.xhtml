@@ -1,0 +1,189 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+    <p:panel id="cedarImportPanel" styleClass="panelLayoutBlock padding-none margin-bottom-half" rendered="#{dataverseSession.user.superuser}">
+        <div class="row">
+            <div class="col-sm-12 form-group padding-none">
+                <div class="col-md-3 control-label highlightBold">#{bundle['dataverse.cedarImport']}</div>
+                <div class="col-md-9">
+                    <p class="help-block">#{bundle['dataverse.cedarImport.tip']}</p>
+                    <h:outputLabel for="cedarTemplateJson" styleClass="control-label">
+                        #{bundle['dataverse.cedarImport.label']}
+                    </h:outputLabel>
+                    <div class="form-col-container">
+                        <p:inputTextarea id="cedarTemplateJson" styleClass="form-control"
+                                         value="#{DataversePage.cedarTemplateJson}"
+                                         rows="10" cols="50" autoResize="false" />
+                        <p:message for="cedarTemplateJson" display="text"/>
+                    </div>
+                    <div id="cedarTemplatePreview" class="form-col-container" style="display:none;">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <strong>#{bundle['dataverse.cedarImport.preview.name']}</strong>
+                                <span id="cedarTemplateNamePreview"></span>
+                            </div>
+                            <div class="col-sm-12">
+                                <strong>#{bundle['dataverse.cedarImport.preview.identifier']}</strong>
+                                <span id="cedarTemplateIdentifierPreview"></span>
+                            </div>
+                            <div class="col-sm-12">
+                                <strong>#{bundle['dataverse.cedarImport.preview.description']}</strong>
+                                <span id="cedarTemplateDescriptionPreview"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                        //<![CDATA[
+                        (function() {
+                            function extractText(node, key) {
+                                if (!node || typeof node[key] === "undefined" || node[key] === null) {
+                                    return "";
+                                }
+                                if (typeof node[key] === "string") {
+                                    return node[key];
+                                }
+                                if (typeof node[key].value === "string") {
+                                    return node[key].value;
+                                }
+                                if (typeof node[key]["@value"] === "string") {
+                                    return node[key]["@value"];
+                                }
+                                if (typeof node[key]["rdfs:label"] === "string") {
+                                    return node[key]["rdfs:label"];
+                                }
+                                return "";
+                            }
+
+                            function findTextarea() {
+                                return document.getElementById("dataverseForm:cedarTemplateJson")
+                                    || document.querySelector("textarea[id$='cedarTemplateJson']");
+                            }
+
+                            function updatePreview(textarea) {
+                                textarea = textarea || findTextarea();
+                                var preview = document.getElementById("cedarTemplatePreview");
+                                if (!textarea || !preview) {
+                                    return;
+                                }
+
+                                var importButton = document.getElementById("dataverseForm:cedarImportButton")
+                                    || document.querySelector("[id$='cedarImportButton']");
+                                var jsonText = textarea.value || "";
+                                if (!jsonText.trim()) {
+                                    preview.style.display = "none";
+                                    if (importButton) {
+                                        var defaultLabel = importButton.getAttribute("data-label-default");
+                                        if (defaultLabel) {
+                                            if (importButton.tagName === "BUTTON") {
+                                                importButton.textContent = defaultLabel;
+                                            } else {
+                                                importButton.value = defaultLabel;
+                                            }
+                                        }
+                                    }
+                                    return;
+                                }
+
+                                try {
+                                    var root = JSON.parse(jsonText);
+                                    var name = extractText(root, "schema:name");
+                                    var identifier = extractText(root, "schema:identifier");
+                                    var description = extractText(root, "schema:description");
+
+                                    if (name || identifier || description) {
+                                        document.getElementById("cedarTemplateNamePreview").textContent = name || "";
+                                        document.getElementById("cedarTemplateIdentifierPreview").textContent = identifier || "";
+                                        document.getElementById("cedarTemplateDescriptionPreview").textContent = description || "";
+                                        preview.style.display = "block";
+                                        if (importButton) {
+                                            var templateLabel = importButton.getAttribute("data-label-template");
+                                            var defaultLabel = importButton.getAttribute("data-label-default");
+                                            var label = (name && templateLabel)
+                                                ? templateLabel.replace("{0}", name)
+                                                : defaultLabel;
+                                            if (label) {
+                                                if (importButton.tagName === "BUTTON") {
+                                                    importButton.textContent = label;
+                                                } else {
+                                                    importButton.value = label;
+                                                }
+                                            }
+                                        }
+                                    } else {
+                                        preview.style.display = "none";
+                                        if (importButton) {
+                                            var defaultLabel = importButton.getAttribute("data-label-default");
+                                            if (defaultLabel) {
+                                                if (importButton.tagName === "BUTTON") {
+                                                    importButton.textContent = defaultLabel;
+                                                } else {
+                                                    importButton.value = defaultLabel;
+                                                }
+                                            }
+                                        }
+                                    }
+                                } catch (e) {
+                                    preview.style.display = "none";
+                                    if (importButton) {
+                                        var defaultLabel = importButton.getAttribute("data-label-default");
+                                        if (defaultLabel) {
+                                            if (importButton.tagName === "BUTTON") {
+                                                importButton.textContent = defaultLabel;
+                                            } else {
+                                                importButton.value = defaultLabel;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            function isCedarTextarea(target) {
+                                return target
+                                    && target.tagName === "TEXTAREA"
+                                    && /cedarTemplateJson$/.test(target.id || "");
+                            }
+
+                            function bindListeners() {
+                                var textarea = findTextarea();
+                                if (textarea) {
+                                    textarea.addEventListener("input", function() { updatePreview(textarea); });
+                                    textarea.addEventListener("blur", function() { updatePreview(textarea); });
+                                    updatePreview(textarea);
+                                }
+                            }
+
+                            document.addEventListener("input", function(event) {
+                                if (isCedarTextarea(event.target)) {
+                                    updatePreview(event.target);
+                                }
+                            });
+                            document.addEventListener("paste", function(event) {
+                                if (isCedarTextarea(event.target)) {
+                                    setTimeout(function() { updatePreview(event.target); }, 0);
+                                }
+                            });
+                            document.addEventListener("DOMContentLoaded", bindListeners);
+                            if (window.jQuery) {
+                                jQuery(document).on("pfAjaxComplete", bindListeners);
+                            }
+                        })();
+                        //]]>
+                    </script>
+                    <div class="button-block margin-top-half">
+                        <p:commandButton id="cedarImportButton" styleClass="btn btn-default"
+                                         value="#{DataversePage.cedarImportButtonLabel}"
+                                         process="@this cedarTemplateJson"
+                                         update=":dataverseForm, :messagePanel"
+                                         actionListener="#{DataversePage.importCedarTemplate}">
+                            <f:ajax onerror="window.scrollTo(0, 0)" />
+                            <f:passThroughAttribute name="data-label-default" value="#{bundle['dataverse.cedarImport.import']}" />
+                            <f:passThroughAttribute name="data-label-template" value="#{bundle['dataverse.cedarImport.importNamed']}" />
+                        </p:commandButton>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </p:panel>
+</ui:composition>

@@ -235,6 +235,10 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-csv</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.github.erosb</groupId>
             <artifactId>everit-json-schema</artifactId>
             <version>1.14.6</version>
@@ -855,6 +859,7 @@
                     <include>**/*.xsl</include>
                     <include>**/services/*</include>
                     <include>**/*.map</include>
+                    <include>cedar/*.*</include>
                 </includes>
             </resource>
             <resource>

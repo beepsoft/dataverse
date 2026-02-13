@@ -1,0 +1,954 @@
+{
+  "@type": "https://schema.metadatacenter.org/core/Template",
+  "@context": {
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "pav": "http://purl.org/pav/",
+    "bibo": "http://purl.org/ontology/bibo/",
+    "oslc": "http://open-services.net/ns/core#",
+    "schema": "http://schema.org/",
+    "schema:name": {
+      "@type": "xsd:string"
+    },
+    "schema:description": {
+      "@type": "xsd:string"
+    },
+    "pav:createdOn": {
+      "@type": "xsd:dateTime"
+    },
+    "pav:createdBy": {
+      "@type": "@id"
+    },
+    "pav:lastUpdatedOn": {
+      "@type": "xsd:dateTime"
+    },
+    "oslc:modifiedBy": {
+      "@type": "@id"
+    }
+  },
+  "type": "object",
+  "_ui": {
+    "pages": [],
+    "order": [
+      "journalVolumeIssue",
+      "journalArticleType"
+    ],
+    "propertyLabels": {
+      "journalVolumeIssue": "journalVolumeIssue",
+      "journalArticleType": "journalArticleType"
+    },
+    "propertyDescriptions": {
+      "journalVolumeIssue": "Indicates the volume, issue and date of a journal, which this Dataset is associated with.",
+      "journalArticleType": "Indicates what kind of article this is, for example, a research article, a commentary, a book or product review, a case report, a calendar, etc (based on JATS). "
+    }
+  },
+  "properties": {
+    "@context": {
+      "type": "object",
+      "properties": {
+        "rdfs": {
+          "type": "string",
+          "format": "uri",
+          "enum": [
+            "http://www.w3.org/2000/01/rdf-schema#"
+          ]
+        },
+        "xsd": {
+          "type": "string",
+          "format": "uri",
+          "enum": [
+            "http://www.w3.org/2001/XMLSchema#"
+          ]
+        },
+        "pav": {
+          "type": "string",
+          "format": "uri",
+          "enum": [
+            "http://purl.org/pav/"
+          ]
+        },
+        "schema": {
+          "type": "string",
+          "format": "uri",
+          "enum": [
+            "http://schema.org/"
+          ]
+        },
+        "oslc": {
+          "type": "string",
+          "format": "uri",
+          "enum": [
+            "http://open-services.net/ns/core#"
+          ]
+        },
+        "skos": {
+          "type": "string",
+          "format": "uri",
+          "enum": [
+            "http://www.w3.org/2004/02/skos/core#"
+          ]
+        },
+        "rdfs:label": {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "type": "string",
+              "enum": [
+                "xsd:string"
+              ]
+            }
+          }
+        },
+        "schema:isBasedOn": {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "type": "string",
+              "enum": [
+                "@id"
+              ]
+            }
+          }
+        },
+        "schema:name": {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "type": "string",
+              "enum": [
+                "xsd:string"
+              ]
+            }
+          }
+        },
+        "schema:description": {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "type": "string",
+              "enum": [
+                "xsd:string"
+              ]
+            }
+          }
+        },
+        "pav:derivedFrom": {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "type": "string",
+              "enum": [
+                "@id"
+              ]
+            }
+          }
+        },
+        "pav:createdOn": {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "type": "string",
+              "enum": [
+                "xsd:dateTime"
+              ]
+            }
+          }
+        },
+        "pav:createdBy": {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "type": "string",
+              "enum": [
+                "@id"
+              ]
+            }
+          }
+        },
+        "pav:lastUpdatedOn": {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "type": "string",
+              "enum": [
+                "xsd:dateTime"
+              ]
+            }
+          }
+        },
+        "oslc:modifiedBy": {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "type": "string",
+              "enum": [
+                "@id"
+              ]
+            }
+          }
+        },
+        "skos:notation": {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "type": "string",
+              "enum": [
+                "xsd:string"
+              ]
+            }
+          }
+        },
+        "journalVolumeIssue": {
+          "enum": [
+            "https://dataverse.org/schema/journal/journalVolumeIssue"
+          ]
+        },
+        "journalArticleType": {
+          "enum": [
+            "https://dataverse.org/schema/journal/journalArticleType"
+          ]
+        }
+      },
+      "required": [
+        "xsd",
+        "pav",
+        "schema",
+        "oslc",
+        "schema:isBasedOn",
+        "schema:name",
+        "schema:description",
+        "pav:createdOn",
+        "pav:createdBy",
+        "pav:lastUpdatedOn",
+        "oslc:modifiedBy",
+        "journalVolumeIssue"
+      ],
+      "additionalProperties": false
+    },
+    "@id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "@type": {
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "uri",
+          "enum": [
+            "https://dataverse.org/schema/journal/"
+          ]
+        },
+        {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "format": "uri",
+            "enum": [
+              "https://dataverse.org/schema/journal/"
+            ]
+          },
+          "uniqueItems": true
+        }
+      ]
+    },
+    "schema:isBasedOn": {
+      "type": "string",
+      "format": "uri"
+    },
+    "schema:name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "schema:description": {
+      "type": "string"
+    },
+    "pav:derivedFrom": {
+      "type": "string",
+      "format": "uri"
+    },
+    "pav:createdOn": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "pav:createdBy": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "pav:lastUpdatedOn": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "oslc:modifiedBy": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "journalVolumeIssue": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "@type": "https://schema.metadatacenter.org/core/TemplateElement",
+        "@context": {
+          "xsd": "http://www.w3.org/2001/XMLSchema#",
+          "pav": "http://purl.org/pav/",
+          "bibo": "http://purl.org/ontology/bibo/",
+          "oslc": "http://open-services.net/ns/core#",
+          "schema": "http://schema.org/",
+          "schema:name": {
+            "@type": "xsd:string"
+          },
+          "schema:description": {
+            "@type": "xsd:string"
+          },
+          "pav:createdOn": {
+            "@type": "xsd:dateTime"
+          },
+          "pav:createdBy": {
+            "@type": "@id"
+          },
+          "pav:lastUpdatedOn": {
+            "@type": "xsd:dateTime"
+          },
+          "oslc:modifiedBy": {
+            "@type": "@id"
+          }
+        },
+        "type": "object",
+        "_ui": {
+          "order": [
+            "journalVolume",
+            "journalIssue",
+            "journalPubDate"
+          ],
+          "propertyLabels": {
+            "journalVolume": "journalVolume",
+            "journalIssue": "journalIssue",
+            "journalPubDate": "journalPubDate"
+          },
+          "propertyDescriptions": {
+            "journalVolume": "The journal volume which this Dataset is associated with (e.g., Volume 4).",
+            "journalIssue": "The journal issue number which this Dataset is associated with (e.g., Number 2, Autumn).",
+            "journalPubDate": "The publication date for this journal volume/issue, which this Dataset is associated with (e.g., 1999)."
+          }
+        },
+        "properties": {
+          "@context": {
+            "type": "object",
+            "properties": {
+              "journalVolume": {
+                "enum": [
+                  "https://dataverse.org/schema/journal/journalVolume"
+                ]
+              },
+              "journalIssue": {
+                "enum": [
+                  "https://dataverse.org/schema/journal/journalIssue"
+                ]
+              },
+              "journalPubDate": {
+                "enum": [
+                  "https://dataverse.org/schema/journal/journalPubDate"
+                ]
+              }
+            },
+            "additionalProperties": false,
+            "required": []
+          },
+          "@id": {
+            "type": "string",
+            "format": "uri"
+          },
+          "@type": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "uri"
+              },
+              {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "uniqueItems": true
+              }
+            ]
+          },
+          "journalVolume": {
+            "@type": "https://schema.metadatacenter.org/core/TemplateField",
+            "@context": {
+              "xsd": "http://www.w3.org/2001/XMLSchema#",
+              "pav": "http://purl.org/pav/",
+              "bibo": "http://purl.org/ontology/bibo/",
+              "oslc": "http://open-services.net/ns/core#",
+              "schema": "http://schema.org/",
+              "skos": "http://www.w3.org/2004/02/skos/core#",
+              "schema:name": {
+                "@type": "xsd:string"
+              },
+              "schema:description": {
+                "@type": "xsd:string"
+              },
+              "skos:prefLabel": {
+                "@type": "xsd:string"
+              },
+              "skos:altLabel": {
+                "@type": "xsd:string"
+              },
+              "pav:createdOn": {
+                "@type": "xsd:dateTime"
+              },
+              "pav:createdBy": {
+                "@type": "@id"
+              },
+              "pav:lastUpdatedOn": {
+                "@type": "xsd:dateTime"
+              },
+              "oslc:modifiedBy": {
+                "@type": "@id"
+              }
+            },
+            "type": "object",
+            "_ui": {
+              "inputType": "textfield"
+            },
+            "_valueConstraints": {
+              "requiredValue": false
+            },
+            "properties": {
+              "@type": {
+                "oneOf": [
+                  {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "uniqueItems": true
+                  }
+                ]
+              },
+              "@value": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "rdfs:label": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "@value"
+            ],
+            "schema:name": "journalVolume",
+            "schema:description": "The journal volume which this Dataset is associated with (e.g., Volume 4).",
+            "pav:createdOn": "2025-10-21T15:23:15Z",
+            "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
+            "pav:lastUpdatedOn": "2025-10-21T15:23:15Z",
+            "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
+            "schema:schemaVersion": "1.6.0",
+            "additionalProperties": false,
+            "@id": "ba7aa691-336b-3df4-b2d5-2b9e162e1939",
+            "title": "journalVolume element schema",
+            "description": "journalVolume element schema generated by the ARP",
+            "hunDescription": "The journal volume which this Dataset is associated with (e.g., Volume 4).",
+            "skos:prefLabel": "Volume",
+            "hunLabel": "Volume",
+            "_arp": {
+              "dataverse": {
+                "advancedSearchField": true,
+                "facetable": true,
+                "displayoncreate": false
+              }
+            },
+            "$schema": "http://json-schema.org/draft-04/schema#"
+          },
+          "journalIssue": {
+            "@type": "https://schema.metadatacenter.org/core/TemplateField",
+            "@context": {
+              "xsd": "http://www.w3.org/2001/XMLSchema#",
+              "pav": "http://purl.org/pav/",
+              "bibo": "http://purl.org/ontology/bibo/",
+              "oslc": "http://open-services.net/ns/core#",
+              "schema": "http://schema.org/",
+              "skos": "http://www.w3.org/2004/02/skos/core#",
+              "schema:name": {
+                "@type": "xsd:string"
+              },
+              "schema:description": {
+                "@type": "xsd:string"
+              },
+              "skos:prefLabel": {
+                "@type": "xsd:string"
+              },
+              "skos:altLabel": {
+                "@type": "xsd:string"
+              },
+              "pav:createdOn": {
+                "@type": "xsd:dateTime"
+              },
+              "pav:createdBy": {
+                "@type": "@id"
+              },
+              "pav:lastUpdatedOn": {
+                "@type": "xsd:dateTime"
+              },
+              "oslc:modifiedBy": {
+                "@type": "@id"
+              }
+            },
+            "type": "object",
+            "_ui": {
+              "inputType": "textfield"
+            },
+            "_valueConstraints": {
+              "requiredValue": false
+            },
+            "properties": {
+              "@type": {
+                "oneOf": [
+                  {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "uniqueItems": true
+                  }
+                ]
+              },
+              "@value": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "rdfs:label": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "@value"
+            ],
+            "schema:name": "journalIssue",
+            "schema:description": "The journal issue number which this Dataset is associated with (e.g., Number 2, Autumn).",
+            "pav:createdOn": "2025-10-21T15:23:15Z",
+            "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
+            "pav:lastUpdatedOn": "2025-10-21T15:23:15Z",
+            "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
+            "schema:schemaVersion": "1.6.0",
+            "additionalProperties": false,
+            "@id": "dc0d0d5b-5096-3993-b8b5-950409a3901f",
+            "title": "journalIssue element schema",
+            "description": "journalIssue element schema generated by the ARP",
+            "hunDescription": "The journal issue number which this Dataset is associated with (e.g., Number 2, Autumn).",
+            "skos:prefLabel": "Issue",
+            "hunLabel": "Issue",
+            "_arp": {
+              "dataverse": {
+                "advancedSearchField": true,
+                "facetable": true,
+                "displayoncreate": false
+              }
+            },
+            "$schema": "http://json-schema.org/draft-04/schema#"
+          },
+          "journalPubDate": {
+            "@type": "https://schema.metadatacenter.org/core/TemplateField",
+            "@context": {
+              "xsd": "http://www.w3.org/2001/XMLSchema#",
+              "pav": "http://purl.org/pav/",
+              "bibo": "http://purl.org/ontology/bibo/",
+              "oslc": "http://open-services.net/ns/core#",
+              "schema": "http://schema.org/",
+              "skos": "http://www.w3.org/2004/02/skos/core#",
+              "schema:name": {
+                "@type": "xsd:string"
+              },
+              "schema:description": {
+                "@type": "xsd:string"
+              },
+              "skos:prefLabel": {
+                "@type": "xsd:string"
+              },
+              "skos:altLabel": {
+                "@type": "xsd:string"
+              },
+              "pav:createdOn": {
+                "@type": "xsd:dateTime"
+              },
+              "pav:createdBy": {
+                "@type": "@id"
+              },
+              "pav:lastUpdatedOn": {
+                "@type": "xsd:dateTime"
+              },
+              "oslc:modifiedBy": {
+                "@type": "@id"
+              }
+            },
+            "type": "object",
+            "_ui": {
+              "inputType": "temporal",
+              "temporalGranularity": "day"
+            },
+            "_valueConstraints": {
+              "requiredValue": false,
+              "temporalType": "xsd:date"
+            },
+            "properties": {
+              "@type": {
+                "oneOf": [
+                  {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "uniqueItems": true
+                  }
+                ]
+              },
+              "@value": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "rdfs:label": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "@value"
+            ],
+            "schema:name": "journalPubDate",
+            "schema:description": "The publication date for this journal volume/issue, which this Dataset is associated with (e.g., 1999).",
+            "pav:createdOn": "2025-10-21T15:23:15Z",
+            "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
+            "pav:lastUpdatedOn": "2025-10-21T15:23:15Z",
+            "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
+            "schema:schemaVersion": "1.6.0",
+            "additionalProperties": false,
+            "@id": "9989616f-364c-3ef5-b12f-1cb8fbf5c110",
+            "title": "journalPubDate element schema",
+            "description": "journalPubDate element schema generated by the ARP",
+            "hunDescription": "The publication date for this journal volume/issue, which this Dataset is associated with (e.g., 1999).",
+            "skos:prefLabel": "Publication Date",
+            "hunLabel": "Publication Date",
+            "_arp": {
+              "dataverse": {
+                "watermark": "YYYY or YYYY-MM or YYYY-MM-DD",
+                "advancedSearchField": true,
+                "facetable": true,
+                "displayoncreate": false
+              }
+            },
+            "$schema": "http://json-schema.org/draft-04/schema#"
+          }
+        },
+        "schema:name": "journalVolumeIssue",
+        "schema:description": "Indicates the volume, issue and date of a journal, which this Dataset is associated with.",
+        "required": [
+          "@context",
+          "@id",
+          "journalVolume",
+          "journalIssue",
+          "journalPubDate"
+        ],
+        "pav:createdOn": "2025-10-21T15:23:15Z",
+        "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
+        "pav:lastUpdatedOn": "2025-10-21T15:23:15Z",
+        "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
+        "schema:schemaVersion": "1.6.0",
+        "additionalProperties": false,
+        "pav:version": "0.0.1",
+        "bibo:status": "bibo:draft",
+        "@id": "https://repo.arp.orgx/template-elements/f8b912fd-f48d-305e-9501-c6d1ba32dc08",
+        "title": "journalVolumeIssue element schema",
+        "description": "journalVolumeIssue element schema generated by the ARP",
+        "schema:identifier": "journalVolumeIssue",
+        "hunDescription": "Indicates the volume, issue and date of a journal, which this Dataset is associated with.",
+        "skos:prefLabel": "Journal",
+        "hunLabel": "Journal",
+        "minItems": 1,
+        "maxItems ": 0,
+        "_valueConstraints": {
+          "requiredValue": false
+        },
+        "_arp": {
+          "dataverse": {
+            "advancedSearchField": false,
+            "facetable": false,
+            "displayoncreate": false
+          }
+        },
+        "$schema": "http://json-schema.org/draft-04/schema#"
+      }
+    },
+    "journalArticleType": {
+      "@type": "https://schema.metadatacenter.org/core/TemplateField",
+      "@context": {
+        "xsd": "http://www.w3.org/2001/XMLSchema#",
+        "pav": "http://purl.org/pav/",
+        "bibo": "http://purl.org/ontology/bibo/",
+        "oslc": "http://open-services.net/ns/core#",
+        "schema": "http://schema.org/",
+        "skos": "http://www.w3.org/2004/02/skos/core#",
+        "schema:name": {
+          "@type": "xsd:string"
+        },
+        "schema:description": {
+          "@type": "xsd:string"
+        },
+        "skos:prefLabel": {
+          "@type": "xsd:string"
+        },
+        "skos:altLabel": {
+          "@type": "xsd:string"
+        },
+        "pav:createdOn": {
+          "@type": "xsd:dateTime"
+        },
+        "pav:createdBy": {
+          "@type": "@id"
+        },
+        "pav:lastUpdatedOn": {
+          "@type": "xsd:dateTime"
+        },
+        "oslc:modifiedBy": {
+          "@type": "@id"
+        }
+      },
+      "type": "object",
+      "_ui": {
+        "inputType": "list"
+      },
+      "_valueConstraints": {
+        "requiredValue": false,
+        "multipleChoice": false,
+        "literals": [
+          {
+            "label": "reply"
+          },
+          {
+            "label": "reprint"
+          },
+          {
+            "label": "research article"
+          },
+          {
+            "label": "retraction"
+          },
+          {
+            "label": "review article"
+          },
+          {
+            "label": "translation"
+          },
+          {
+            "label": "other"
+          },
+          {
+            "label": "product review"
+          },
+          {
+            "label": "rapid communication"
+          },
+          {
+            "label": "abstract"
+          },
+          {
+            "label": "addendum"
+          },
+          {
+            "label": "announcement"
+          },
+          {
+            "label": "article-commentary"
+          },
+          {
+            "label": "book review"
+          },
+          {
+            "label": "books received"
+          },
+          {
+            "label": "brief report"
+          },
+          {
+            "label": "calendar"
+          },
+          {
+            "label": "case report"
+          },
+          {
+            "label": "collection"
+          },
+          {
+            "label": "correction"
+          },
+          {
+            "label": "data paper"
+          },
+          {
+            "label": "discussion"
+          },
+          {
+            "label": "dissertation"
+          },
+          {
+            "label": "editorial"
+          },
+          {
+            "label": "in brief"
+          },
+          {
+            "label": "introduction"
+          },
+          {
+            "label": "letter"
+          },
+          {
+            "label": "meeting report"
+          },
+          {
+            "label": "news"
+          },
+          {
+            "label": "obituary"
+          },
+          {
+            "label": "oration"
+          },
+          {
+            "label": "partial retraction"
+          }
+        ]
+      },
+      "properties": {
+        "@type": {
+          "oneOf": [
+            {
+              "type": "string",
+              "format": "uri"
+            },
+            {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string",
+                "format": "uri"
+              },
+              "uniqueItems": true
+            }
+          ]
+        },
+        "@value": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "rdfs:label": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "@value"
+      ],
+      "schema:name": "journalArticleType",
+      "schema:description": "Indicates what kind of article this is, for example, a research article, a commentary, a book or product review, a case report, a calendar, etc (based on JATS). ",
+      "pav:createdOn": "2025-10-21T15:23:15Z",
+      "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
+      "pav:lastUpdatedOn": "2025-10-21T15:23:15Z",
+      "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
+      "schema:schemaVersion": "1.6.0",
+      "additionalProperties": false,
+      "@id": "97167e85-0120-3591-94f0-58fb04cc934f",
+      "title": "journalArticleType element schema",
+      "description": "journalArticleType element schema generated by the ARP",
+      "hunDescription": "Indicates what kind of article this is, for example, a research article, a commentary, a book or product review, a case report, a calendar, etc (based on JATS).",
+      "skos:prefLabel": "Type of Article",
+      "hunLabel": "Type of Article",
+      "_arp": {
+        "dataverse": {
+          "advancedSearchField": true,
+          "facetable": true,
+          "displayoncreate": false
+        }
+      },
+      "$schema": "http://json-schema.org/draft-04/schema#"
+    }
+  },
+  "required": [
+    "@context",
+    "@id",
+    "schema:isBasedOn",
+    "schema:name",
+    "schema:description",
+    "pav:createdOn",
+    "pav:createdBy",
+    "pav:lastUpdatedOn",
+    "oslc:modifiedBy",
+    "journalVolumeIssue",
+    "journalArticleType"
+  ],
+  "schema:name": "Journal Metadata",
+  "schema:description": "",
+  "pav:lastUpdatedOn": "2025-10-21T15:23:15Z",
+  "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
+  "schema:schemaVersion": "1.6.0",
+  "additionalProperties": false,
+  "pav:version": "0.0.1",
+  "bibo:status": "bibo:draft",
+  "title": "journal template schema",
+  "description": "journal template schema generated by ARP",
+  "hunName": "Journal Metadata",
+  "schema:identifier": "journal",
+  "@id": "https://repo.arp.orgx/templates/ab2a9696-291f-4705-b5e6-6c262266c506",
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}

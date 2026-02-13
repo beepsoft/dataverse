@@ -17,6 +17,11 @@ import edu.harvard.iq.dataverse.DvObject;
 import edu.harvard.iq.dataverse.DvObjectServiceBean;
 import edu.harvard.iq.dataverse.FileMetadata;
 import edu.harvard.iq.dataverse.api.auth.AuthRequired;
+import edu.harvard.iq.dataverse.api.cedar.CedarParams;
+import edu.harvard.iq.dataverse.api.cedar.SetCedarKeyParams;
+import edu.harvard.iq.dataverse.cedar.AuthenticatedUserCedar;
+import edu.harvard.iq.dataverse.cedar.CedarAuthenticationServiceBean;
+import edu.harvard.iq.dataverse.cedar.CedarServiceBean;
 import edu.harvard.iq.dataverse.settings.JvmSettings;
 import edu.harvard.iq.dataverse.settings.SettingsValidationException;
 import edu.harvard.iq.dataverse.util.StringUtil;
@@ -143,6 +148,7 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 
 import java.nio.file.Paths;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 /**
  * Where the secure, setup API calls live.
@@ -2819,5 +2825,132 @@ public class Admin extends AbstractApiBean {
         }
         String csvData = cacheFactory.getStats(CacheFactoryBean.RATE_LIMIT_CACHE, deltaMinutesFilter != null ? String.valueOf(deltaMinutesFilter) : null);
         return Response.ok(csvData).header("Content-Disposition", "attachment; filename=\"data.csv\"").build();
+    }
+
+    @EJB
+    CedarServiceBean cedarService;
+
+    @EJB
+    protected CedarAuthenticationServiceBean cedarAuthSvc;
+
+    /**
+     * Associate a CEDAR key with a given user. Once set, one can execute API calls using either the
+     * DV api token or the CEDAR key.
+     *
+     * curl -X POST \
+     *   http://localhost:8080/api/admin/cedar/setCedarKey \
+     *   -H 'Content-Type: application/json' \
+     *   -d '{
+     *     "userIdentifier": "dataverseAdmin",
+     *     "cedarKey": "<<CEDAR KEY>"
+     *   }'
+     *
+     * @param params
+     * @return
+     */
+    @POST
+    @Path("cedar/setCedarKey")
+    @Consumes("application/json")
+    public Response arpCetCedarKey(SetCedarKeyParams params)
+    {
+        AuthenticatedUser user = authSvc.getAuthenticatedUser(params.userIdentifier);
+
+        if (user == null) {
+            return error(Response.Status.FORBIDDEN, "User not found.");
+        }
+
+        AuthenticatedUserCedar userArp = cedarAuthSvc.findAuthenticatedUserCedarById(user.getId());
+
+        if (userArp == null) {
+            userArp = cedarAuthSvc.createNewAuthenticatedUserCedar();
+            userArp.setUser(user);
+        }
+        userArp.setCedarToken(params.cedarKey);
+
+        return Response.ok().build();
+    }
+
+    /**
+     * Synchronizes MDB-s with CEDAR templates. It uploads the selected MDB-s as CEDAR templates then syncs back
+     * those templates as MDB-s storing the templates and element JSON schemas along with the MDB and field types.
+     * This function is idempotent and can be called any number of time to do the resync time.
+     * @param params
+     * @return
+     */
+    //curl -X POST 'http://localhost:8080/api/admin/cedar/syncMdbsWithCedar' \
+    //-H 'Content-Type: application/json' \
+    //-d '{
+    //  "mdbParams": [
+    //    {"name": "citation"},
+    //    {"name": "geospatial", "namespaceUri": "https://dataverse.org/schema/geospatial/"},
+    //    {"name": "socialscience", "namespaceUri": "https://dataverse.org/schema/socialscience/"},
+    //    {"name": "biomedical", "namespaceUri": "https://dataverse.org/schema/biomedical/"},
+    //    {"name": "astrophysics", "namespaceUri": "https://dataverse.org/schema/astrophysics/"},
+    //    {
+    //      "name": "journal",
+    //      "namespaceUri": "https://dataverse.org/schema/journal/",
+    //      "cedarUuid": "aaaaaaaa-bbbb-cccc-dddd-65d43571f306"
+    //    }
+    //  ],
+    //  "cedarParams": {
+    //    "cedarDomain": "arp3.orgx",
+    //    "apiKey": "0000111122223333444455556666777788889999aaaabbbbccccddddeeeeffff",
+    //    "folderId": "https:%2F%2Frepo.arp3.orgx%2Ffolders%2Fb62e9090-c9f0-4883-9bf9-010f3ae96075"
+    //  }
+    //}'
+    @POST
+    @Path("cedar/syncMdbsWithCedar")
+    @Consumes("application/json")
+    public Response cedarSyncMdbsWithCedar(CedarParams params) {
+        try {
+            if (params.getMdbParams() == null || params.getMdbParams().isEmpty()) {
+                return Response.serverError().entity("No mdbParams specified").build();
+            }
+
+            // Make sure that both name and id are set.
+            try {
+                params.getMdbParams().stream().forEach(mdbParam -> {
+
+                            if (mdbParam.id != null) {
+                                try {
+                                    var mdb = metadataBlockSvc.findById(mdbParam.id);
+                                    mdbParam.name = mdb.getName();
+                                } catch (IllegalArgumentException ex) {
+                                    throw new RuntimeException("Invalid MDB id " + mdbParam.id);
+                                }
+                            }
+                            if (mdbParam.name != null) {
+                                try {
+                                    var mdb = metadataBlockSvc.findByName(mdbParam.name);
+                                    mdbParam.id = mdb.getId();
+                                } catch (IllegalArgumentException ex) {
+                                    throw new RuntimeException("Invalid MDB name " + mdbParam.name);
+                                }
+                            }
+
+                        }
+                );
+            } catch(Exception ex) {
+                Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
+                return Response.status(Status.BAD_REQUEST).entity(ex.getMessage()).build();
+            }
+
+            var namespaceUris = params.getMdbParams().stream()
+                    .filter(mdbParam -> mdbParam.namespaceUri != null)
+                    .collect(Collectors.toMap(mdbParam -> mdbParam.name, mdbParam -> mdbParam.namespaceUri));
+
+            if (!namespaceUris.isEmpty()) {
+                cedarService.updateMetadatablockNamesaceUris(namespaceUris);
+            }
+
+            params.getMdbParams().stream().forEach(mdbParam -> {
+                logger.info("Syncing MDB '"+mdbParam.name+"' ...");
+                cedarService.syncMetadataBlockWithCedar(mdbParam, params.cedarParams);
+                logger.info("Syncing MDB '"+mdbParam.name+"' done.");
+            });
+            return Response.ok("Done").build();
+        } catch (Throwable ex) {
+            return Response.serverError().entity(ex.getLocalizedMessage()).build();
+        }
     }
 }
