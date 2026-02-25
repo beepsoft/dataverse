@@ -19,6 +19,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import edu.harvard.iq.dataverse.cedar.DatasetFieldTypeOverride;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -738,4 +740,29 @@ public class DatasetField implements Serializable {
         
     } // end: needsTextCleaning
 
+    @Transient
+    private DatasetFieldTypeOverride fieldTypeOverride;
+
+    public DatasetFieldTypeOverride getFieldTypeOverride()
+    {
+        return fieldTypeOverride;
+    }
+
+    public void setFieldTypeOverride(DatasetFieldTypeOverride fieldTypeOverride)
+    {
+        this.fieldTypeOverride = fieldTypeOverride;
+    }
+
+    @Transient
+    private DatasetField originalField;
+
+    public DatasetField getOriginalField()
+    {
+        return originalField;
+    }
+
+    public void setOriginalField(DatasetField originalField)
+    {
+        this.originalField = originalField;
+    }
 }
