@@ -1725,6 +1725,8 @@ public class CedarServiceBean implements java.io.Serializable {
                     ResourceBundle.clearCache();
                 }
             }
+        } catch (CedarTemplateErrorsException e) {
+            throw e;
         } catch (Exception e) {
             e.printStackTrace();
             logger.log(Level.SEVERE, "Updating metadatablock "+""+" from CEDAR template failed", e);
