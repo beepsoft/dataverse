@@ -200,7 +200,8 @@ public class CedarServiceBean implements java.io.Serializable {
 //      TODO: handle dataverseAlias?
         mdbRow.add("");
         mdbRow.add(mdb.getDisplayName());
-        mdbRow.add(mdb.getNamespaceUri());
+        String namespaceUri = CedarNamespaceUriUtil.mdbNamespaceUri(mdb.getNamespaceUri(), mdb.getName());
+        mdbRow.add(namespaceUri);
 
         CsvSchema datasetFieldSchema = CsvSchema.builder()
                 .addColumn("#datasetField")
@@ -258,7 +259,11 @@ public class CedarServiceBean implements java.io.Serializable {
             dsfRowValues.add(String.valueOf(dsf.isRequired()));
             dsfRowValues.add(dsf.getParentDatasetFieldType() != null ? dsf.getParentDatasetFieldType().getName() : "");
             dsfRowValues.add(mdb.getName());
-            dsfRowValues.add(dsf.getUri());
+            var uri = dsf.getUri();
+            if (uri == null || uri.isBlank()) {
+                uri = namespaceUri + dsf.getName();
+            }
+            dsfRowValues.add(uri);
             dsfRows.add(dsfRowValues.toString().replace("null", ""));
 
             controlledVocabularyValueService.findByDatasetFieldTypeId(dsf.getId()).forEach(cvv -> {
@@ -1310,11 +1315,15 @@ public class CedarServiceBean implements java.io.Serializable {
         
         // Check if the schema:identifier is already in use before importing the template into Dataverse
         if (isExport) {
-            var id = cedarResource.get("@id").getAsString();
-            var providedVersion = cedarResource.has("pav:version") ? cedarResource.get("pav:version").getAsString() : null;
-            if (cedarMetadataBlockServiceBean.isDuplicateSchemaIdentifier(idNode.getAsString(), id, providedVersion)) {
-                errors.errors.add("Resources with the same schema:identifier must have a version greater than or equal to the existing version. Please update the version of the resource to be imported.");
-                return errors;
+            var cedarIdNode = cedarResource.get("@id");
+            // If @id is not present, there's nothing to compare against for duplicate checking.
+            if (cedarIdNode != null && !cedarIdNode.isJsonNull()) {
+                var id = cedarIdNode.getAsString();
+                var providedVersion = cedarResource.has("pav:version") ? cedarResource.get("pav:version").getAsString() : null;
+                if (cedarMetadataBlockServiceBean.isDuplicateSchemaIdentifier(idNode.getAsString(), id, providedVersion)) {
+                    errors.errors.add("Resources with the same schema:identifier must have a version greater than or equal to the existing version. Please update the version of the resource to be imported.");
+                    return errors;
+                }
             }
         }
         
@@ -1787,7 +1796,10 @@ public class CedarServiceBean implements java.io.Serializable {
             var actualUuid = mdbParam.cedarUuid != null ? mdbParam.cedarUuid : generateNamedUuid(mdbParam.name);
 
             JsonObject existingTemplate = getCedarTemplateForMdb(mdbParam.name);
-            JsonNode cedarTemplate = mapper.readTree(tsvToCedarTemplate(exportMdbAsTsv(mdb.getName()), true, existingTemplate, forceNamespaceUri).toString());
+            String cedarTemplateStr = tsvToCedarTemplate(exportMdbAsTsv(mdb.getName()), true, existingTemplate, forceNamespaceUri).toString();
+            // ARP compatibility: just naively replace "_ext" to "_arp" for extension values.
+            cedarTemplateStr = cedarTemplateStr.replaceAll("\"_ext\"", "\"_arp\"");
+            JsonNode cedarTemplate = mapper.readTree(cedarTemplateStr);
             String templateJson = exportTemplateToCedar(cedarTemplate, actualUuid, cedarParams);
             createOrUpdateMdbFromCedarTemplate("root", templateJson, false);
         } catch (Exception e) {

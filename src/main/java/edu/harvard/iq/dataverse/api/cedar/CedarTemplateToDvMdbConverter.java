@@ -214,7 +214,12 @@ public class CedarTemplateToDvMdbConverter {
     }
 
     public void processCtrlVocabValues(JsonObject templateField, String finalPropName, ProcessedCedarTemplateValues processedCedarTemplateValues) {
-        JsonArray ctrlVocabValues = JsonHelper.getJsonElement(templateField, "_valueConstraints.literals").getAsJsonArray();
+        JsonArray ctrlVocabValues = JsonHelper.getJsonArray(templateField, "_valueConstraints.literals");
+        if (ctrlVocabValues == null) {
+            return;
+        }
+
+        JsonArray identifiers = JsonHelper.getJsonArray(templateField, "_ext.dataverse.identifiers");
 
         for (int i = 0; i < ctrlVocabValues.size(); i++) {
             JsonObject value = ctrlVocabValues.get(i).getAsJsonObject();
@@ -222,6 +227,11 @@ public class CedarTemplateToDvMdbConverter {
             controlledVocabulary.setDatasetField(finalPropName);
             controlledVocabulary.setValue(value.get("label").getAsString());
             controlledVocabulary.setDisplayOrder(i);
+            String identifier = "";
+            if (identifiers != null && identifiers.size() > i && !identifiers.get(i).isJsonNull()) {
+                identifier = identifiers.get(i).getAsString();
+            }
+            controlledVocabulary.setIdentifier(identifier);
             processedCedarTemplateValues.controlledVocabularyValues.add(controlledVocabulary);
         }
     }

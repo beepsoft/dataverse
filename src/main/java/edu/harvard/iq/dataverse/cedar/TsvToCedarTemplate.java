@@ -47,6 +47,35 @@ public class TsvToCedarTemplate implements java.io.Serializable {
 
     private JsonObject existingTemplate;
 
+    private static final class ControlledVocabularyData {
+        private final JsonArray literals;
+        private final JsonArray identifiers;
+
+        private ControlledVocabularyData(JsonArray literals, JsonArray identifiers) {
+            this.literals = literals;
+            this.identifiers = identifiers;
+        }
+    }
+
+    private void addDataverseExt(JsonObject cedarTemplate, String propName, JsonElement jsonValue) {
+        if (cedarTemplate.has("_ext")) {
+            var _extPart = cedarTemplate.getAsJsonObject("_ext");
+            if (_extPart.has("dataverse")) {
+                _extPart.getAsJsonObject("dataverse").add(propName, jsonValue);
+            } else {
+                JsonObject dvValue = new JsonObject();
+                dvValue.add(propName, jsonValue);
+                _extPart.add("dataverse", dvValue);
+            }
+        } else {
+            JsonObject _extPart = new JsonObject();
+            JsonObject dvValue = new JsonObject();
+            dvValue.add(propName, jsonValue);
+            _extPart.add("dataverse", dvValue);
+            cedarTemplate.add("_ext", _extPart);
+        }
+    }
+
     static {
         setupCedarTemplateParts();
     }
@@ -163,23 +192,30 @@ public class TsvToCedarTemplate implements java.io.Serializable {
                 return;
             }
             List<DataverseDatasetField> children = datasetFields.stream().filter(datasetField -> datasetField.getParent().equals(dsf.getName())).collect(Collectors.toList());
-            JsonArray cvvs = new JsonArray();
-            controlledVocabularyValues.stream()
-                    .filter(cvv -> cvv.getDatasetField().equals(dsf.getName()))
-                    .forEach(cvv -> {
-                        String label = cvv.getValue();
-                        JsonObject literal = new JsonObject();
-                        literal.addProperty("label", label);
-                        cvvs.add(literal);
-                    });
             if (children.isEmpty()){
-                processTemplateField(jsonSchema, dsf, cvvs, finalMetadataBlock);
+                ControlledVocabularyData cvvData = collectControlledVocabularyValues(controlledVocabularyValues, dsf.getName());
+                processTemplateField(jsonSchema, dsf, cvvData, finalMetadataBlock);
             } else {
                 processTemplateElement(jsonSchema, dsf, children, controlledVocabularyValues, finalMetadataBlock);
             }
         });
 
         return jsonSchema;
+    }
+    
+    private ControlledVocabularyData collectControlledVocabularyValues(List<DataverseControlledVocabulary> controlledVocabularyValues, String dsfName) {
+        JsonArray literals = new JsonArray();
+        JsonArray identifiers = new JsonArray();
+        controlledVocabularyValues.stream()
+                .filter(cvv -> cvv.getDatasetField().equals(dsfName))
+                .forEach(cvv -> {
+                    String label = cvv.getValue();
+                    JsonObject literal = new JsonObject();
+                    literal.addProperty("label", label);
+                    identifiers.add(cvv.getIdentifier());
+                    literals.add(literal);
+                });
+        return new ControlledVocabularyData(literals, identifiers);
     }
 
     private void addValueToParent(JsonObject parentObj, JsonObject valueObj, DataverseDatasetField datasetField, boolean parentIsTemplateField, DataverseMetadataBlock dataverseMetadataBlock) {
@@ -210,7 +246,7 @@ public class TsvToCedarTemplate implements java.io.Serializable {
         * When forceNamespaceUri is true, always use namespaceUri + propName, ignoring existing termUri.
         * */
         String termUri = datasetField.getTermURI();
-        String nameSpaceUri = dataverseMetadataBlock.getBlockURI().endsWith("/") ? dataverseMetadataBlock.getBlockURI() : dataverseMetadataBlock.getBlockURI() + "/";
+        String nameSpaceUri = CedarNamespaceUriUtil.mdbNamespaceUri(dataverseMetadataBlock.getBlockURI(), dataverseMetadataBlock.getName());
         String constructedUri = nameSpaceUri + datasetField.getName();
         String uri = forceNamespaceUri ? constructedUri : (termUri != null && !termUri.isBlank() ? termUri : constructedUri);
         enumArray.add(uri);
@@ -261,10 +297,11 @@ public class TsvToCedarTemplate implements java.io.Serializable {
             }
         }
         jsonSchema.addProperty("schema:identifier", dataverseMetadataBlock.getName());
+        final String blockUri = CedarNamespaceUriUtil.mdbNamespaceUri(dataverseMetadataBlock.getBlockURI(), dataverseMetadataBlock.getName());
         JsonHelper.getJsonElement(jsonSchema, "properties.@type.oneOf").getAsJsonArray().forEach(jsonElement -> {
             JsonObject oneOf = jsonElement.getAsJsonObject();
             JsonArray enumArray = new JsonArray();
-            enumArray.add(dataverseMetadataBlock.getBlockURI());
+            enumArray.add(blockUri);
             if (oneOf.get("type").getAsString().equals("string")) {
                 oneOf.add("enum", enumArray);
             } else if (oneOf.get("type").getAsString().equals("array")) {
@@ -273,7 +310,7 @@ public class TsvToCedarTemplate implements java.io.Serializable {
         });
     }
 
-    private void processTemplateField(JsonObject jsonSchema, DataverseDatasetField datasetField, JsonArray cvvs, DataverseMetadataBlock dataverseMetadataBlock) {
+    private void processTemplateField(JsonObject jsonSchema, DataverseDatasetField datasetField, ControlledVocabularyData cvvData, DataverseMetadataBlock dataverseMetadataBlock) {
         String fieldType = datasetField.getFieldType().toLowerCase();
         // Find existing field or create an empty one if no existing field exists
         var templateField = jsonSchema.has("properties") && jsonSchema.get("properties").getAsJsonObject().has(datasetField.getName())
@@ -288,9 +325,10 @@ public class TsvToCedarTemplate implements java.io.Serializable {
                 if (datasetField.isAllowControlledVocabulary()) {
                     templateField.getAsJsonObject("_ui").addProperty("inputType", "list");
                     templateField.getAsJsonObject("_valueConstraints").addProperty("multipleChoice", datasetField.isAllowmultiples());
-                    templateField.getAsJsonObject("_valueConstraints").add("literals", cvvs);
-
-
+                    if (cvvData != null && !cvvData.literals.isEmpty()) {
+                        templateField.getAsJsonObject("_valueConstraints").add("literals", cvvData.literals);
+                        addDataverseExt(templateField, "identifiers", cvvData.identifiers);
+                    }
                 } else {
                     templateField.getAsJsonObject("_ui").addProperty("inputType", "textfield");
                 }
@@ -352,16 +390,8 @@ public class TsvToCedarTemplate implements java.io.Serializable {
 
         processCommonFields(templateElement, datasetField, dataverseMetadataBlock, true);
         children.forEach(child -> {
-            JsonArray cvvs = new JsonArray();
-            controlledVocabularyValues.stream()
-                    .filter(cvv -> cvv.getDatasetField().equals(child.getName()))
-                    .forEach(cvv -> {
-                        String label = cvv.getValue();
-                        JsonObject literal = new JsonObject();
-                        literal.addProperty("label", label);
-                        cvvs.add(literal);
-                    });
-            processTemplateField(finalElement, child, cvvs, dataverseMetadataBlock);
+            ControlledVocabularyData cvvData = collectControlledVocabularyValues(controlledVocabularyValues, child.getName());
+            processTemplateField(finalElement, child, cvvData, dataverseMetadataBlock);
         });
 
         addValueToParent(jsonSchema, templateElement, datasetField, false, dataverseMetadataBlock);
