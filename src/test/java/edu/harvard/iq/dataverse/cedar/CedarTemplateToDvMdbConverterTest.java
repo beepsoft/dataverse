@@ -38,12 +38,12 @@ public class CedarTemplateToDvMdbConverterTest {
 
     @Test
     public void testCitationModifiedCedarValuesForAuthorName() throws IOException {
-        String originalSchema = Files.readString(Paths.get("src/test/resources/cedar/citation.json"));
-        String originalTsv = Files.readString(Paths.get("src/test/resources/cedar/citation.tsv"));
+        String originalSchema = Files.readString(Paths.get("src/test/resources/cedar/citation_to_be_modified_cedar_values.json"));
+        String originalTsv = Files.readString(Paths.get("src/test/resources/cedar/citation_to_be_modified_cedar_values.tsv"));
         String generatedMdbTsv = cedarTemplateToDvMdbConverter.processCedarTemplate(originalSchema, new HashSet<>());
         assertEquals(originalTsv.toLowerCase(), generatedMdbTsv.toLowerCase().trim());
 
-        // Modify the "_cedar" and "_valueConstraints" values of the authorName and datasetContactEmail properties as if 
+        // Modify the "_ext" and "_valueConstraints" values of the authorName and datasetContactEmail properties as if 
         // these values were edited in CEDAR
         String modifiedSchema = Files.readString(Paths.get("src/test/resources/cedar/citation_modified_cedar_values.json"));
         String modifiedTsv = Files.readString(Paths.get("src/test/resources/cedar/citation_modified_cedar_values.tsv"));

@@ -27,7 +27,6 @@
   },
   "type": "object",
   "_ui": {
-    "pages": [],
     "order": [
       "astroType",
       "astroFacility",
@@ -74,7 +73,7 @@
     },
     "propertyDescriptions": {
       "astroType": "The nature or genre of the content of the files in the dataset.",
-      "astroFacility": "The observatory or facility where the data was obtained. ",
+      "astroFacility": "The observatory or facility where the data was obtained.",
       "astroInstrument": "The instrument used to collect the data.",
       "astroObject": "Astronomical Objects represented in the data (Given as SIMBAD recognizable names preferred).",
       "resolution:Spatial": "The spatial (angular) resolution that is typical of the observations, in decimal degrees.",
@@ -83,7 +82,7 @@
       "coverage:Spectral:Bandpass": "Conventional bandpass name",
       "coverage:Spectral:CentralWavelength": "The central wavelength of the spectral bandpass, in meters.",
       "coverage:Spectral:Wavelength": "The minimum and maximum wavelength of the spectral bandpass.",
-      "coverage:Temporal": " Time period covered by the data.",
+      "coverage:Temporal": "Time period covered by the data.",
       "coverage:Spatial": "The sky coverage of the data object.",
       "coverage:Depth": "The (typical) depth coverage, or sensitivity, of the data object in Jy.",
       "coverage:ObjectDensity": "The (typical) density of objects, catalog entries, telescope pointings, etc., on the sky, in number per square degree.",
@@ -486,42 +485,6 @@
         "multipleChoice": true,
         "literals": [
           {
-            "label": "Image"
-          },
-          {
-            "label": "Mosaic"
-          },
-          {
-            "label": "EventList"
-          },
-          {
-            "label": "Spectrum"
-          },
-          {
-            "label": "Cube"
-          },
-          {
-            "label": "Table"
-          },
-          {
-            "label": "Catalog"
-          },
-          {
-            "label": "LightCurve"
-          },
-          {
-            "label": "Simulation"
-          },
-          {
-            "label": "Figure"
-          },
-          {
-            "label": "Artwork"
-          },
-          {
-            "label": "Animation"
-          },
-          {
             "label": "PrettyPicture"
           },
           {
@@ -556,6 +519,42 @@
           },
           {
             "label": "Survey"
+          },
+          {
+            "label": "Image"
+          },
+          {
+            "label": "Cube"
+          },
+          {
+            "label": "Table"
+          },
+          {
+            "label": "Catalog"
+          },
+          {
+            "label": "LightCurve"
+          },
+          {
+            "label": "Simulation"
+          },
+          {
+            "label": "Figure"
+          },
+          {
+            "label": "Artwork"
+          },
+          {
+            "label": "Animation"
+          },
+          {
+            "label": "Mosaic"
+          },
+          {
+            "label": "EventList"
+          },
+          {
+            "label": "Spectrum"
           }
         ]
       },
@@ -595,9 +594,9 @@
       ],
       "schema:name": "astroType",
       "schema:description": "The nature or genre of the content of the files in the dataset.",
-      "pav:createdOn": "2025-10-21T15:23:19Z",
+      "pav:createdOn": "2026-05-06T16:47:14Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:19Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:14Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -609,11 +608,37 @@
       "hunLabel": "Type",
       "minItems": 1,
       "maxItems ": 0,
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": true,
           "facetable": true,
-          "displayoncreate": false
+          "displayoncreate": false,
+          "identifiers": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ]
         }
       },
       "$schema": "http://json-schema.org/draft-04/schema#"
@@ -694,10 +719,10 @@
         "@value"
       ],
       "schema:name": "astroFacility",
-      "schema:description": "The observatory or facility where the data was obtained. ",
-      "pav:createdOn": "2025-10-21T15:23:19Z",
+      "schema:description": "The observatory or facility where the data was obtained.",
+      "pav:createdOn": "2026-05-06T16:47:14Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:19Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:14Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -709,7 +734,7 @@
       "hunLabel": "Facility",
       "minItems": 1,
       "maxItems ": 0,
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": true,
           "facetable": true,
@@ -795,9 +820,9 @@
       ],
       "schema:name": "astroInstrument",
       "schema:description": "The instrument used to collect the data.",
-      "pav:createdOn": "2025-10-21T15:23:19Z",
+      "pav:createdOn": "2026-05-06T16:47:14Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:19Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:14Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -809,7 +834,7 @@
       "hunLabel": "Instrument",
       "minItems": 1,
       "maxItems ": 0,
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": true,
           "facetable": true,
@@ -895,9 +920,9 @@
       ],
       "schema:name": "astroObject",
       "schema:description": "Astronomical Objects represented in the data (Given as SIMBAD recognizable names preferred).",
-      "pav:createdOn": "2025-10-21T15:23:19Z",
+      "pav:createdOn": "2026-05-06T16:47:14Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:19Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:14Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -909,7 +934,7 @@
       "hunLabel": "Object",
       "minItems": 1,
       "maxItems ": 0,
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": true,
           "facetable": true,
@@ -995,9 +1020,9 @@
       ],
       "schema:name": "resolution:Spatial",
       "schema:description": "The spatial (angular) resolution that is typical of the observations, in decimal degrees.",
-      "pav:createdOn": "2025-10-21T15:23:19Z",
+      "pav:createdOn": "2026-05-06T16:47:14Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:19Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:14Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -1007,7 +1032,7 @@
       "hunDescription": "The spatial (angular) resolution that is typical of the observations, in decimal degrees.",
       "skos:prefLabel": "Spatial Resolution",
       "hunLabel": "Spatial Resolution",
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": true,
           "facetable": true,
@@ -1093,9 +1118,9 @@
       ],
       "schema:name": "resolution:Spectral",
       "schema:description": "The spectral resolution that is typical of the observations, given as the ratio \\u03bb/\\u0394\\u03bb.",
-      "pav:createdOn": "2025-10-21T15:23:19Z",
+      "pav:createdOn": "2026-05-06T16:47:14Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:19Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:14Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -1105,7 +1130,7 @@
       "hunDescription": "The spectral resolution that is typical of the observations, given as the ratio λ/Δλ.",
       "skos:prefLabel": "Spectral Resolution",
       "hunLabel": "Spectral Resolution",
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": true,
           "facetable": true,
@@ -1191,9 +1216,9 @@
       ],
       "schema:name": "resolution:Temporal",
       "schema:description": "The temporal resolution that is typical of the observations, given in seconds.",
-      "pav:createdOn": "2025-10-21T15:23:19Z",
+      "pav:createdOn": "2026-05-06T16:47:14Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:19Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:14Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -1203,7 +1228,7 @@
       "hunDescription": "The temporal resolution that is typical of the observations, given in seconds.",
       "skos:prefLabel": "Time Resolution",
       "hunLabel": "Time Resolution",
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": false,
           "facetable": false,
@@ -1289,9 +1314,9 @@
       ],
       "schema:name": "coverage:Spectral:Bandpass",
       "schema:description": "Conventional bandpass name",
-      "pav:createdOn": "2025-10-21T15:23:19Z",
+      "pav:createdOn": "2026-05-06T16:47:14Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:19Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:14Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -1303,7 +1328,7 @@
       "hunLabel": "Bandpass",
       "minItems": 1,
       "maxItems ": 0,
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": true,
           "facetable": true,
@@ -1378,9 +1403,9 @@
       ],
       "schema:name": "coverage:Spectral:CentralWavelength",
       "schema:description": "The central wavelength of the spectral bandpass, in meters.",
-      "pav:createdOn": "2025-10-21T15:23:19Z",
+      "pav:createdOn": "2026-05-06T16:47:14Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:19Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:14Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -1392,7 +1417,7 @@
       "hunLabel": "Central Wavelength (m)",
       "minItems": 1,
       "maxItems ": 0,
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "watermark": "Enter a floating-point number.",
           "advancedSearchField": true,
@@ -1552,9 +1577,9 @@
             ],
             "schema:name": "coverage:Spectral:MinimumWavelength",
             "schema:description": "The minimum wavelength of the spectral bandpass, in meters.",
-            "pav:createdOn": "2025-10-21T15:23:19Z",
+            "pav:createdOn": "2026-05-06T16:47:13Z",
             "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-            "pav:lastUpdatedOn": "2025-10-21T15:23:19Z",
+            "pav:lastUpdatedOn": "2026-05-06T16:47:13Z",
             "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
             "schema:schemaVersion": "1.6.0",
             "additionalProperties": false,
@@ -1564,7 +1589,7 @@
             "hunDescription": "The minimum wavelength of the spectral bandpass, in meters.",
             "skos:prefLabel": "Minimum (m)",
             "hunLabel": "Minimum (m)",
-            "_arp": {
+            "_ext": {
               "dataverse": {
                 "watermark": "Enter a floating-point number.",
                 "advancedSearchField": true,
@@ -1640,9 +1665,9 @@
             ],
             "schema:name": "coverage:Spectral:MaximumWavelength",
             "schema:description": "The maximum wavelength of the spectral bandpass, in meters.",
-            "pav:createdOn": "2025-10-21T15:23:19Z",
+            "pav:createdOn": "2026-05-06T16:47:13Z",
             "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-            "pav:lastUpdatedOn": "2025-10-21T15:23:19Z",
+            "pav:lastUpdatedOn": "2026-05-06T16:47:13Z",
             "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
             "schema:schemaVersion": "1.6.0",
             "additionalProperties": false,
@@ -1652,7 +1677,7 @@
             "hunDescription": "The maximum wavelength of the spectral bandpass, in meters.",
             "skos:prefLabel": "Maximum (m)",
             "hunLabel": "Maximum (m)",
-            "_arp": {
+            "_ext": {
               "dataverse": {
                 "watermark": "Enter a floating-point number.",
                 "advancedSearchField": true,
@@ -1671,9 +1696,9 @@
           "coverage:Spectral:MinimumWavelength",
           "coverage:Spectral:MaximumWavelength"
         ],
-        "pav:createdOn": "2025-10-21T15:23:19Z",
+        "pav:createdOn": "2026-05-06T16:47:14Z",
         "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-        "pav:lastUpdatedOn": "2025-10-21T15:23:19Z",
+        "pav:lastUpdatedOn": "2026-05-06T16:47:14Z",
         "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
         "schema:schemaVersion": "1.6.0",
         "additionalProperties": false,
@@ -1691,7 +1716,7 @@
         "_valueConstraints": {
           "requiredValue": false
         },
-        "_arp": {
+        "_ext": {
           "dataverse": {
             "watermark": "Enter a floating-point number.",
             "advancedSearchField": false,
@@ -1865,9 +1890,9 @@
             ],
             "schema:name": "coverage:Temporal:StartTime",
             "schema:description": "Dataset Start Date",
-            "pav:createdOn": "2025-10-21T15:23:19Z",
+            "pav:createdOn": "2026-05-06T16:47:14Z",
             "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-            "pav:lastUpdatedOn": "2025-10-21T15:23:19Z",
+            "pav:lastUpdatedOn": "2026-05-06T16:47:14Z",
             "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
             "schema:schemaVersion": "1.6.0",
             "additionalProperties": false,
@@ -1877,7 +1902,7 @@
             "hunDescription": "Dataset Start Date",
             "skos:prefLabel": "Start",
             "hunLabel": "Start",
-            "_arp": {
+            "_ext": {
               "dataverse": {
                 "watermark": "YYYY-MM-DD",
                 "advancedSearchField": true,
@@ -1966,9 +1991,9 @@
             ],
             "schema:name": "coverage:Temporal:StopTime",
             "schema:description": "Dataset End Date",
-            "pav:createdOn": "2025-10-21T15:23:19Z",
+            "pav:createdOn": "2026-05-06T16:47:14Z",
             "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-            "pav:lastUpdatedOn": "2025-10-21T15:23:19Z",
+            "pav:lastUpdatedOn": "2026-05-06T16:47:14Z",
             "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
             "schema:schemaVersion": "1.6.0",
             "additionalProperties": false,
@@ -1978,7 +2003,7 @@
             "hunDescription": "Dataset End Date",
             "skos:prefLabel": "End",
             "hunLabel": "End",
-            "_arp": {
+            "_ext": {
               "dataverse": {
                 "watermark": "YYYY-MM-DD",
                 "advancedSearchField": true,
@@ -1990,16 +2015,16 @@
           }
         },
         "schema:name": "coverage:Temporal",
-        "schema:description": " Time period covered by the data.",
+        "schema:description": "Time period covered by the data.",
         "required": [
           "@context",
           "@id",
           "coverage:Temporal:StartTime",
           "coverage:Temporal:StopTime"
         ],
-        "pav:createdOn": "2025-10-21T15:23:19Z",
+        "pav:createdOn": "2026-05-06T16:47:14Z",
         "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-        "pav:lastUpdatedOn": "2025-10-21T15:23:19Z",
+        "pav:lastUpdatedOn": "2026-05-06T16:47:14Z",
         "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
         "schema:schemaVersion": "1.6.0",
         "additionalProperties": false,
@@ -2017,7 +2042,7 @@
         "_valueConstraints": {
           "requiredValue": false
         },
-        "_arp": {
+        "_ext": {
           "dataverse": {
             "advancedSearchField": false,
             "facetable": false,
@@ -2104,9 +2129,9 @@
       ],
       "schema:name": "coverage:Spatial",
       "schema:description": "The sky coverage of the data object.",
-      "pav:createdOn": "2025-10-21T15:23:19Z",
+      "pav:createdOn": "2026-05-06T16:47:14Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:19Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:14Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -2118,7 +2143,7 @@
       "hunLabel": "Sky Coverage",
       "minItems": 1,
       "maxItems ": 0,
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": false,
           "facetable": false,
@@ -2193,9 +2218,9 @@
       ],
       "schema:name": "coverage:Depth",
       "schema:description": "The (typical) depth coverage, or sensitivity, of the data object in Jy.",
-      "pav:createdOn": "2025-10-21T15:23:19Z",
+      "pav:createdOn": "2026-05-06T16:47:14Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:19Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:14Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -2205,7 +2230,7 @@
       "hunDescription": "The (typical) depth coverage, or sensitivity, of the data object in Jy.",
       "skos:prefLabel": "Depth Coverage",
       "hunLabel": "Depth Coverage",
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "watermark": "Enter a floating-point number.",
           "advancedSearchField": false,
@@ -2281,9 +2306,9 @@
       ],
       "schema:name": "coverage:ObjectDensity",
       "schema:description": "The (typical) density of objects, catalog entries, telescope pointings, etc., on the sky, in number per square degree.",
-      "pav:createdOn": "2025-10-21T15:23:19Z",
+      "pav:createdOn": "2026-05-06T16:47:14Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:19Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:14Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -2293,7 +2318,7 @@
       "hunDescription": "The (typical) density of objects, catalog entries, telescope pointings, etc., on the sky, in number per square degree.",
       "skos:prefLabel": "Object Density",
       "hunLabel": "Object Density",
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "watermark": "Enter a floating-point number.",
           "advancedSearchField": false,
@@ -2369,9 +2394,9 @@
       ],
       "schema:name": "coverage:ObjectCount",
       "schema:description": "The total number of objects, catalog entries, etc., in the data object.",
-      "pav:createdOn": "2025-10-21T15:23:19Z",
+      "pav:createdOn": "2026-05-06T16:47:14Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:19Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:14Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -2381,7 +2406,7 @@
       "hunDescription": "The total number of objects, catalog entries, etc., in the data object.",
       "skos:prefLabel": "Object Count",
       "hunLabel": "Object Count",
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "watermark": "Enter an integer.",
           "advancedSearchField": false,
@@ -2457,9 +2482,9 @@
       ],
       "schema:name": "coverage:SkyFraction",
       "schema:description": "The fraction of the sky represented in the observations, ranging from 0 to 1.",
-      "pav:createdOn": "2025-10-21T15:23:19Z",
+      "pav:createdOn": "2026-05-06T16:47:14Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:19Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:14Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -2469,7 +2494,7 @@
       "hunDescription": "The fraction of the sky represented in the observations, ranging from 0 to 1.",
       "skos:prefLabel": "Fraction of Sky",
       "hunLabel": "Fraction of Sky",
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "watermark": "Enter a floating-point number.",
           "advancedSearchField": false,
@@ -2556,9 +2581,9 @@
       ],
       "schema:name": "coverage:Polarization",
       "schema:description": "The polarization coverage",
-      "pav:createdOn": "2025-10-21T15:23:19Z",
+      "pav:createdOn": "2026-05-06T16:47:14Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:19Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:14Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -2568,7 +2593,7 @@
       "hunDescription": "The polarization coverage",
       "skos:prefLabel": "Polarization",
       "hunLabel": "Polarization",
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": false,
           "facetable": false,
@@ -2654,9 +2679,9 @@
       ],
       "schema:name": "redshiftType",
       "schema:description": "RedshiftType string C \"Redshift\"; or \"Optical\" or \"Radio\" definitions of Doppler velocity used in the data object.",
-      "pav:createdOn": "2025-10-21T15:23:19Z",
+      "pav:createdOn": "2026-05-06T16:47:14Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:19Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:14Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -2666,7 +2691,7 @@
       "hunDescription": "RedshiftType string C \"Redshift\"; or \"Optical\" or \"Radio\" definitions of Doppler velocity used in the data object.",
       "skos:prefLabel": "RedshiftType",
       "hunLabel": "RedshiftType",
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": false,
           "facetable": false,
@@ -2741,9 +2766,9 @@
       ],
       "schema:name": "resolution:Redshift",
       "schema:description": "The resolution in redshift (unitless) or Doppler velocity (km/s) in the data object.",
-      "pav:createdOn": "2025-10-21T15:23:19Z",
+      "pav:createdOn": "2026-05-06T16:47:14Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:19Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:14Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -2753,7 +2778,7 @@
       "hunDescription": "The resolution in redshift (unitless) or Doppler velocity (km/s) in the data object.",
       "skos:prefLabel": "Redshift Resolution",
       "hunLabel": "Redshift Resolution",
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "watermark": "Enter a floating-point number.",
           "advancedSearchField": false,
@@ -2913,9 +2938,9 @@
             ],
             "schema:name": "coverage:Redshift:MinimumValue",
             "schema:description": "The minimum value of the redshift (unitless) or Doppler velocity (km/s in the data object.",
-            "pav:createdOn": "2025-10-21T15:23:19Z",
+            "pav:createdOn": "2026-05-06T16:47:14Z",
             "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-            "pav:lastUpdatedOn": "2025-10-21T15:23:19Z",
+            "pav:lastUpdatedOn": "2026-05-06T16:47:14Z",
             "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
             "schema:schemaVersion": "1.6.0",
             "additionalProperties": false,
@@ -2925,7 +2950,7 @@
             "hunDescription": "The minimum value of the redshift (unitless) or Doppler velocity (km/s) in the data object.",
             "skos:prefLabel": "Minimum",
             "hunLabel": "Minimum",
-            "_arp": {
+            "_ext": {
               "dataverse": {
                 "watermark": "Enter a floating-point number.",
                 "advancedSearchField": false,
@@ -3001,9 +3026,9 @@
             ],
             "schema:name": "coverage:Redshift:MaximumValue",
             "schema:description": "The maximum value of the redshift (unitless) or Doppler velocity (km/s in the data object.",
-            "pav:createdOn": "2025-10-21T15:23:19Z",
+            "pav:createdOn": "2026-05-06T16:47:14Z",
             "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-            "pav:lastUpdatedOn": "2025-10-21T15:23:19Z",
+            "pav:lastUpdatedOn": "2026-05-06T16:47:14Z",
             "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
             "schema:schemaVersion": "1.6.0",
             "additionalProperties": false,
@@ -3013,7 +3038,7 @@
             "hunDescription": "The maximum value of the redshift (unitless) or Doppler velocity (km/s) in the data object.",
             "skos:prefLabel": "Maximum",
             "hunLabel": "Maximum",
-            "_arp": {
+            "_ext": {
               "dataverse": {
                 "watermark": "Enter a floating-point number.",
                 "advancedSearchField": false,
@@ -3032,9 +3057,9 @@
           "coverage:Redshift:MinimumValue",
           "coverage:Redshift:MaximumValue"
         ],
-        "pav:createdOn": "2025-10-21T15:23:19Z",
+        "pav:createdOn": "2026-05-06T16:47:14Z",
         "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-        "pav:lastUpdatedOn": "2025-10-21T15:23:19Z",
+        "pav:lastUpdatedOn": "2026-05-06T16:47:14Z",
         "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
         "schema:schemaVersion": "1.6.0",
         "additionalProperties": false,
@@ -3052,7 +3077,7 @@
         "_valueConstraints": {
           "requiredValue": false
         },
-        "_arp": {
+        "_ext": {
           "dataverse": {
             "watermark": "Enter a floating-point number.",
             "advancedSearchField": false,
@@ -3097,7 +3122,7 @@
   ],
   "schema:name": "Astronomy and Astrophysics Metadata",
   "schema:description": "",
-  "pav:lastUpdatedOn": "2025-10-21T15:23:19Z",
+  "pav:lastUpdatedOn": "2026-05-06T16:47:14Z",
   "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
   "schema:schemaVersion": "1.6.0",
   "additionalProperties": false,

@@ -27,7 +27,6 @@
   },
   "type": "object",
   "_ui": {
-    "pages": [],
     "order": [
       "unitOfAnalysis",
       "universe",
@@ -91,7 +90,7 @@
       "controlOperations": "Control OperationsMethods to facilitate data control performed by the primary investigator or by the data archive.",
       "weighting": "The use of sampling procedures might make it necessary to apply weights to produce accurate statistical results. Describes the criteria for using weights in analysis of a collection. If a weighting formula or coefficient was developed, the formula is provided, its elements are defined, and it is indicated how the formula was applied to the data.",
       "cleaningOperations": "Methods used to clean the data collection, such as consistency checking, wildcode checking, or other.",
-      "datasetLevelErrorNotes": "Note element used for any information annotating or clarifying the methodology and processing of the study. ",
+      "datasetLevelErrorNotes": "Note element used for any information annotating or clarifying the methodology and processing of the study.",
       "responseRate": "Percentage of sample members who provided information.",
       "samplingErrorEstimates": "Measure of how precisely one can estimate a population value from a given sample.",
       "otherDataAppraisal": "Other issues pertaining to the data appraisal. Describe issues such as response variance, nonresponse rate  and testing for bias, interviewer and response bias, confidence levels, question bias, or similar.",
@@ -527,9 +526,9 @@
       ],
       "schema:name": "unitOfAnalysis",
       "schema:description": "Basic unit of analysis or observation that this Dataset describes, such as individuals, families/households, groups, institutions/organizations, administrative units, and more. For information about the DDI\u0027s controlled vocabulary for this element, please refer to the DDI web page at http://www.ddialliance.org/controlled-vocabularies.",
-      "pav:createdOn": "2025-10-21T15:23:18Z",
+      "pav:createdOn": "2026-05-06T16:47:12Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:18Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:12Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -541,7 +540,7 @@
       "hunLabel": "Unit of Analysis",
       "minItems": 1,
       "maxItems ": 0,
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": true,
           "facetable": true,
@@ -627,9 +626,9 @@
       ],
       "schema:name": "universe",
       "schema:description": "Description of the population covered by the data in the file; the group of people or other elements that are the object of the study and to which the study results refer. Age, nationality, and residence commonly help to  delineate a given universe, but any number of other factors may be used, such as age limits, sex, marital status, race, ethnic group, nationality, income, veteran status, criminal convictions, and more. The universe may consist of elements other than persons, such as housing units, court cases, deaths, countries, and so on. In general, it should be possible to tell from the description of the universe whether a given individual or element is a member of the population under study. Also known as the universe of interest, population of interest, and target population.",
-      "pav:createdOn": "2025-10-21T15:23:18Z",
+      "pav:createdOn": "2026-05-06T16:47:12Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:18Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:12Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -641,7 +640,7 @@
       "hunLabel": "Universe",
       "minItems": 1,
       "maxItems ": 0,
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": true,
           "facetable": true,
@@ -727,9 +726,9 @@
       ],
       "schema:name": "timeMethod",
       "schema:description": "The time method or time dimension of the data collection, such as panel, cross-sectional, trend, time- series, or other.",
-      "pav:createdOn": "2025-10-21T15:23:18Z",
+      "pav:createdOn": "2026-05-06T16:47:12Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:18Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:12Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -739,7 +738,7 @@
       "hunDescription": "The time method or time dimension of the data collection, such as panel, cross-sectional, trend, time- series, or other.",
       "skos:prefLabel": "Time Method",
       "hunLabel": "Time Method",
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": true,
           "facetable": true,
@@ -825,9 +824,9 @@
       ],
       "schema:name": "dataCollector",
       "schema:description": "Individual, agency or organization responsible for  administering the questionnaire or interview or compiling the data.",
-      "pav:createdOn": "2025-10-21T15:23:18Z",
+      "pav:createdOn": "2026-05-06T16:47:12Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:18Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:12Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -837,7 +836,7 @@
       "hunDescription": "Individual, agency or organization responsible for  administering the questionnaire or interview or compiling the data.",
       "skos:prefLabel": "Data Collector",
       "hunLabel": "Data Collector",
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "watermark": "FamilyName, GivenName or Organization",
           "advancedSearchField": false,
@@ -924,9 +923,9 @@
       ],
       "schema:name": "collectorTraining",
       "schema:description": "Type of training provided to the data collector",
-      "pav:createdOn": "2025-10-21T15:23:18Z",
+      "pav:createdOn": "2026-05-06T16:47:12Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:18Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:12Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -936,7 +935,7 @@
       "hunDescription": "Type of training provided to the data collector",
       "skos:prefLabel": "Collector Training",
       "hunLabel": "Collector Training",
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": false,
           "facetable": false,
@@ -1022,9 +1021,9 @@
       ],
       "schema:name": "frequencyOfDataCollection",
       "schema:description": "If the data collected includes more than one point in time, indicate the frequency with which the data was collected; that is, monthly, quarterly, or other.",
-      "pav:createdOn": "2025-10-21T15:23:18Z",
+      "pav:createdOn": "2026-05-06T16:47:12Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:18Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:12Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -1034,7 +1033,7 @@
       "hunDescription": "If the data collected includes more than one point in time, indicate the frequency with which the data was collected; that is, monthly, quarterly, or other.",
       "skos:prefLabel": "Frequency",
       "hunLabel": "Frequency",
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": true,
           "facetable": true,
@@ -1120,9 +1119,9 @@
       ],
       "schema:name": "samplingProcedure",
       "schema:description": "Type of sample and sample design used to select the survey respondents to represent the population. May include reference to the target sample size and the sampling fraction.",
-      "pav:createdOn": "2025-10-21T15:23:18Z",
+      "pav:createdOn": "2026-05-06T16:47:12Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:18Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:12Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -1132,7 +1131,7 @@
       "hunDescription": "Type of sample and sample design used to select the survey respondents to represent the population. May include reference to the target sample size and the sampling fraction.",
       "skos:prefLabel": "Sampling Procedure",
       "hunLabel": "Sampling Procedure",
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": false,
           "facetable": false,
@@ -1288,9 +1287,9 @@
           ],
           "schema:name": "targetSampleActualSize",
           "schema:description": "Actual sample size.",
-          "pav:createdOn": "2025-10-21T15:23:18Z",
+          "pav:createdOn": "2026-05-06T16:47:12Z",
           "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-          "pav:lastUpdatedOn": "2025-10-21T15:23:18Z",
+          "pav:lastUpdatedOn": "2026-05-06T16:47:12Z",
           "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
           "schema:schemaVersion": "1.6.0",
           "additionalProperties": false,
@@ -1300,7 +1299,7 @@
           "hunDescription": "Actual sample size.",
           "skos:prefLabel": "Actual",
           "hunLabel": "Actual",
-          "_arp": {
+          "_ext": {
             "dataverse": {
               "watermark": "Enter an integer...",
               "advancedSearchField": false,
@@ -1387,9 +1386,9 @@
           ],
           "schema:name": "targetSampleSizeFormula",
           "schema:description": "Formula used to determine target sample size.",
-          "pav:createdOn": "2025-10-21T15:23:18Z",
+          "pav:createdOn": "2026-05-06T16:47:12Z",
           "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-          "pav:lastUpdatedOn": "2025-10-21T15:23:18Z",
+          "pav:lastUpdatedOn": "2026-05-06T16:47:12Z",
           "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
           "schema:schemaVersion": "1.6.0",
           "additionalProperties": false,
@@ -1399,7 +1398,7 @@
           "hunDescription": "Formula used to determine target sample size.",
           "skos:prefLabel": "Formula",
           "hunLabel": "Formula",
-          "_arp": {
+          "_ext": {
             "dataverse": {
               "advancedSearchField": false,
               "facetable": false,
@@ -1417,9 +1416,9 @@
         "targetSampleActualSize",
         "targetSampleSizeFormula"
       ],
-      "pav:createdOn": "2025-10-21T15:23:18Z",
+      "pav:createdOn": "2026-05-06T16:47:12Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:18Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:12Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -1435,7 +1434,7 @@
       "_valueConstraints": {
         "requiredValue": false
       },
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": false,
           "facetable": false,
@@ -1521,9 +1520,9 @@
       ],
       "schema:name": "deviationsFromSampleDesign",
       "schema:description": "Show correspondence as well as discrepancies between the sampled units (obtained) and available statistics for the population (age, sex-ratio, marital status, etc.) as a whole.",
-      "pav:createdOn": "2025-10-21T15:23:18Z",
+      "pav:createdOn": "2026-05-06T16:47:12Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:18Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:12Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -1533,7 +1532,7 @@
       "hunDescription": "Show correspondence as well as discrepancies between the sampled units (obtained) and available statistics for the population (age, sex-ratio, marital status, etc.) as a whole.",
       "skos:prefLabel": "Major Deviations for Sample Design",
       "hunLabel": "Major Deviations for Sample Design",
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": false,
           "facetable": false,
@@ -1619,9 +1618,9 @@
       ],
       "schema:name": "collectionMode",
       "schema:description": "Method used to collect the data; instrumentation characteristics (e.g., telephone interview, mail questionnaire, or other).",
-      "pav:createdOn": "2025-10-21T15:23:18Z",
+      "pav:createdOn": "2026-05-06T16:47:12Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:18Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:12Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -1633,7 +1632,7 @@
       "hunLabel": "Collection Mode",
       "minItems": 1,
       "maxItems ": 0,
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": false,
           "facetable": false,
@@ -1719,9 +1718,9 @@
       ],
       "schema:name": "researchInstrument",
       "schema:description": "Type of data collection instrument used. Structured indicates an instrument in which all respondents are asked the same questions/tests, possibly with precoded answers. If a small portion of such a questionnaire includes open-ended questions, provide appropriate comments. Semi-structured indicates that the research instrument contains mainly open-ended questions. Unstructured indicates that in-depth interviews were conducted.",
-      "pav:createdOn": "2025-10-21T15:23:18Z",
+      "pav:createdOn": "2026-05-06T16:47:12Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:18Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:12Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -1731,7 +1730,7 @@
       "hunDescription": "Type of data collection instrument used. Structured indicates an instrument in which all respondents are asked the same questions/tests, possibly with precoded answers. If a small portion of such a questionnaire includes open-ended questions, provide appropriate comments. Semi-structured indicates that the research instrument contains mainly open-ended questions. Unstructured indicates that in-depth interviews were conducted.",
       "skos:prefLabel": "Type of Research Instrument",
       "hunLabel": "Type of Research Instrument",
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": false,
           "facetable": false,
@@ -1817,9 +1816,9 @@
       ],
       "schema:name": "dataCollectionSituation",
       "schema:description": "Description of noteworthy aspects of the data collection situation. Includes information on factors such as cooperativeness of respondents, duration of interviews, number of call backs, or similar.",
-      "pav:createdOn": "2025-10-21T15:23:18Z",
+      "pav:createdOn": "2026-05-06T16:47:12Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:18Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:12Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -1829,7 +1828,7 @@
       "hunDescription": "Description of noteworthy aspects of the data collection situation. Includes information on factors such as cooperativeness of respondents, duration of interviews, number of call backs, or similar.",
       "skos:prefLabel": "Characteristics of Data Collection Situation",
       "hunLabel": "Characteristics of Data Collection Situation",
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": false,
           "facetable": false,
@@ -1915,9 +1914,9 @@
       ],
       "schema:name": "actionsToMinimizeLoss",
       "schema:description": "Summary of actions taken to minimize data loss. Include information on actions such as follow-up visits, supervisory checks, historical matching, estimation, and so on.",
-      "pav:createdOn": "2025-10-21T15:23:18Z",
+      "pav:createdOn": "2026-05-06T16:47:12Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:18Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:12Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -1927,7 +1926,7 @@
       "hunDescription": "Summary of actions taken to minimize data loss. Include information on actions such as follow-up visits, supervisory checks, historical matching, estimation, and so on.",
       "skos:prefLabel": "Actions to Minimize Losses",
       "hunLabel": "Actions to Minimize Losses",
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": false,
           "facetable": false,
@@ -2013,9 +2012,9 @@
       ],
       "schema:name": "controlOperations",
       "schema:description": "Control OperationsMethods to facilitate data control performed by the primary investigator or by the data archive.",
-      "pav:createdOn": "2025-10-21T15:23:18Z",
+      "pav:createdOn": "2026-05-06T16:47:12Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:18Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:12Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -2025,7 +2024,7 @@
       "hunDescription": "Control OperationsMethods to facilitate data control performed by the primary investigator or by the data archive.",
       "skos:prefLabel": "Control Operations",
       "hunLabel": "Control Operations",
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": false,
           "facetable": false,
@@ -2111,9 +2110,9 @@
       ],
       "schema:name": "weighting",
       "schema:description": "The use of sampling procedures might make it necessary to apply weights to produce accurate statistical results. Describes the criteria for using weights in analysis of a collection. If a weighting formula or coefficient was developed, the formula is provided, its elements are defined, and it is indicated how the formula was applied to the data.",
-      "pav:createdOn": "2025-10-21T15:23:18Z",
+      "pav:createdOn": "2026-05-06T16:47:12Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:18Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:12Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -2123,7 +2122,7 @@
       "hunDescription": "The use of sampling procedures might make it necessary to apply weights to produce accurate statistical results. Describes the criteria for using weights in analysis of a collection. If a weighting formula or coefficient was developed, the formula is provided, its elements are defined, and it is indicated how the formula was applied to the data.",
       "skos:prefLabel": "Weighting",
       "hunLabel": "Weighting",
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": false,
           "facetable": false,
@@ -2209,9 +2208,9 @@
       ],
       "schema:name": "cleaningOperations",
       "schema:description": "Methods used to clean the data collection, such as consistency checking, wildcode checking, or other.",
-      "pav:createdOn": "2025-10-21T15:23:18Z",
+      "pav:createdOn": "2026-05-06T16:47:12Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:18Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:12Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -2221,7 +2220,7 @@
       "hunDescription": "Methods used to clean the data collection, such as consistency checking, wildcode checking, or other.",
       "skos:prefLabel": "Cleaning Operations",
       "hunLabel": "Cleaning Operations",
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": false,
           "facetable": false,
@@ -2306,10 +2305,10 @@
         "@value"
       ],
       "schema:name": "datasetLevelErrorNotes",
-      "schema:description": "Note element used for any information annotating or clarifying the methodology and processing of the study. ",
-      "pav:createdOn": "2025-10-21T15:23:18Z",
+      "schema:description": "Note element used for any information annotating or clarifying the methodology and processing of the study.",
+      "pav:createdOn": "2026-05-06T16:47:12Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:18Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:12Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -2319,7 +2318,7 @@
       "hunDescription": "Note element used for any information annotating or clarifying the methodology and processing of the study.",
       "skos:prefLabel": "Study Level Error Notes",
       "hunLabel": "Study Level Error Notes",
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": false,
           "facetable": false,
@@ -2405,9 +2404,9 @@
       ],
       "schema:name": "responseRate",
       "schema:description": "Percentage of sample members who provided information.",
-      "pav:createdOn": "2025-10-21T15:23:18Z",
+      "pav:createdOn": "2026-05-06T16:47:12Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:18Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:12Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -2417,7 +2416,7 @@
       "hunDescription": "Percentage of sample members who provided information.",
       "skos:prefLabel": "Response Rate",
       "hunLabel": "Response Rate",
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": true,
           "facetable": true,
@@ -2503,9 +2502,9 @@
       ],
       "schema:name": "samplingErrorEstimates",
       "schema:description": "Measure of how precisely one can estimate a population value from a given sample.",
-      "pav:createdOn": "2025-10-21T15:23:18Z",
+      "pav:createdOn": "2026-05-06T16:47:12Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:18Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:12Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -2515,7 +2514,7 @@
       "hunDescription": "Measure of how precisely one can estimate a population value from a given sample.",
       "skos:prefLabel": "Estimates of Sampling Error",
       "hunLabel": "Estimates of Sampling Error",
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": false,
           "facetable": false,
@@ -2601,9 +2600,9 @@
       ],
       "schema:name": "otherDataAppraisal",
       "schema:description": "Other issues pertaining to the data appraisal. Describe issues such as response variance, nonresponse rate  and testing for bias, interviewer and response bias, confidence levels, question bias, or similar.",
-      "pav:createdOn": "2025-10-21T15:23:18Z",
+      "pav:createdOn": "2026-05-06T16:47:12Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:18Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:12Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -2613,7 +2612,7 @@
       "hunDescription": "Other issues pertaining to the data appraisal. Describe issues such as response variance, nonresponse rate  and testing for bias, interviewer and response bias, confidence levels, question bias, or similar.",
       "skos:prefLabel": "Other Forms of Data Appraisal",
       "hunLabel": "Other Forms of Data Appraisal",
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": false,
           "facetable": false,
@@ -2788,9 +2787,9 @@
           ],
           "schema:name": "socialScienceNotesType",
           "schema:description": "Type of note.",
-          "pav:createdOn": "2025-10-21T15:23:18Z",
+          "pav:createdOn": "2026-05-06T16:47:12Z",
           "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-          "pav:lastUpdatedOn": "2025-10-21T15:23:18Z",
+          "pav:lastUpdatedOn": "2026-05-06T16:47:12Z",
           "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
           "schema:schemaVersion": "1.6.0",
           "additionalProperties": false,
@@ -2800,7 +2799,7 @@
           "hunDescription": "Type of note.",
           "skos:prefLabel": "Type",
           "hunLabel": "Type",
-          "_arp": {
+          "_ext": {
             "dataverse": {
               "advancedSearchField": false,
               "facetable": false,
@@ -2886,9 +2885,9 @@
           ],
           "schema:name": "socialScienceNotesSubject",
           "schema:description": "Note subject.",
-          "pav:createdOn": "2025-10-21T15:23:18Z",
+          "pav:createdOn": "2026-05-06T16:47:12Z",
           "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-          "pav:lastUpdatedOn": "2025-10-21T15:23:18Z",
+          "pav:lastUpdatedOn": "2026-05-06T16:47:12Z",
           "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
           "schema:schemaVersion": "1.6.0",
           "additionalProperties": false,
@@ -2898,7 +2897,7 @@
           "hunDescription": "Note subject.",
           "skos:prefLabel": "Subject",
           "hunLabel": "Subject",
-          "_arp": {
+          "_ext": {
             "dataverse": {
               "advancedSearchField": false,
               "facetable": false,
@@ -2984,9 +2983,9 @@
           ],
           "schema:name": "socialScienceNotesText",
           "schema:description": "Text for this note.",
-          "pav:createdOn": "2025-10-21T15:23:18Z",
+          "pav:createdOn": "2026-05-06T16:47:12Z",
           "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-          "pav:lastUpdatedOn": "2025-10-21T15:23:18Z",
+          "pav:lastUpdatedOn": "2026-05-06T16:47:12Z",
           "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
           "schema:schemaVersion": "1.6.0",
           "additionalProperties": false,
@@ -2996,7 +2995,7 @@
           "hunDescription": "Text for this note.",
           "skos:prefLabel": "Text",
           "hunLabel": "Text",
-          "_arp": {
+          "_ext": {
             "dataverse": {
               "advancedSearchField": false,
               "facetable": false,
@@ -3015,9 +3014,9 @@
         "socialScienceNotesSubject",
         "socialScienceNotesText"
       ],
-      "pav:createdOn": "2025-10-21T15:23:18Z",
+      "pav:createdOn": "2026-05-06T16:47:12Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:18Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:12Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -3033,7 +3032,7 @@
       "_valueConstraints": {
         "requiredValue": false
       },
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": false,
           "facetable": false,
@@ -3077,7 +3076,7 @@
   ],
   "schema:name": "Social Science and Humanities Metadata",
   "schema:description": "",
-  "pav:lastUpdatedOn": "2025-10-21T15:23:18Z",
+  "pav:lastUpdatedOn": "2026-05-06T16:47:12Z",
   "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
   "schema:schemaVersion": "1.6.0",
   "additionalProperties": false,

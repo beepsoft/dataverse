@@ -1,19 +1,19 @@
 #metadataBlock	name	dataverseAlias	displayName	blockURI
-	biomedical		Life Sciences Metadata
+	biomedical		Life Sciences Metadata	https://dataverse.org/schema/biomedical/
 #datasetField	name	title	description	watermark	fieldType	displayOrder	displayFormat	advancedSearchField	allowControlledVocabulary	allowmultiples	facetable	displayoncreate	required	parent	metadatablock_id	termURI
-	studyDesignType	Design Type	Design types that are based on the overall experimental design.		TEXT	0		true	true	true	true	false	false		biomedical	
-	studyOtherDesignType	Other Design Type	If Other was selected in Design Type, list any other design types that were used in this Dataset.		TEXT	1		true	false	true	true	false	false		biomedical	
-	studyFactorType	Factor Type	Factors used in the Dataset.		TEXT	2		true	true	true	true	false	false		biomedical	
-	studyOtherFactorType	Other Factor Type	If Other was selected in Factor Type, list any other factor types that were used in this Dataset.		TEXT	3		true	false	true	true	false	false		biomedical	
-	studyAssayOrganism	Organism	The taxonomic name of the organism used in the Dataset or from which the  starting biological material derives.		TEXT	4		true	true	true	true	false	false		biomedical	
-	studyAssayOtherOrganism	Other Organism	If Other was selected in Organism, list any other organisms that were used in this Dataset. Terms from the NCBI Taxonomy are recommended.		TEXT	5		true	false	true	true	false	false		biomedical	
-	studyAssayMeasurementType	Measurement Type	A term to qualify the endpoint, or what is being measured (e.g. gene expression profiling; protein identification).		TEXT	6		true	true	true	true	false	false		biomedical	
-	studyAssayOtherMeasurmentType	Other Measurement Type	If Other was selected in Measurement Type, list any other measurement types that were used. Terms from NCBO Bioportal are recommended.		TEXT	7		true	false	true	true	false	false		biomedical	
-	studyAssayTechnologyType	Technology Type	A term to identify the technology used to perform the measurement (e.g. DNA microarray; mass spectrometry).		TEXT	8		true	true	true	true	false	false		biomedical	
-	studyAssayOtherTechnologyType	Other Technology Type	If Other was selected in Technology Type, list any other technology types that were used in this Dataset.		TEXT	9		true	false	true	true	false	false		biomedical	
-	studyAssayPlatform	Technology Platform	The manufacturer and name of the technology platform used in the assay (e.g. Bruker AVANCE).		TEXT	10		true	true	true	true	false	false		biomedical	
-	studyAssayOtherPlatform	Other Technology Platform	If Other was selected in Technology Platform, list any other technology platforms that were used in this Dataset.		TEXT	11		true	false	true	true	false	false		biomedical	
-	studyAssayCellType	Cell Type	The name of the cell line from which the source or sample derives.		TEXT	12		true	false	true	true	false	false		biomedical
+	studyDesignType	Design Type	Design types that are based on the overall experimental design.		TEXT	0		true	true	true	true	false	false		biomedical	https://dataverse.org/schema/biomedical/studyDesignType
+	studyOtherDesignType	Other Design Type	If Other was selected in Design Type, list any other design types that were used in this Dataset.		TEXT	1		true	false	true	true	false	false		biomedical	https://dataverse.org/schema/biomedical/studyOtherDesignType
+	studyFactorType	Factor Type	Factors used in the Dataset.		TEXT	2		true	true	true	true	false	false		biomedical	https://dataverse.org/schema/biomedical/studyFactorType
+	studyOtherFactorType	Other Factor Type	If Other was selected in Factor Type, list any other factor types that were used in this Dataset.		TEXT	3		true	false	true	true	false	false		biomedical	https://dataverse.org/schema/biomedical/studyOtherFactorType
+	studyAssayOrganism	Organism	The taxonomic name of the organism used in the Dataset or from which the  starting biological material derives.		TEXT	4		true	true	true	true	false	false		biomedical	https://dataverse.org/schema/biomedical/studyAssayOrganism
+	studyAssayOtherOrganism	Other Organism	If Other was selected in Organism, list any other organisms that were used in this Dataset. Terms from the NCBI Taxonomy are recommended.		TEXT	5		true	false	true	true	false	false		biomedical	https://dataverse.org/schema/biomedical/studyAssayOtherOrganism
+	studyAssayMeasurementType	Measurement Type	A term to qualify the endpoint, or what is being measured (e.g. gene expression profiling; protein identification).		TEXT	6		true	true	true	true	false	false		biomedical	https://dataverse.org/schema/biomedical/studyAssayMeasurementType
+	studyAssayOtherMeasurmentType	Other Measurement Type	If Other was selected in Measurement Type, list any other measurement types that were used. Terms from NCBO Bioportal are recommended.		TEXT	7		true	false	true	true	false	false		biomedical	https://dataverse.org/schema/biomedical/studyAssayOtherMeasurmentType
+	studyAssayTechnologyType	Technology Type	A term to identify the technology used to perform the measurement (e.g. DNA microarray; mass spectrometry).		TEXT	8		true	true	true	true	false	false		biomedical	https://dataverse.org/schema/biomedical/studyAssayTechnologyType
+	studyAssayOtherTechnologyType	Other Technology Type	If Other was selected in Technology Type, list any other technology types that were used in this Dataset.		TEXT	9		true	false	true	true	false	false		biomedical	https://dataverse.org/schema/biomedical/studyAssayOtherTechnologyType
+	studyAssayPlatform	Technology Platform	The manufacturer and name of the technology platform used in the assay (e.g. Bruker AVANCE).		TEXT	10		true	true	true	true	false	false		biomedical	https://dataverse.org/schema/biomedical/studyAssayPlatform
+	studyAssayOtherPlatform	Other Technology Platform	If Other was selected in Technology Platform, list any other technology platforms that were used in this Dataset.		TEXT	11		true	false	true	true	false	false		biomedical	https://dataverse.org/schema/biomedical/studyAssayOtherPlatform
+	studyAssayCellType	Cell Type	The name of the cell line from which the source or sample derives.		TEXT	12		true	false	true	true	false	false		biomedical	https://dataverse.org/schema/biomedical/studyAssayCellType
 #controlledVocabulary	DatasetField	Value	identifier	displayOrder
 	studyDesignType	Case Control	EFO_0001427	0
 	studyDesignType	Cross Sectional	EFO_0001428	1
@@ -70,36 +70,36 @@
 	studyAssayOrganism	Xenopus laevis	NCBITaxon_8355	22
 	studyAssayOrganism	Zea mays	NCBITaxon_4577	23
 	studyAssayOrganism	Other	OTHER_TAXONOMY	24
-	studyAssayMeasurementType	cell counting	ERO_0001899	0
-	studyAssayMeasurementType	cell sorting	CHMO_0001085	1
-	studyAssayMeasurementType	clinical chemistry analysis	OBI_0000520	2
-	studyAssayMeasurementType	copy number variation profiling	OBI_0000537	3
-	studyAssayMeasurementType	DNA methylation profiling	OBI_0000634	4
-	studyAssayMeasurementType	DNA methylation profiling (Bisulfite-Seq)	OBI_0000748	5
-	studyAssayMeasurementType	DNA methylation profiling (MeDIP-Seq)	_OBI_0000634	6
-	studyAssayMeasurementType	drug susceptibility	_IDO_0000469	7
-	studyAssayMeasurementType	environmental gene survey	ENV_GENE_SURVEY	8
-	studyAssayMeasurementType	genome sequencing	ERO_0001183	9
-	studyAssayMeasurementType	hematology	OBI_0000630	10
-	studyAssayMeasurementType	histology	OBI_0600020	11
-	studyAssayMeasurementType	Histone Modification (ChIP-Seq)	OBI_0002017	12
-	studyAssayMeasurementType	loss of heterozygosity profiling	SO_0001786	13
-	studyAssayMeasurementType	metabolite profiling	OBI_0000366	14
-	studyAssayMeasurementType	metagenome sequencing	METAGENOME_SEQ	15
-	studyAssayMeasurementType	protein expression profiling	OBI_0000615	16
-	studyAssayMeasurementType	protein identification	ERO_0000346	17
-	studyAssayMeasurementType	protein-DNA binding site identification	PROTEIN_DNA_BINDING	18
-	studyAssayMeasurementType	protein-protein interaction detection	OBI_0000288	19
-	studyAssayMeasurementType	protein-RNA binding (RIP-Seq)	PROTEIN_RNA_BINDING	20
-	studyAssayMeasurementType	SNP analysis	OBI_0000435	21
-	studyAssayMeasurementType	targeted sequencing	TARGETED_SEQ	22
-	studyAssayMeasurementType	transcription factor binding (ChIP-Seq)	OBI_0002018	23
-	studyAssayMeasurementType	transcription factor binding site identification	OBI_0000291	24
-	studyAssayMeasurementType	transcription profiling	EFO_0001032	26
-	studyAssayMeasurementType	transcription profiling (Microarray)	TRANSCRIPTION_PROF	27
-	studyAssayMeasurementType	transcription profiling (RNA-Seq)	OBI_0001271	28
-	studyAssayMeasurementType	TRAP translational profiling	TRAP_TRANS_PROF	29
-	studyAssayMeasurementType	Other	OTHER_MEASUREMENT	30
+	studyAssayMeasurementType	transcription profiling	EFO_0001032	0
+	studyAssayMeasurementType	transcription profiling (Microarray)	TRANSCRIPTION_PROF	1
+	studyAssayMeasurementType	transcription profiling (RNA-Seq)	OBI_0001271	2
+	studyAssayMeasurementType	TRAP translational profiling	TRAP_TRANS_PROF	3
+	studyAssayMeasurementType	Other	OTHER_MEASUREMENT	4
+	studyAssayMeasurementType	cell counting	ERO_0001899	5
+	studyAssayMeasurementType	cell sorting	CHMO_0001085	6
+	studyAssayMeasurementType	clinical chemistry analysis	OBI_0000520	7
+	studyAssayMeasurementType	copy number variation profiling	OBI_0000537	8
+	studyAssayMeasurementType	DNA methylation profiling	OBI_0000634	9
+	studyAssayMeasurementType	DNA methylation profiling (Bisulfite-Seq)	OBI_0000748	10
+	studyAssayMeasurementType	DNA methylation profiling (MeDIP-Seq)	_OBI_0000634	11
+	studyAssayMeasurementType	drug susceptibility	_IDO_0000469	12
+	studyAssayMeasurementType	environmental gene survey	ENV_GENE_SURVEY	13
+	studyAssayMeasurementType	genome sequencing	ERO_0001183	14
+	studyAssayMeasurementType	hematology	OBI_0000630	15
+	studyAssayMeasurementType	histology	OBI_0600020	16
+	studyAssayMeasurementType	Histone Modification (ChIP-Seq)	OBI_0002017	17
+	studyAssayMeasurementType	loss of heterozygosity profiling	SO_0001786	18
+	studyAssayMeasurementType	metabolite profiling	OBI_0000366	19
+	studyAssayMeasurementType	metagenome sequencing	METAGENOME_SEQ	20
+	studyAssayMeasurementType	protein expression profiling	OBI_0000615	21
+	studyAssayMeasurementType	protein identification	ERO_0000346	22
+	studyAssayMeasurementType	protein-DNA binding site identification	PROTEIN_DNA_BINDING	23
+	studyAssayMeasurementType	protein-protein interaction detection	OBI_0000288	24
+	studyAssayMeasurementType	protein-RNA binding (RIP-Seq)	PROTEIN_RNA_BINDING	25
+	studyAssayMeasurementType	SNP analysis	OBI_0000435	26
+	studyAssayMeasurementType	targeted sequencing	TARGETED_SEQ	27
+	studyAssayMeasurementType	transcription factor binding (ChIP-Seq)	OBI_0002018	28
+	studyAssayMeasurementType	transcription factor binding site identification	OBI_0000291	29
 	studyAssayTechnologyType	culture based drug susceptibility testing, single concentration	CULTURE_DRUG_TEST_SINGLE	0
 	studyAssayTechnologyType	culture based drug susceptibility testing, two concentrations	CULTURE_DRUG_TEST_TWO	1
 	studyAssayTechnologyType	culture based drug susceptibility testing, three or more concentrations (minimium inhibitory concentration measurement)	CULTURE_DRUG_TEST_THREE	2

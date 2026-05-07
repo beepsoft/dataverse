@@ -2,85 +2,85 @@
 	citation		Citation Metadata	https://dataverse.org/schema/citation/
 #datasetField	name	title	description	watermark	fieldType	displayOrder	displayFormat	advancedSearchField	allowControlledVocabulary	allowmultiples	facetable	displayoncreate	required	parent	metadatablock_id	termURI
 	title	Title	The main title of the Dataset		TEXT	0		true	false	false	false	true	true		citation	http://purl.org/dc/terms/title
-	subtitle	Subtitle	A secondary title that amplifies or states certain limitations on the main title		TEXT	1		false	false	false	false	false	false		citation	
+	subtitle	Subtitle	A secondary title that amplifies or states certain limitations on the main title		TEXT	1		false	false	false	false	false	false		citation	https://dataverse.org/schema/citation/subtitle
 	alternativeTitle	Alternative Title	Either 1) a title commonly used to refer to the Dataset or 2) an abbreviation of the main title		TEXT	2		false	false	true	false	false	false		citation	http://purl.org/dc/terms/alternative
 	alternativeURL	Alternative URL	Another URL where one can view or access the data in the Dataset, e.g. a project or personal webpage	https://	URL	3	<a href="#VALUE" target="_blank">#VALUE</a>	false	false	false	false	false	false		citation	https://schema.org/distribution
-	otherId	Other Identifier	Another unique identifier for the Dataset (e.g. producer's or another repository's identifier)		NONE	4	:	false	false	true	false	false	false		citation	
-	otherIdAgency	Agency	The name of the agency that generated the other identifier		TEXT	5	#VALUE	false	false	false	false	false	false	otherId	citation	
-	otherIdValue	Identifier	Another identifier uniquely identifies the Dataset		TEXT	6	#VALUE	false	false	false	false	false	false	otherId	citation	
+	otherId	Other Identifier	Another unique identifier for the Dataset (e.g. producer's or another repository's identifier)		NONE	4	:	false	false	true	false	false	false		citation	https://dataverse.org/schema/citation/otherId
+	otherIdAgency	Agency	The name of the agency that generated the other identifier		TEXT	5	#VALUE	false	false	false	false	false	false	otherId	citation	https://dataverse.org/schema/citation/otherIdAgency
+	otherIdValue	Identifier	Another identifier uniquely identifies the Dataset		TEXT	6	#VALUE	false	false	false	false	false	false	otherId	citation	https://dataverse.org/schema/citation/otherIdValue
 	author	Author	The entity, e.g. a person or organization, that created the Dataset		NONE	7		false	false	true	false	true	true		citation	http://purl.org/dc/terms/creator
-	authorName	Name	The name of the author, such as the person's name or the name of an organization	1) Family Name, Given Name or 2) Organization XYZ	TEXT	8	#VALUE	true	false	false	true	true	true	author	citation	
-	authorAffiliation	Affiliation	The name of the entity affiliated with the author, e.g. an organization's name	Organization XYZ	TEXT	9	(#VALUE)	true	false	false	true	true	false	author	citation	
+	authorName	Name	The name of the author, such as the person's name or the name of an organization	1) Family Name, Given Name or 2) Organization XYZ	TEXT	8	#VALUE	true	false	false	true	true	true	author	citation	https://dataverse.org/schema/citation/authorName
+	authorAffiliation	Affiliation	The name of the entity affiliated with the author, e.g. an organization's name	Organization XYZ	TEXT	9	(#VALUE)	true	false	false	true	true	false	author	citation	https://dataverse.org/schema/citation/authorAffiliation
 	authorIdentifierScheme	Identifier Type	The type of identifier that uniquely identifies the author (e.g. ORCID, ISNI)		TEXT	10	- #VALUE:	false	true	false	false	true	false	author	citation	http://purl.org/spar/datacite/AgentIdentifierScheme
 	authorIdentifier	Identifier	Uniquely identifies the author when paired with an identifier type		TEXT	11	#VALUE	false	false	false	false	true	false	author	citation	http://purl.org/spar/datacite/AgentIdentifier
-	datasetContact	Point of Contact	The entity, e.g. a person or organization, that users of the Dataset can contact with questions		NONE	12		false	false	true	false	true	true		citation	
-	datasetContactName	Name	The name of the point of contact, e.g. the person's name or the name of an organization	1) FamilyName, GivenName or 2) Organization	TEXT	13	#VALUE	false	false	false	false	true	false	datasetContact	citation	
-	datasetContactAffiliation	Affiliation	The name of the entity affiliated with the point of contact, e.g. an organization's name	Organization XYZ	TEXT	14	(#VALUE)	false	false	false	false	true	false	datasetContact	citation	
-	datasetContactEmail	E-mail	The point of contact's email address	name@email.xyz	EMAIL	15	#EMAIL	false	false	false	false	true	true	datasetContact	citation	
-	dsDescription	Description	A summary describing the purpose, nature, and scope of the Dataset		NONE	16		false	false	true	false	true	true		citation	
-	dsDescriptionValue	Text	A summary describing the purpose, nature, and scope of the Dataset		TEXTBOX	17	#VALUE	true	false	false	false	true	true	dsDescription	citation	
-	dsDescriptionDate	Date	The date when the description was added to the Dataset. If the Dataset contains more than one description, e.g. the data producer supplied one description and the data repository supplied another, this date is used to distinguish between the descriptions	YYYY-MM-DD	DATE	18	(#VALUE)	false	false	false	false	true	false	dsDescription	citation	
+	datasetContact	Point of Contact	The entity, e.g. a person or organization, that users of the Dataset can contact with questions		NONE	12		false	false	true	false	true	true		citation	https://dataverse.org/schema/citation/datasetContact
+	datasetContactName	Name	The name of the point of contact, e.g. the person's name or the name of an organization	1) FamilyName, GivenName or 2) Organization	TEXT	13	#VALUE	false	false	false	false	true	false	datasetContact	citation	https://dataverse.org/schema/citation/datasetContactName
+	datasetContactAffiliation	Affiliation	The name of the entity affiliated with the point of contact, e.g. an organization's name	Organization XYZ	TEXT	14	(#VALUE)	false	false	false	false	true	false	datasetContact	citation	https://dataverse.org/schema/citation/datasetContactAffiliation
+	datasetContactEmail	E-mail	The point of contact's email address	name@email.xyz	EMAIL	15	#EMAIL	false	false	false	false	true	true	datasetContact	citation	https://dataverse.org/schema/citation/datasetContactEmail
+	dsDescription	Description	A summary describing the purpose, nature, and scope of the Dataset		NONE	16		false	false	true	false	true	true		citation	https://dataverse.org/schema/citation/dsDescription
+	dsDescriptionValue	Text	A summary describing the purpose, nature, and scope of the Dataset		TEXTBOX	17	#VALUE	true	false	false	false	true	true	dsDescription	citation	https://dataverse.org/schema/citation/dsDescriptionValue
+	dsDescriptionDate	Date	The date when the description was added to the Dataset. If the Dataset contains more than one description, e.g. the data producer supplied one description and the data repository supplied another, this date is used to distinguish between the descriptions	YYYY-MM-DD	DATE	18	(#VALUE)	false	false	false	false	true	false	dsDescription	citation	https://dataverse.org/schema/citation/dsDescriptionDate
 	subject	Subject	The area of study relevant to the Dataset		TEXT	19		true	true	true	true	true	true		citation	http://purl.org/dc/terms/subject
-	keyword	Keyword	A key term that describes an important aspect of the Dataset and information about any controlled vocabulary used		NONE	20		false	false	true	false	true	false		citation	
-	keywordValue	Term	A key term that describes important aspects of the Dataset		TEXT	21	#VALUE	true	false	false	true	true	false	keyword	citation	
-	keywordTermURI	Term URI	A URI that points to the web presence of the Keyword Term	https://	URL	22	<a href="#VALUE" target="_blank" rel="noopener">#VALUE</a>	false	false	false	false	true	false	keyword	citation	
-	keywordVocabulary	Controlled Vocabulary Name	The controlled vocabulary used for the keyword term (e.g. LCSH, MeSH)		TEXT	23	(#VALUE)	false	false	false	false	true	false	keyword	citation	
-	keywordVocabularyURI	Controlled Vocabulary URL	The URL where one can access information about the term's controlled vocabulary	https://	URL	24	<a href="#VALUE" target="_blank" rel="noopener">#VALUE</a>	false	false	false	false	true	false	keyword	citation	
-	topicClassification	Topic Classification	Indicates a broad, important topic or subject that the Dataset covers and information about any controlled vocabulary used		NONE	25		false	false	true	false	false	false		citation	
-	topicClassValue	Term	A topic or subject term		TEXT	26	#VALUE	true	false	false	true	false	false	topicClassification	citation	
-	topicClassVocab	Controlled Vocabulary Name	The controlled vocabulary used for the keyword term (e.g. LCSH, MeSH)		TEXT	27	(#VALUE)	false	false	false	false	false	false	topicClassification	citation	
-	topicClassVocabURI	Controlled Vocabulary URL	The URL where one can access information about the term's controlled vocabulary	https://	URL	28	<a href="#VALUE" target="_blank" rel="noopener">#VALUE</a>	false	false	false	false	false	false	topicClassification	citation	
+	keyword	Keyword	A key term that describes an important aspect of the Dataset and information about any controlled vocabulary used		NONE	20		false	false	true	false	true	false		citation	https://dataverse.org/schema/citation/keyword
+	keywordValue	Term	A key term that describes important aspects of the Dataset		TEXT	21	#VALUE	true	false	false	true	true	false	keyword	citation	https://dataverse.org/schema/citation/keywordValue
+	keywordTermURI	Term URI	A URI that points to the web presence of the Keyword Term	https://	URL	22	<a href="#VALUE" target="_blank" rel="noopener">#VALUE</a>	false	false	false	false	true	false	keyword	citation	https://dataverse.org/schema/citation/keywordTermURI
+	keywordVocabulary	Controlled Vocabulary Name	The controlled vocabulary used for the keyword term (e.g. LCSH, MeSH)		TEXT	23	(#VALUE)	false	false	false	false	true	false	keyword	citation	https://dataverse.org/schema/citation/keywordVocabulary
+	keywordVocabularyURI	Controlled Vocabulary URL	The URL where one can access information about the term's controlled vocabulary	https://	URL	24	<a href="#VALUE" target="_blank" rel="noopener">#VALUE</a>	false	false	false	false	true	false	keyword	citation	https://dataverse.org/schema/citation/keywordVocabularyURI
+	topicClassification	Topic Classification	Indicates a broad, important topic or subject that the Dataset covers and information about any controlled vocabulary used		NONE	25		false	false	true	false	false	false		citation	https://dataverse.org/schema/citation/topicClassification
+	topicClassValue	Term	A topic or subject term		TEXT	26	#VALUE	true	false	false	true	false	false	topicClassification	citation	https://dataverse.org/schema/citation/topicClassValue
+	topicClassVocab	Controlled Vocabulary Name	The controlled vocabulary used for the keyword term (e.g. LCSH, MeSH)		TEXT	27	(#VALUE)	false	false	false	false	false	false	topicClassification	citation	https://dataverse.org/schema/citation/topicClassVocab
+	topicClassVocabURI	Controlled Vocabulary URL	The URL where one can access information about the term's controlled vocabulary	https://	URL	28	<a href="#VALUE" target="_blank" rel="noopener">#VALUE</a>	false	false	false	false	false	false	topicClassification	citation	https://dataverse.org/schema/citation/topicClassVocabURI
 	publication	Related Publication	The article or report that uses the data in the Dataset. The full list of related publications will be displayed on the metadata tab		NONE	29		false	false	true	false	true	false		citation	http://purl.org/dc/terms/isReferencedBy
 	publicationRelationType	Relation Type	The nature of the relationship between this Dataset and the related publication		TEXT	30	#VALUE:	true	true	false	false	true	false	publication	citation	http://datacite.org/schema/kernel-4/simpleTypes#relationType
 	publicationCitation	Citation	The full bibliographic citation for the related publication		TEXTBOX	31	#VALUE	true	false	false	false	true	false	publication	citation	http://purl.org/dc/terms/bibliographicCitation
 	publicationIDType	Identifier Type	The type of identifier that uniquely identifies a related publication		TEXT	32	#VALUE:	true	true	false	false	true	false	publication	citation	http://purl.org/spar/datacite/ResourceIdentifierScheme
 	publicationIDNumber	Identifier	The identifier for a related publication		TEXT	33	#VALUE	true	false	false	false	true	false	publication	citation	http://purl.org/spar/datacite/ResourceIdentifier
 	publicationURL	URL	The URL form of the identifier entered in the Identifier field, e.g. the DOI URL if a DOI was entered in the Identifier field. Used to display what was entered in the ID Type and ID Number fields as a link. If what was entered in the Identifier field has no URL form, the URL of the publication webpage is used, e.g. a journal article webpage	https://	URL	34	<a href="#VALUE" target="_blank" rel="noopener">#VALUE</a>	false	false	false	false	true	false	publication	citation	https://schema.org/distribution
-	notesText	Notes	Additional information about the Dataset		TEXTBOX	35		false	false	false	false	true	false		citation	
+	notesText	Notes	Additional information about the Dataset		TEXTBOX	35		false	false	false	false	true	false		citation	https://dataverse.org/schema/citation/notesText
 	language	Language	A language that the Dataset's files is written in		TEXT	36		true	true	true	true	false	false		citation	http://purl.org/dc/terms/language
-	producer	Producer	The entity, such a person or organization, managing the finances or other administrative processes involved in the creation of the Dataset		NONE	37		false	false	true	false	false	false		citation	
-	producerName	Name	The name of the entity, e.g. the person's name or the name of an organization	1) FamilyName, GivenName or 2) Organization	TEXT	38	#VALUE	true	false	false	true	false	true	producer	citation	
-	producerAffiliation	Affiliation	The name of the entity affiliated with the producer, e.g. an organization's name	Organization XYZ	TEXT	39	(#VALUE)	false	false	false	false	false	false	producer	citation	
-	producerAbbreviation	Abbreviated Name	The producer's abbreviated name (e.g. IQSS, ICPSR)		TEXT	40	(#VALUE)	false	false	false	false	false	false	producer	citation	
-	producerURL	URL	The URL of the producer's website	https://	URL	41	<a href="#VALUE" target="_blank" rel="noopener">#VALUE</a>	false	false	false	false	false	false	producer	citation	
-	producerLogoURL	Logo URL	The URL of the producer's logo	https://	URL	42	<img src="#VALUE" alt="#NAME" class="metadata-logo"/><br/>	false	false	false	false	false	false	producer	citation	
-	productionDate	Production Date	The date when the data were produced (not distributed, published, or archived)	YYYY-MM-DD	DATE	43		true	false	false	true	false	false		citation	
-	productionPlace	Production Location	The location where the data and any related materials were produced or collected		TEXT	44		true	false	true	true	false	false		citation	
+	producer	Producer	The entity, such a person or organization, managing the finances or other administrative processes involved in the creation of the Dataset		NONE	37		false	false	true	false	false	false		citation	https://dataverse.org/schema/citation/producer
+	producerName	Name	The name of the entity, e.g. the person's name or the name of an organization	1) FamilyName, GivenName or 2) Organization	TEXT	38	#VALUE	true	false	false	true	false	true	producer	citation	https://dataverse.org/schema/citation/producerName
+	producerAffiliation	Affiliation	The name of the entity affiliated with the producer, e.g. an organization's name	Organization XYZ	TEXT	39	(#VALUE)	false	false	false	false	false	false	producer	citation	https://dataverse.org/schema/citation/producerAffiliation
+	producerAbbreviation	Abbreviated Name	The producer's abbreviated name (e.g. IQSS, ICPSR)		TEXT	40	(#VALUE)	false	false	false	false	false	false	producer	citation	https://dataverse.org/schema/citation/producerAbbreviation
+	producerURL	URL	The URL of the producer's website	https://	URL	41	<a href="#VALUE" target="_blank" rel="noopener">#VALUE</a>	false	false	false	false	false	false	producer	citation	https://dataverse.org/schema/citation/producerURL
+	producerLogoURL	Logo URL	The URL of the producer's logo	https://	URL	42	<img src="#VALUE" alt="#NAME" class="metadata-logo"/><br/>	false	false	false	false	false	false	producer	citation	https://dataverse.org/schema/citation/producerLogoURL
+	productionDate	Production Date	The date when the data were produced (not distributed, published, or archived)	YYYY-MM-DD	DATE	43		true	false	false	true	false	false		citation	https://dataverse.org/schema/citation/productionDate
+	productionPlace	Production Location	The location where the data and any related materials were produced or collected		TEXT	44		true	false	true	true	false	false		citation	https://dataverse.org/schema/citation/productionPlace
 	contributor	Contributor	The entity, such as a person or organization, responsible for collecting, managing, or otherwise contributing to the development of the Dataset		NONE	45	:	false	false	true	false	false	false		citation	http://purl.org/dc/terms/contributor
-	contributorType	Type	Indicates the type of contribution made to the dataset		TEXT	46	#VALUE	true	true	false	true	false	false	contributor	citation	
-	contributorName	Name	The name of the contributor, e.g. the person's name or the name of an organization	1) FamilyName, GivenName or 2) Organization	TEXT	47	#VALUE	true	false	false	true	false	false	contributor	citation	
+	contributorType	Type	Indicates the type of contribution made to the dataset		TEXT	46	#VALUE	true	true	false	true	false	false	contributor	citation	https://dataverse.org/schema/citation/contributorType
+	contributorName	Name	The name of the contributor, e.g. the person's name or the name of an organization	1) FamilyName, GivenName or 2) Organization	TEXT	47	#VALUE	true	false	false	true	false	false	contributor	citation	https://dataverse.org/schema/citation/contributorName
 	grantNumber	Funding Information	Information about the Dataset's financial support		NONE	48	:	false	false	true	false	false	false		citation	https://schema.org/sponsor
-	grantNumberAgency	Agency	The agency that provided financial support for the Dataset	Organization XYZ	TEXT	49	#VALUE	true	false	false	true	false	false	grantNumber	citation	
-	grantNumberValue	Identifier	The grant identifier or contract identifier of the agency that provided financial support for the Dataset		TEXT	50	#VALUE	true	false	false	true	false	false	grantNumber	citation	
-	distributor	Distributor	The entity, such as a person or organization, designated to generate copies of the Dataset, including any editions or revisions		NONE	51		false	false	true	false	false	false		citation	
-	distributorName	Name	The name of the entity, e.g. the person's name or the name of an organization	1) FamilyName, GivenName or 2) Organization	TEXT	52	#VALUE	true	false	false	true	false	false	distributor	citation	
-	distributorAffiliation	Affiliation	The name of the entity affiliated with the distributor, e.g. an organization's name	Organization XYZ	TEXT	53	(#VALUE)	false	false	false	false	false	false	distributor	citation	
-	distributorAbbreviation	Abbreviated Name	The distributor's abbreviated name (e.g. IQSS, ICPSR)		TEXT	54	(#VALUE)	false	false	false	false	false	false	distributor	citation	
-	distributorURL	URL	The URL of the distributor's webpage	https://	URL	55	<a href="#VALUE" target="_blank" rel="noopener">#VALUE</a>	false	false	false	false	false	false	distributor	citation	
-	distributorLogoURL	Logo URL	The URL of the distributor's logo image, used to show the image on the Dataset's page	https://	URL	56	<img src="#VALUE" alt="#NAME" class="metadata-logo"/><br/>	false	false	false	false	false	false	distributor	citation	
-	distributionDate	Distribution Date	The date when the Dataset was made available for distribution/presentation	YYYY-MM-DD	DATE	57		true	false	false	true	false	false		citation	
-	depositor	Depositor	The entity, such as a person or organization, that deposited the Dataset in the repository	1) FamilyName, GivenName or 2) Organization	TEXT	58		false	false	false	false	true	false		citation	
+	grantNumberAgency	Agency	The agency that provided financial support for the Dataset	Organization XYZ	TEXT	49	#VALUE	true	false	false	true	false	false	grantNumber	citation	https://dataverse.org/schema/citation/grantNumberAgency
+	grantNumberValue	Identifier	The grant identifier or contract identifier of the agency that provided financial support for the Dataset		TEXT	50	#VALUE	true	false	false	true	false	false	grantNumber	citation	https://dataverse.org/schema/citation/grantNumberValue
+	distributor	Distributor	The entity, such as a person or organization, designated to generate copies of the Dataset, including any editions or revisions		NONE	51		false	false	true	false	false	false		citation	https://dataverse.org/schema/citation/distributor
+	distributorName	Name	The name of the entity, e.g. the person's name or the name of an organization	1) FamilyName, GivenName or 2) Organization	TEXT	52	#VALUE	true	false	false	true	false	false	distributor	citation	https://dataverse.org/schema/citation/distributorName
+	distributorAffiliation	Affiliation	The name of the entity affiliated with the distributor, e.g. an organization's name	Organization XYZ	TEXT	53	(#VALUE)	false	false	false	false	false	false	distributor	citation	https://dataverse.org/schema/citation/distributorAffiliation
+	distributorAbbreviation	Abbreviated Name	The distributor's abbreviated name (e.g. IQSS, ICPSR)		TEXT	54	(#VALUE)	false	false	false	false	false	false	distributor	citation	https://dataverse.org/schema/citation/distributorAbbreviation
+	distributorURL	URL	The URL of the distributor's webpage	https://	URL	55	<a href="#VALUE" target="_blank" rel="noopener">#VALUE</a>	false	false	false	false	false	false	distributor	citation	https://dataverse.org/schema/citation/distributorURL
+	distributorLogoURL	Logo URL	The URL of the distributor's logo image, used to show the image on the Dataset's page	https://	URL	56	<img src="#VALUE" alt="#NAME" class="metadata-logo"/><br/>	false	false	false	false	false	false	distributor	citation	https://dataverse.org/schema/citation/distributorLogoURL
+	distributionDate	Distribution Date	The date when the Dataset was made available for distribution/presentation	YYYY-MM-DD	DATE	57		true	false	false	true	false	false		citation	https://dataverse.org/schema/citation/distributionDate
+	depositor	Depositor	The entity, such as a person or organization, that deposited the Dataset in the repository	1) FamilyName, GivenName or 2) Organization	TEXT	58		false	false	false	false	true	false		citation	https://dataverse.org/schema/citation/depositor
 	dateOfDeposit	Deposit Date	The date when the Dataset was deposited into the repository	YYYY-MM-DD	DATE	59		false	false	false	true	true	false		citation	http://purl.org/dc/terms/dateSubmitted
 	timePeriodCovered	Time Period	The time period that the data refer to. Also known as span. This is the time period covered by the data, not the dates of coding, collecting data, or making documents machine-readable		NONE	60	;	false	false	true	false	false	false		citation	https://schema.org/temporalCoverage
-	timePeriodCoveredStart	Start Date	The start date of the time period that the data refer to	YYYY-MM-DD	DATE	61	#NAME: #VALUE	true	false	false	true	false	false	timePeriodCovered	citation	
-	timePeriodCoveredEnd	End Date	The end date of the time period that the data refer to	YYYY-MM-DD	DATE	62	#NAME: #VALUE	true	false	false	true	false	false	timePeriodCovered	citation	
-	dateOfCollection	Date of Collection	The dates when the data were collected or generated		NONE	63	;	false	false	true	false	false	false		citation	
-	dateOfCollectionStart	Start Date	The date when the data collection started	YYYY-MM-DD	DATE	64	#NAME: #VALUE	false	false	false	false	false	false	dateOfCollection	citation	
-	dateOfCollectionEnd	End Date	The date when the data collection ended	YYYY-MM-DD	DATE	65	#NAME: #VALUE	false	false	false	false	false	false	dateOfCollection	citation	
+	timePeriodCoveredStart	Start Date	The start date of the time period that the data refer to	YYYY-MM-DD	DATE	61	#NAME: #VALUE	true	false	false	true	false	false	timePeriodCovered	citation	https://dataverse.org/schema/citation/timePeriodCoveredStart
+	timePeriodCoveredEnd	End Date	The end date of the time period that the data refer to	YYYY-MM-DD	DATE	62	#NAME: #VALUE	true	false	false	true	false	false	timePeriodCovered	citation	https://dataverse.org/schema/citation/timePeriodCoveredEnd
+	dateOfCollection	Date of Collection	The dates when the data were collected or generated		NONE	63	;	false	false	true	false	false	false		citation	https://dataverse.org/schema/citation/dateOfCollection
+	dateOfCollectionStart	Start Date	The date when the data collection started	YYYY-MM-DD	DATE	64	#NAME: #VALUE	false	false	false	false	false	false	dateOfCollection	citation	https://dataverse.org/schema/citation/dateOfCollectionStart
+	dateOfCollectionEnd	End Date	The date when the data collection ended	YYYY-MM-DD	DATE	65	#NAME: #VALUE	false	false	false	false	false	false	dateOfCollection	citation	https://dataverse.org/schema/citation/dateOfCollectionEnd
 	kindOfData	Data Type	The type of data included in the files (e.g. survey data, clinical data, or machine-readable text)		TEXT	66		true	false	true	true	false	false		citation	http://rdf-vocabulary.ddialliance.org/discovery#kindOfData
-	series	Series	Information about the dataset series to which the Dataset belong		NONE	67	:	false	false	true	false	false	false		citation	
-	seriesName	Name	The name of the dataset series		TEXT	68	#VALUE	true	false	false	true	false	false	series	citation	
-	seriesInformation	Information	Can include 1) a history of the series and 2) a summary of features that apply to the series		TEXTBOX	69	#VALUE	false	false	false	false	false	false	series	citation	
+	series	Series	Information about the dataset series to which the Dataset belong		NONE	67	:	false	false	true	false	false	false		citation	https://dataverse.org/schema/citation/series
+	seriesName	Name	The name of the dataset series		TEXT	68	#VALUE	true	false	false	true	false	false	series	citation	https://dataverse.org/schema/citation/seriesName
+	seriesInformation	Information	Can include 1) a history of the series and 2) a summary of features that apply to the series		TEXTBOX	69	#VALUE	false	false	false	false	false	false	series	citation	https://dataverse.org/schema/citation/seriesInformation
 	software	Software	Information about the software used to generate the Dataset		NONE	70	,	false	false	true	false	false	false		citation	https://www.w3.org/TR/prov-o/#wasGeneratedBy
-	softwareName	Name	The name of software used to generate the Dataset		TEXT	71	#VALUE	false	false	false	false	false	false	software	citation	
-	softwareVersion	Version	The version of the software used to generate the Dataset, e.g. 4.11		TEXT	72	#NAME: #VALUE	false	false	false	false	false	false	software	citation	
-	relatedMaterial	Related Material	Information, such as a persistent ID or citation, about the material related to the Dataset, such as appendices or sampling information available outside of the Dataset		TEXTBOX	73		false	false	true	false	false	false		citation	
+	softwareName	Name	The name of software used to generate the Dataset		TEXT	71	#VALUE	false	false	false	false	false	false	software	citation	https://dataverse.org/schema/citation/softwareName
+	softwareVersion	Version	The version of the software used to generate the Dataset, e.g. 4.11		TEXT	72	#NAME: #VALUE	false	false	false	false	false	false	software	citation	https://dataverse.org/schema/citation/softwareVersion
+	relatedMaterial	Related Material	Information, such as a persistent ID or citation, about the material related to the Dataset, such as appendices or sampling information available outside of the Dataset		TEXTBOX	73		false	false	true	false	false	false		citation	https://dataverse.org/schema/citation/relatedMaterial
 	relatedDatasets	Related Dataset	Information, such as a persistent ID or citation, about a related dataset, such as previous research on the Dataset's subject		TEXTBOX	74		false	false	true	false	false	false		citation	http://purl.org/dc/terms/relation
 	otherReferences	Other Reference	Information, such as a persistent ID or citation, about another type of resource that provides background or supporting material to the Dataset		TEXT	75		false	false	true	false	false	false		citation	http://purl.org/dc/terms/references
 	dataSources	Data Source	Information, such as a persistent ID or citation, about sources of the Dataset (e.g. a book, article, serial, or machine-readable data file)		TEXTBOX	76		false	false	true	false	false	false		citation	https://www.w3.org/TR/prov-o/#wasDerivedFrom
-	originOfSources	Origin of Historical Sources	For historical sources, the origin and any rules followed in establishing them as sources		TEXTBOX	77		false	false	false	false	false	false		citation	
-	characteristicOfSources	Characteristic of Sources	Characteristics not already noted elsewhere		TEXTBOX	78		false	false	false	false	false	false		citation	
-	accessToSources	Documentation and Access to Sources	1) Methods or procedures for accessing data sources and 2) any special permissions needed for access		TEXTBOX	79		false	false	false	false	false	false		citation
+	originOfSources	Origin of Historical Sources	For historical sources, the origin and any rules followed in establishing them as sources		TEXTBOX	77		false	false	false	false	false	false		citation	https://dataverse.org/schema/citation/originOfSources
+	characteristicOfSources	Characteristic of Sources	Characteristics not already noted elsewhere		TEXTBOX	78		false	false	false	false	false	false		citation	https://dataverse.org/schema/citation/characteristicOfSources
+	accessToSources	Documentation and Access to Sources	1) Methods or procedures for accessing data sources and 2) any special permissions needed for access		TEXTBOX	79		false	false	false	false	false	false		citation	https://dataverse.org/schema/citation/accessToSources
 #controlledVocabulary	DatasetField	Value	identifier	displayOrder
 	authorIdentifierScheme	ORCID		0
 	authorIdentifierScheme	ROR		1
@@ -185,68 +185,6 @@
 	language	Adi	adi	53
 	language	Adilabad Gondi	wsg	54
 	language	Adioukrou	adj	55
-	language	Adithinngithigh	dth	56
-	language	Adivasi Oriya	ort	57
-	language	Adiwasi Garasia	gas	58
-	language	Adnyamathanha	adt	59
-	language	Adonara	adr	60
-	language	Aduge	adu	61
-	language	Adyghe	ady	62
-	language	Adzera	adz	63
-	language	Aeka	aez	64
-	language	Aekyom	awi	65
-	language	Aequian	xae	66
-	language	Aer	aeq	67
-	language	Afade	aal	68
-	language	Afar	aar	69
-	language	Afghan Sign Language	afg	70
-	language	Afitti	aft	71
-	language	Afrihili	afh	72
-	language	Afrikaans	afr	73
-	language	Afro-Seminole Creole	afs	74
-	language	Agarabi	agd	75
-	language	Agariya	agi	76
-	language	Agatu	agc	77
-	language	Agavotaguerra	avo	78
-	language	Aghem	agq	79
-	language	Aghu	ahh	80
-	language	Aghu-Tharnggala	gtu	81
-	language	Aghul	agx	82
-	language	Aghwan	xag	83
-	language	Agi	aif	84
-	language	Agob	kit	85
-	language	Agoi	ibm	86
-	language	Aguacateco	agu	87
-	language	Aguano	aga	88
-	language	Aguaruna	agr	89
-	language	Aguna	aug	90
-	language	Agusan Manobo	msm	91
-	language	Agutaynen	agn	92
-	language	Agwagwune	yay	93
-	language	Ahanta	aha	94
-	language	Aheri Gondi	esg	95
-	language	Aheu	thm	96
-	language	Ahirani	ahr	97
-	language	Ahom	aho	98
-	language	Ahtena	aht	99
-	language	Ahwai	nfd	100
-	language	Ai-Cham	aih	101
-	language	Aighon	aix	102
-	language	Aikanã	tba	103
-	language	Aiklep	mwg	104
-	language	Aimaq	aiq	105
-	language	Aimele	ail	106
-	language	Aimol	aim	107
-	language	Ainbai	aic	108
-	language	Ainu (China)	aib	109
-	language	Ainu (Japan)	ain	110
-	language	Aiome	aki	111
-	language	Airoran	air	112
-	language	Aiton	aio	113
-	language	Aja (Benin)	ajg	114
-	language	Aja (South Sudan)	aja	115
-	language	Ajawa	ajw	116
-	language	Ajië	aji	117
 	language	Ajumbu	muc	118
 	language	Ajyíninka Apurucayali	cpc	119
 	language	Ak	akq	120
@@ -397,6 +335,7 @@
 	language	Andoa	anb	265
 	language	Andoque	ano	266
 	language	Andra-Hus	anx	267
+	language	Aja (South Sudan)	aja	115
 	language	Aneityum	aty	268
 	language	Anem	anz	269
 	language	Aneme Wake	aby	270
@@ -1123,7 +1062,6 @@
 	language	Brunca Sign Language	rnb	992
 	language	Brunei	kxd	993
 	language	Brunei Bisaya	bsb	994
-	language	Cakfem-Mushere	cky	1126
 	language	Bruny Island Tasmanian	xpz	995
 	language	Bu (Bauchi State)	zbu	996
 	language	Bu (Kaduna State)	jid	997
@@ -1255,6 +1193,7 @@
 	language	Cajun French	frc	1123
 	language	Caka	ckx	1124
 	language	Cakchiquel-Quiché Mixed Language	ckz	1125
+	language	Cakfem-Mushere	cky	1126
 	language	Calamian Tagbanwa	tbk	1127
 	language	Calderón Highland Quichua	qud	1128
 	language	Callawalla	caw	1129
@@ -1308,10 +1247,10 @@
 	language	Cebuano	ceb	1177
 	language	Celtiberian	xce	1178
 	language	Cemuhî	cam	1179
-	language	Cen	cen	1180
 	language	Central Asmat	cns	1181
 	language	Central Atlas Tamazight	tzm	1182
 	language	Central Awyu	awu	1183
+	language	Cen	cen	1180
 	language	Central Aymara	ayr	1184
 	language	Central Bai	bca	1185
 	language	Central Berawan	zbc	1186
@@ -1655,7 +1594,6 @@
 	language	Degexit'an	ing	1524
 	language	Dehu	dhv	1525
 	language	Dehwari	deh	1526
-	language	Dek	dek	1527
 	language	Dela-Oenale	row	1528
 	language	Delaware	del	1529
 	language	Delo	ntr	1530
@@ -1698,6 +1636,7 @@
 	language	Dhungaloo	dhx	1567
 	language	Dhurga	dhu	1568
 	language	Dhuwal	dwu	1569
+	language	Dek	dek	1527
 	language	Dhuwaya	dwy	1570
 	language	Dia	dia	1571
 	language	Dibabawon Manobo	mbd	1572
@@ -1959,41 +1898,7 @@
 	language	Embaloh	emb	1828
 	language	Emberá-Baudó	bdc	1829
 	language	Emberá-Catío	cto	1830
-	language	Emberá-Chamí	cmi	1831
 	language	Emberá-Tadó	tdc	1832
-	language	Embu	ebu	1833
-	language	Emerillon	eme	1834
-	language	Emilian	egl	1835
-	language	Emplawas	emw	1836
-	language	Emumu	enr	1837
-	language	En	enc	1838
-	language	Enawené-Nawé	unk	1839
-	language	Ende	end	1840
-	language	Enga	enq	1841
-	language	Engdewu	ngr	1842
-	language	Engenni	enn	1843
-	language	Enggano	eno	1844
-	language	English	eng	1845
-	language	Enlhet	enl	1846
-	language	Enrekang	ptt	1847
-	language	Enu	enu	1848
-	language	Enwan (Akwa Ibom State)	enw	1849
-	language	Enwan (Edo State)	env	1850
-	language	Enxet	enx	1851
-	language	Enya	gey	1852
-	language	Epena	sja	1853
-	language	Epi-Olmec	xep	1854
-	language	Epie	epi	1855
-	language	Epigraphic Mayan	emy	1856
-	language	Eravallan	era	1857
-	language	Erave	kjy	1858
-	language	Ere	twp	1859
-	language	Eritai	ert	1860
-	language	Erokwanas	erw	1861
-	language	Erre	err	1862
-	language	Erromintxela	emx	1863
-	language	Ersu	ers	1864
-	language	Eruwa	erh	1865
 	language	Erzya	myv	1866
 	language	Esan	ish	1867
 	language	Ese	mcq	1868
@@ -2166,7 +2071,6 @@
 	language	Garifuna	cab	2035
 	language	Garig-Ilgar	ilg	2036
 	language	Garingbal	xgi	2037
-	language	Garlali	gll	2038
 	language	Garo	grt	2039
 	language	Garre	gex	2040
 	language	Garrwa	wrk	2041
@@ -2559,7 +2463,6 @@
 	language	Huehuetla Tepehua	tee	2428
 	language	Huichol	hch	2429
 	language	Huilliche	huh	2430
-	language	Huitepec Mixtec	mxs	2431
 	language	Huizhou Chinese	czh	2432
 	language	Hukumina	huw	2433
 	language	Hula	hul	2434
@@ -3436,6 +3339,7 @@
 	language	Korupun-Sela	kpq	3305
 	language	Korwa	kfp	3306
 	language	Koryak	kpy	3307
+	language	Ajawa	ajw	116
 	language	Kosadle	kiq	3308
 	language	Kosarek Yale	kkl	3309
 	language	Kosena	kze	3310
@@ -3694,13 +3598,13 @@
 	language	Laimbue	lmx	3563
 	language	Laitu Chin	clj	3564
 	language	Laiyolo	lji	3565
-	language	Lak	lbe	3566
 	language	Laka (Chad)	lap	3567
 	language	Lakalei	lka	3568
 	language	Lake Miwok	lmw	3569
 	language	Lakha	lkh	3570
 	language	Laki	lki	3571
 	language	Lakkia	lbc	3572
+	language	Lak	lbe	3566
 	language	Lakon	lkn	3573
 	language	Lakondê	lkd	3574
 	language	Lakota	lkt	3575
@@ -3876,10 +3780,8 @@
 	language	Limassa	bme	3745
 	language	Limbu	lif	3746
 	language	Limbum	lmp	3747
-	language	Lushootseed	lut	3878
 	language	Limburgan, Limburger, Limburgish	lim	3748
 	language	Limi	ylm	3749
-	language	Limilngan	lmc	3750
 	language	Limos Kalinga	kmk	3751
 	language	Linear A	lab	3752
 	language	Lingala	lin	3753
@@ -4007,6 +3909,7 @@
 	language	Luri	ldd	3875
 	language	Lusengo	lse	3876
 	language	Lushai	lus	3877
+	language	Lushootseed	lut	3878
 	language	Lusi	khl	3879
 	language	Lusitanian	xls	3880
 	language	Lutos	ndy	3881
@@ -4024,7 +3927,6 @@
 	language	Lyélé	lee	3893
 	language	Láadan	ldn	3894
 	language	Láá Láá Bwamu	bwj	3895
-	language	Lü	khb	3896
 	language	Ma (Democratic Republic of Congo)	msj	3897
 	language	Ma (Papua New Guinea)	mjn	3898
 	language	Ma Manda	skc	3899
@@ -4659,7 +4561,6 @@
 	language	Montol	mtl	4528
 	language	Monumbo	mxk	4529
 	language	Monzombo	moj	4530
-	language	Moo	gwg	4531
 	language	Moose Cree	crm	4532
 	language	Mopán Maya	mop	4533
 	language	Mor (Bomberai Peninsula)	moq	4534
@@ -4702,7 +4603,6 @@
 	language	Mozarabic	mxi	4571
 	language	Mpade	mpi	4572
 	language	Mpalitjanh	xpj	4573
-	language	Mpi	mpz	4574
 	language	Mpiemo	mcx	4575
 	language	Mpinda	pnd	4576
 	language	Mpoto	mpa	4577
@@ -4746,6 +4646,7 @@
 	language	Mundari	unr	4615
 	language	Mundat	mmf	4616
 	language	Mundurukú	myu	4617
+	language	Mpi	mpz	4574
 	language	Mungaka	mhk	4618
 	language	Munggui	mth	4619
 	language	Mungkip	mpv	4620
@@ -4827,7 +4728,6 @@
 	language	Nagumi	ngv	4696
 	language	Nahali	nlx	4697
 	language	Nahari	nhh	4698
-	language	Nai	bio	4699
 	language	Najdi Arabic	ars	4700
 	language	Naka'ela	nae	4701
 	language	Nakai	nkj	4702
@@ -4924,7 +4824,6 @@
 	language	Ndolo	ndl	4793
 	language	Ndom	nqm	4794
 	language	Ndombe	ndq	4795
-	language	Ndonde Hamba	njd	4796
 	language	Ndonga	ndo	4797
 	language	Ndoola	ndr	4798
 	language	Ndra'ngith	dgt	4799
@@ -5067,7 +4966,6 @@
 	language	Nila	nil	4936
 	language	Nilamba	nim	4937
 	language	Nimadi	noe	4938
-	language	Nimanbur	nmp	4939
 	language	Nimbari	nmr	4940
 	language	Nimboran	nir	4941
 	language	Nimi	nis	4942
@@ -5142,6 +5040,7 @@
 	language	North Giziga	gis	5011
 	language	North Junín Quechua	qvn	5012
 	language	North Marquesan	mrq	5013
+	language	Nimanbur	nmp	4939
 	language	North Mesopotamian Arabic	ayp	5014
 	language	North Midlands Tasmanian	xph	5015
 	language	North Mofu	mfk	5016
@@ -5785,6 +5684,7 @@
 	language	Powhatan	pim	5654
 	language	Poyanáwa	pyn	5655
 	language	Prasuni	prn	5656
+	language	Ajië	aji	117
 	language	Primitive Irish	pgl	5657
 	language	Principense	pre	5658
 	language	Providencia Sign Language	prz	5659
@@ -5831,7 +5731,6 @@
 	language	Putoh	put	5700
 	language	Putukwam	afe	5701
 	language	Puyo	xpy	5702
-	language	Puyo-Paekche	xpp	5703
 	language	Puyuma	pyu	5704
 	language	Pwaamei	pme	5705
 	language	Pwapwâ	pop	5706
@@ -6282,56 +6181,6 @@
 	language	Seychelles Sign Language	lsw	6151
 	language	Seze	sze	6152
 	language	Sha	scw	6153
-	language	Shabak	sdb	6154
-	language	Shahmirzadi	srz	6155
-	language	Shahrudi	shm	6156
-	language	Shall-Zwall	sha	6157
-	language	Shama-Sambuga	sqa	6158
-	language	Shamang	xsh	6159
-	language	Shambala	ksb	6160
-	language	Shan	shn	6161
-	language	Shanenawa	swo	6162
-	language	Shanga	sho	6163
-	language	Sharanahua	mcd	6164
-	language	Shark Bay	ssv	6165
-	language	Sharwa	swq	6166
-	language	Shasta	sht	6167
-	language	Shatt	shj	6168
-	language	Shau	sqh	6169
-	language	Shawnee	sjw	6170
-	language	She	shx	6171
-	language	Shehri	shv	6172
-	language	Shekhawati	swv	6173
-	language	Shekkacho	moy	6174
-	language	Sheko	she	6175
-	language	Shelta	sth	6176
-	language	Shempire Senoufo	seb	6177
-	language	Shendu	shl	6178
-	language	Sheni	scv	6179
-	language	Sherbro	bun	6180
-	language	Sherdukpen	sdp	6181
-	language	Sherpa	xsr	6182
-	language	Sheshi Kham	kip	6183
-	language	Shi	shr	6184
-	language	Shihhi Arabic	ssh	6185
-	language	Shiki	gua	6186
-	language	Shilluk	shk	6187
-	language	Shina	scl	6188
-	language	Shipibo-Conibo	shp	6189
-	language	Sholaga	sle	6190
-	language	Shom Peng	sii	6191
-	language	Shona	sna	6192
-	language	Shoo-Minda-Nye	bcv	6193
-	language	Shor	cjs	6194
-	language	Shoshoni	shh	6195
-	language	Shua	shg	6196
-	language	Shuadit	sdt	6197
-	language	Shuar	jiv	6198
-	language	Shubi	suj	6199
-	language	Shughni	sgh	6200
-	language	Shuhi	sxg	6201
-	language	Shumashti	sts	6202
-	language	Shumcho	scu	6203
 	language	Shuswap	shs	6204
 	language	Shwai	shw	6205
 	language	Shwe Palaung	pll	6206
@@ -6351,7 +6200,65 @@
 	language	Siculo Arabic	sqr	6220
 	language	Sidamo	sid	6221
 	language	Sidetic	xsd	6222
-	language	Sie	erg	6223
+	language	Adithinngithigh	dth	56
+	language	Adivasi Oriya	ort	57
+	language	Adiwasi Garasia	gas	58
+	language	Adnyamathanha	adt	59
+	language	Adonara	adr	60
+	language	Aduge	adu	61
+	language	Adyghe	ady	62
+	language	Adzera	adz	63
+	language	Aeka	aez	64
+	language	Aekyom	awi	65
+	language	Aequian	xae	66
+	language	Aer	aeq	67
+	language	Afade	aal	68
+	language	Afar	aar	69
+	language	Afghan Sign Language	afg	70
+	language	Afitti	aft	71
+	language	Afrihili	afh	72
+	language	Afrikaans	afr	73
+	language	Afro-Seminole Creole	afs	74
+	language	Agarabi	agd	75
+	language	Agariya	agi	76
+	language	Agatu	agc	77
+	language	Agavotaguerra	avo	78
+	language	Aghem	agq	79
+	language	Aghu	ahh	80
+	language	Aghu-Tharnggala	gtu	81
+	language	Aghul	agx	82
+	language	Aghwan	xag	83
+	language	Agi	aif	84
+	language	Agob	kit	85
+	language	Agoi	ibm	86
+	language	Aguacateco	agu	87
+	language	Aguano	aga	88
+	language	Aguaruna	agr	89
+	language	Aguna	aug	90
+	language	Agusan Manobo	msm	91
+	language	Agutaynen	agn	92
+	language	Agwagwune	yay	93
+	language	Ahanta	aha	94
+	language	Aheri Gondi	esg	95
+	language	Aheu	thm	96
+	language	Ahirani	ahr	97
+	language	Ahom	aho	98
+	language	Ahtena	aht	99
+	language	Ahwai	nfd	100
+	language	Ai-Cham	aih	101
+	language	Aighon	aix	102
+	language	Aikanã	tba	103
+	language	Aiklep	mwg	104
+	language	Aimaq	aiq	105
+	language	Aimele	ail	106
+	language	Aimol	aim	107
+	language	Ainbai	aic	108
+	language	Ainu (China)	aib	109
+	language	Ainu (Japan)	ain	110
+	language	Aiome	aki	111
+	language	Airoran	air	112
+	language	Aiton	aio	113
+	language	Aja (Benin)	ajg	114
 	language	Sierra Leone Sign Language	sgx	6224
 	language	Sierra Negra Nahuatl	nsu	6225
 	language	Sierra de Juárez Zapotec	zaa	6226
@@ -6365,6 +6272,25 @@
 	language	Sikkimese	sip	6234
 	language	Siksika	bla	6235
 	language	Sikule	skh	6236
+	language	Emberá-Chamí	cmi	1831
+	language	Embu	ebu	1833
+	language	Emerillon	eme	1834
+	language	Emilian	egl	1835
+	language	Emplawas	emw	1836
+	language	Emumu	enr	1837
+	language	En	enc	1838
+	language	Enawené-Nawé	unk	1839
+	language	Ende	end	1840
+	language	Enga	enq	1841
+	language	Engdewu	ngr	1842
+	language	Engenni	enn	1843
+	language	Enggano	eno	1844
+	language	English	eng	1845
+	language	Enlhet	enl	1846
+	language	Enrekang	ptt	1847
+	language	Enu	enu	1848
+	language	Enwan (Akwa Ibom State)	enw	1849
+	language	Enwan (Edo State)	env	1850
 	language	Sila	slt	6237
 	language	Silacayoapan Mixtec	mks	6238
 	language	Sileibi	sbq	6239
@@ -6391,6 +6317,28 @@
 	language	Singa	sgm	6260
 	language	Singapore Sign Language	sls	6261
 	language	Singpho	sgp	6262
+	language	Enxet	enx	1851
+	language	Enya	gey	1852
+	language	Epena	sja	1853
+	language	Epi-Olmec	xep	1854
+	language	Epie	epi	1855
+	language	Epigraphic Mayan	emy	1856
+	language	Eravallan	era	1857
+	language	Erave	kjy	1858
+	language	Ere	twp	1859
+	language	Eritai	ert	1860
+	language	Erokwanas	erw	1861
+	language	Erre	err	1862
+	language	Erromintxela	emx	1863
+	language	Ersu	ers	1864
+	language	Eruwa	erh	1865
+	language	Garlali	gll	2038
+	language	Huitepec Mixtec	mxs	2431
+	language	Limilngan	lmc	3750
+	language	Lü	khb	3896
+	language	Moo	gwg	4531
+	language	Ndonde Hamba	njd	4796
+	language	Puyo-Paekche	xpp	5703
 	language	Sinhala, Sinhalese	sin	6263
 	language	Sinicahua Mixtec	xti	6264
 	language	Sininkere	skq	6265
@@ -6622,6 +6570,7 @@
 	language	Sudanese Arabic	apd	6491
 	language	Sudanese Creole Arabic	pga	6492
 	language	Sudest	tgo	6493
+	language	Nai	bio	4699
 	language	Sudovian	xsv	6494
 	language	Suena	sue	6495
 	language	Suga	sgi	6496
@@ -6884,7 +6833,6 @@
 	language	Tela-Masbuar	tvm	6754
 	language	Telefol	tlf	6755
 	language	Telugu	tel	6756
-	language	Tem	kdh	6757
 	language	Temacine Tamazight	tjo	6758
 	language	Temascaltepec Nahuatl	nhv	6759
 	language	Tembo (Kitembo)	tbt	6760
@@ -7580,7 +7528,6 @@
 	language	Wayu	vay	7451
 	language	Wayuu	guc	7452
 	language	Wedau	wed	7453
-	language	Weh	weh	7454
 	language	Wejewa	wew	7455
 	language	Welaun	wlh	7456
 	language	Weliki	klh	7457
@@ -7690,7 +7637,6 @@
 	language	Woccon	xwc	7561
 	language	Wogamusin	wog	7562
 	language	Wogeo	woc	7563
-	language	Woi	wbw	7564
 	language	Woiwurrung	wyi	7565
 	language	Wojenaka	jod	7566
 	language	Wolane	wle	7567
@@ -7921,13 +7867,6 @@
 	language	Yolŋu Sign Language	ygs	7793
 	language	Yom	pil	7794
 	language	Yombe	yom	7795
-	language	Yonaguni	yoi	7796
-	language	Yong	yno	7797
-	language	Yongbei Zhuang	zyb	7798
-	language	Yongkom	yon	7799
-	language	Yongnan Zhuang	zyn	7800
-	language	Yopno	yut	7801
-	language	Yora	mts	7802
 	language	Yoron	yox	7803
 	language	Yorta Yorta	xyy	7804
 	language	Yoruba	yor	7805
@@ -8046,6 +7985,67 @@
 	language	ǂUngkue	gku	7918
 	language	ǃXóõ	nmn	7919
 	language	Not applicable		7920
+	language	Shabak	sdb	6154
+	language	Shahmirzadi	srz	6155
+	language	Shahrudi	shm	6156
+	language	Shall-Zwall	sha	6157
+	language	Shama-Sambuga	sqa	6158
+	language	Shamang	xsh	6159
+	language	Shambala	ksb	6160
+	language	Shan	shn	6161
+	language	Shanenawa	swo	6162
+	language	Shanga	sho	6163
+	language	Sharanahua	mcd	6164
+	language	Shark Bay	ssv	6165
+	language	Sharwa	swq	6166
+	language	Shasta	sht	6167
+	language	Shatt	shj	6168
+	language	Shau	sqh	6169
+	language	Shawnee	sjw	6170
+	language	She	shx	6171
+	language	Shehri	shv	6172
+	language	Shekhawati	swv	6173
+	language	Shekkacho	moy	6174
+	language	Sheko	she	6175
+	language	Shelta	sth	6176
+	language	Shempire Senoufo	seb	6177
+	language	Shendu	shl	6178
+	language	Sheni	scv	6179
+	language	Sherbro	bun	6180
+	language	Sherdukpen	sdp	6181
+	language	Sherpa	xsr	6182
+	language	Sheshi Kham	kip	6183
+	language	Shi	shr	6184
+	language	Shihhi Arabic	ssh	6185
+	language	Shiki	gua	6186
+	language	Shilluk	shk	6187
+	language	Shina	scl	6188
+	language	Shipibo-Conibo	shp	6189
+	language	Sholaga	sle	6190
+	language	Shom Peng	sii	6191
+	language	Shona	sna	6192
+	language	Shoo-Minda-Nye	bcv	6193
+	language	Shor	cjs	6194
+	language	Shoshoni	shh	6195
+	language	Shua	shg	6196
+	language	Shuadit	sdt	6197
+	language	Shuar	jiv	6198
+	language	Shubi	suj	6199
+	language	Shughni	sgh	6200
+	language	Shuhi	sxg	6201
+	language	Shumashti	sts	6202
+	language	Shumcho	scu	6203
+	language	Sie	erg	6223
+	language	Tem	kdh	6757
+	language	Weh	weh	7454
+	language	Woi	wbw	7564
+	language	Yonaguni	yoi	7796
+	language	Yong	yno	7797
+	language	Yongbei Zhuang	zyb	7798
+	language	Yongkom	yon	7799
+	language	Yongnan Zhuang	zyn	7800
+	language	Yopno	yut	7801
+	language	Yora	mts	7802
 	contributorType	Data Collector		0
 	contributorType	Data Curator		1
 	contributorType	Data Manager		2

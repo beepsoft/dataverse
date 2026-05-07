@@ -27,7 +27,6 @@
   },
   "type": "object",
   "_ui": {
-    "pages": [],
     "order": [
       "studyDesignType",
       "studyOtherDesignType",
@@ -494,9 +493,9 @@
       ],
       "schema:name": "studyDesignType",
       "schema:description": "Design types that are based on the overall experimental design.",
-      "pav:createdOn": "2025-10-21T15:23:17Z",
+      "pav:createdOn": "2026-05-06T16:47:11Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:17Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:11Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -508,11 +507,23 @@
       "hunLabel": "Design Type",
       "minItems": 1,
       "maxItems ": 0,
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": true,
           "facetable": true,
-          "displayoncreate": false
+          "displayoncreate": false,
+          "identifiers": [
+            "EFO_0001427",
+            "EFO_0001428",
+            "OCRE100078",
+            "NCI_C48202",
+            "NOT_SPECIFIED",
+            "OBI_0500006",
+            "OBI_0001033",
+            "MESH_D016449",
+            "TECH_DESIGN",
+            "OTHER_DESIGN"
+          ]
         }
       },
       "$schema": "http://json-schema.org/draft-04/schema#"
@@ -594,9 +605,9 @@
       ],
       "schema:name": "studyOtherDesignType",
       "schema:description": "If Other was selected in Design Type, list any other design types that were used in this Dataset.",
-      "pav:createdOn": "2025-10-21T15:23:17Z",
+      "pav:createdOn": "2026-05-06T16:47:11Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:17Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:11Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -608,7 +619,7 @@
       "hunLabel": "Other Design Type",
       "minItems": 1,
       "maxItems ": 0,
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": true,
           "facetable": true,
@@ -757,9 +768,9 @@
       ],
       "schema:name": "studyFactorType",
       "schema:description": "Factors used in the Dataset.",
-      "pav:createdOn": "2025-10-21T15:23:17Z",
+      "pav:createdOn": "2026-05-06T16:47:11Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:17Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:11Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -771,11 +782,33 @@
       "hunLabel": "Factor Type",
       "minItems": 1,
       "maxItems ": 0,
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": true,
           "facetable": true,
-          "displayoncreate": false
+          "displayoncreate": false,
+          "identifiers": [
+            "EFO_0000246",
+            "BIOMARKERS",
+            "CELL_SURFACE_M",
+            "EFO_0000324;EFO_0000322",
+            "EFO_0000399",
+            "OBI_0001293",
+            "IDO_0000469",
+            "FBcv_0010001",
+            "OBI_0001404",
+            "OBI_0000690",
+            "OBI_0100026",
+            "PASSAGES_FACTOR",
+            "OBI_0000050",
+            "EFO_0000695",
+            "EFO_0005135",
+            "EFO_0000724",
+            "BTO_0001384",
+            "EFO_0000369",
+            "EFO_0000727",
+            "OTHER_FACTOR"
+          ]
         }
       },
       "$schema": "http://json-schema.org/draft-04/schema#"
@@ -857,9 +890,9 @@
       ],
       "schema:name": "studyOtherFactorType",
       "schema:description": "If Other was selected in Factor Type, list any other factor types that were used in this Dataset.",
-      "pav:createdOn": "2025-10-21T15:23:17Z",
+      "pav:createdOn": "2026-05-06T16:47:11Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:17Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:11Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -871,7 +904,7 @@
       "hunLabel": "Other Factor Type",
       "minItems": 1,
       "maxItems ": 0,
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": true,
           "facetable": true,
@@ -1035,9 +1068,9 @@
       ],
       "schema:name": "studyAssayOrganism",
       "schema:description": "The taxonomic name of the organism used in the Dataset or from which the  starting biological material derives.",
-      "pav:createdOn": "2025-10-21T15:23:17Z",
+      "pav:createdOn": "2026-05-06T16:47:11Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:17Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:11Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -1049,11 +1082,38 @@
       "hunLabel": "Organism",
       "minItems": 1,
       "maxItems ": 0,
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": true,
           "facetable": true,
-          "displayoncreate": false
+          "displayoncreate": false,
+          "identifiers": [
+            "NCBITaxon_3702",
+            "NCBITaxon_9913",
+            "NCBITaxon_6239",
+            "NCBITaxon_3055",
+            "NCBITaxon_7955",
+            "NCBITaxon_44689",
+            "NCBITaxon_7227",
+            "NCBITaxon_562",
+            "NCBITaxon_11103",
+            "NCBITaxon_9606",
+            "NCBITaxon_10090",
+            "NCBITaxon_33894",
+            "NCBITaxon_78331",
+            "NCBITaxon_1773",
+            "NCBITaxon_2104",
+            "NCBITaxon_4530",
+            "NCBITaxon_5833",
+            "NCBITaxon_4754",
+            "NCBITaxon_10116",
+            "NCBITaxon_4932",
+            "NCBITaxon_4896",
+            "NCBITaxon_31033",
+            "NCBITaxon_8355",
+            "NCBITaxon_4577",
+            "OTHER_TAXONOMY"
+          ]
         }
       },
       "$schema": "http://json-schema.org/draft-04/schema#"
@@ -1135,9 +1195,9 @@
       ],
       "schema:name": "studyAssayOtherOrganism",
       "schema:description": "If Other was selected in Organism, list any other organisms that were used in this Dataset. Terms from the NCBI Taxonomy are recommended.",
-      "pav:createdOn": "2025-10-21T15:23:17Z",
+      "pav:createdOn": "2026-05-06T16:47:11Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:17Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:11Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -1149,7 +1209,7 @@
       "hunLabel": "Other Organism",
       "minItems": 1,
       "maxItems ": 0,
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": true,
           "facetable": true,
@@ -1200,6 +1260,21 @@
         "requiredValue": false,
         "multipleChoice": true,
         "literals": [
+          {
+            "label": "transcription profiling"
+          },
+          {
+            "label": "transcription profiling (Microarray)"
+          },
+          {
+            "label": "transcription profiling (RNA-Seq)"
+          },
+          {
+            "label": "TRAP translational profiling"
+          },
+          {
+            "label": "Other"
+          },
           {
             "label": "cell counting"
           },
@@ -1274,21 +1349,6 @@
           },
           {
             "label": "transcription factor binding site identification"
-          },
-          {
-            "label": "transcription profiling"
-          },
-          {
-            "label": "transcription profiling (Microarray)"
-          },
-          {
-            "label": "transcription profiling (RNA-Seq)"
-          },
-          {
-            "label": "TRAP translational profiling"
-          },
-          {
-            "label": "Other"
           }
         ]
       },
@@ -1328,9 +1388,9 @@
       ],
       "schema:name": "studyAssayMeasurementType",
       "schema:description": "A term to qualify the endpoint, or what is being measured (e.g. gene expression profiling; protein identification).",
-      "pav:createdOn": "2025-10-21T15:23:17Z",
+      "pav:createdOn": "2026-05-06T16:47:11Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:17Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:11Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -1342,11 +1402,43 @@
       "hunLabel": "Measurement Type",
       "minItems": 1,
       "maxItems ": 0,
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": true,
           "facetable": true,
-          "displayoncreate": false
+          "displayoncreate": false,
+          "identifiers": [
+            "EFO_0001032",
+            "TRANSCRIPTION_PROF",
+            "OBI_0001271",
+            "TRAP_TRANS_PROF",
+            "OTHER_MEASUREMENT",
+            "ERO_0001899",
+            "CHMO_0001085",
+            "OBI_0000520",
+            "OBI_0000537",
+            "OBI_0000634",
+            "OBI_0000748",
+            "_OBI_0000634",
+            "_IDO_0000469",
+            "ENV_GENE_SURVEY",
+            "ERO_0001183",
+            "OBI_0000630",
+            "OBI_0600020",
+            "OBI_0002017",
+            "SO_0001786",
+            "OBI_0000366",
+            "METAGENOME_SEQ",
+            "OBI_0000615",
+            "ERO_0000346",
+            "PROTEIN_DNA_BINDING",
+            "OBI_0000288",
+            "PROTEIN_RNA_BINDING",
+            "OBI_0000435",
+            "TARGETED_SEQ",
+            "OBI_0002018",
+            "OBI_0000291"
+          ]
         }
       },
       "$schema": "http://json-schema.org/draft-04/schema#"
@@ -1428,9 +1520,9 @@
       ],
       "schema:name": "studyAssayOtherMeasurmentType",
       "schema:description": "If Other was selected in Measurement Type, list any other measurement types that were used. Terms from NCBO Bioportal are recommended.",
-      "pav:createdOn": "2025-10-21T15:23:17Z",
+      "pav:createdOn": "2026-05-06T16:47:11Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:17Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:11Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -1442,7 +1534,7 @@
       "hunLabel": "Other Measurement Type",
       "minItems": 1,
       "maxItems ": 0,
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": true,
           "facetable": true,
@@ -1570,9 +1662,9 @@
       ],
       "schema:name": "studyAssayTechnologyType",
       "schema:description": "A term to identify the technology used to perform the measurement (e.g. DNA microarray; mass spectrometry).",
-      "pav:createdOn": "2025-10-21T15:23:17Z",
+      "pav:createdOn": "2026-05-06T16:47:11Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:17Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:11Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -1584,11 +1676,26 @@
       "hunLabel": "Technology Type",
       "minItems": 1,
       "maxItems ": 0,
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": true,
           "facetable": true,
-          "displayoncreate": false
+          "displayoncreate": false,
+          "identifiers": [
+            "CULTURE_DRUG_TEST_SINGLE",
+            "CULTURE_DRUG_TEST_TWO",
+            "CULTURE_DRUG_TEST_THREE",
+            "OBI_0400148",
+            "OBI_0000916",
+            "OBI_0600053",
+            "OBI_0000470",
+            "OBI_0000623",
+            "OBI_0000626",
+            "OBI_0400149",
+            "OBI_0000893",
+            "NO_TECHNOLOGY",
+            "OTHER_TECHNOLOGY"
+          ]
         }
       },
       "$schema": "http://json-schema.org/draft-04/schema#"
@@ -1670,9 +1777,9 @@
       ],
       "schema:name": "studyAssayOtherTechnologyType",
       "schema:description": "If Other was selected in Technology Type, list any other technology types that were used in this Dataset.",
-      "pav:createdOn": "2025-10-21T15:23:17Z",
+      "pav:createdOn": "2026-05-06T16:47:11Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:17Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:11Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -1684,7 +1791,7 @@
       "hunLabel": "Other Technology Type",
       "minItems": 1,
       "maxItems ": 0,
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": true,
           "facetable": true,
@@ -1735,9 +1842,6 @@
         "requiredValue": false,
         "multipleChoice": true,
         "literals": [
-          {
-            "label": "GENEQ"
-          },
           {
             "label": "210-MS GC Ion Trap (Varian)"
           },
@@ -2010,6 +2114,9 @@
           },
           {
             "label": "GCT Premier (Waters)"
+          },
+          {
+            "label": "GENEQ"
           },
           {
             "label": "Genome Corp."
@@ -2325,9 +2432,9 @@
       ],
       "schema:name": "studyAssayPlatform",
       "schema:description": "The manufacturer and name of the technology platform used in the assay (e.g. Bruker AVANCE).",
-      "pav:createdOn": "2025-10-21T15:23:17Z",
+      "pav:createdOn": "2026-05-06T16:47:11Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:17Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:11Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -2339,11 +2446,197 @@
       "hunLabel": "Technology Platform",
       "minItems": 1,
       "maxItems ": 0,
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": true,
           "facetable": true,
-          "displayoncreate": false
+          "displayoncreate": false,
+          "identifiers": [
+            "210_MS_GC",
+            "220_MS_GC",
+            "225_MS_GC",
+            "240_MS_GC",
+            "300_MS_GCMS",
+            "320_MS_LCMS",
+            "325_MS_LCMS",
+            "500_MS_GCMS",
+            "500_MS_LCMS",
+            "800D",
+            "910_MS_TQFT",
+            "920_MS_TQFT",
+            "3100_MASS_D",
+            "6110_QUAD_LCMS",
+            "6120_QUAD_LCMS",
+            "6130_QUAD_LCMS",
+            "6140_QUAD_LCMS",
+            "6310_ION_LCMS",
+            "6320_ION_LCMS",
+            "6330_ION_LCMS",
+            "6340_ION_LCMS",
+            "6410_TRIPLE_LCMS",
+            "6430_TRIPLE_LCMS",
+            "6460_TRIPLE_LCMS",
+            "6490_TRIPLE_LCMS",
+            "6530_Q_TOF_LCMS",
+            "6540_Q_TOF_LCMS",
+            "6210_Q_TOF_LCMS",
+            "6220_Q_TOF_LCMS",
+            "6230_Q_TOF_LCMS",
+            "700B_TRIPLE_GCMS",
+            "ACCUTO_DART",
+            "ACCUTOF_GC",
+            "ACCUTOF_LC",
+            "ACQUITY_SQD",
+            "ACQUITY_TQD",
+            "AGILENT",
+            "AGILENT_ 5975E_GCMSD",
+            "AGILENT_5975T_LTM_GCMSD",
+            "5975C_GCMSD",
+            "AFFYMETRIX",
+            "AMAZON_ETD_ESI",
+            "AMAZON_X_ESI",
+            "APEX_ULTRA_QQ_FTMS",
+            "API_2000",
+            "API_3200",
+            "API_3200_QTRAP",
+            "API_4000",
+            "API_4000_QTRAP",
+            "API_5000",
+            "API_5500",
+            "API_5500_QTRAP",
+            "APPLIED_BIOSYSTEMS",
+            "AQI_BIOSCIENCES",
+            "ATMOS_GC",
+            "AUTOFLEX_III_MALDI_TOF_MS",
+            "AUTOFLEX_SPEED",
+            "AUTOSPEC_PREMIER",
+            "AXIMA_MEGA_TOF",
+            "AXIMA_PERF_MALDI_TOF",
+            "A_10_ANALYZER",
+            "A_40_MINIFCM",
+            "BACTIFLOW",
+            "BASE4INNOVATION",
+            "BD_BACTEC_MGIT_320",
+            "BD_BACTEC_MGIT_960",
+            "BD_RADIO_BACTEC_460TB",
+            "BIONANOMATRIX",
+            "CELL_LAB_QUANTA_SC",
+            "CLARUS_560_D_GCMS",
+            "CLARUS_560_S_GCMS",
+            "CLARUS_600_GCMS",
+            "COMPLETE_GENOMICS",
+            "CYAN",
+            "CYFLOW_ML",
+            "CYFLOW_SL",
+            "CYFLOW_SL3",
+            "CYTOBUOY",
+            "CYTOSENCE",
+            "CYTOSUB",
+            "DANAHER",
+            "DFS",
+            "EXACTIVE",
+            "FACS_CANTO",
+            "FACS_CANTO2",
+            "FACS_SCAN",
+            "FC_500",
+            "GCMATE_II",
+            "GCMS_QP2010_PLUS",
+            "GCMS_QP2010S_PLUS",
+            "GCT_PREMIER",
+            "GENEQ",
+            "GENOME_CORP",
+            "GENOVOXX",
+            "GNUBIO",
+            "GUAVA_EASYCYTE_MINI",
+            "GUAVA_EASYCYTE_PLUS",
+            "GUAVA_PERSONAL_CELL",
+            "GUAVA_PERSONAL_CELL_96",
+            "HELICOS_BIO",
+            "ILLUMINA",
+            "INDIRECT_LJ_MEDIUM",
+            "INDIRECT_AGAR_7H9",
+            "INDIRECT_AGAR_7H10",
+            "INDIRECT_AGAR_7H11",
+            "INFLUX_ANALYZER",
+            "INTELLIGENT_BIOSYSTEMS",
+            "ITQ_700",
+            "ITQ_900",
+            "ITQ_1100",
+            "JMS_53000_SPIRAL",
+            "LASERGEN",
+            "LCMS_2020",
+            "LCMS_2010EV",
+            "LCMS_IT_TOF",
+            "LI_COR",
+            "LIFE_TECH",
+            "LIGHTSPEED_GENOMICS",
+            "LCT_PREMIER_XE",
+            "LCQ_DECA_XP_MAX",
+            "LCQ_FLEET",
+            "LXQ_THERMO",
+            "LTQ_CLASSIC",
+            "LTQ_XL",
+            "LTQ_VELOS",
+            "LTQ_ORBITRAP_CLASSIC",
+            "LTQ_ORBITRAP_XL",
+            "LTQ_ORBITRAP_DISCOVERY",
+            "LTQ_ORBITRAP_VELOS",
+            "LUMINEX_100",
+            "LUMINEX_200",
+            "MACS_QUANT",
+            "MALDI_SYNAPT_G2_HDMS",
+            "MALDI_SYNAPT_G2_MS",
+            "MALDI_SYNAPT_HDMS",
+            "MALDI_SYNAPT_MS",
+            "MALDI_MICROMX",
+            "MAXIS",
+            "MAXISG4",
+            "MICROFLEX_LT_MALDI_TOF_MS",
+            "MICROFLEX_LRF_MALDI_TOF_MS",
+            "MICROFLEX_III_TOF_MS",
+            "MICROTOF_II_ESI_TOF",
+            "MICROTOF_Q_II_ESI_QQ_TOF",
+            "MICROPLATE_ALAMAR_BLUE_COLORIMETRIC",
+            "MSTATION",
+            "MSQ_PLUS",
+            "NABSYS",
+            "NANOPHOTONICS_BIOSCIENCES",
+            "NETWORK_BIOSYSTEMS",
+            "NIMBLEGEN",
+            "OXFORD_NANOPORE_TECHNOLOGIES",
+            "PACIFIC_BIOSCIENCES",
+            "POPULATION_GENETICS_TECHNOLOGIES",
+            "Q1000GC_ULTRAQUAD",
+            "QUATTRO_MICRO_API",
+            "QUATTRO_MICRO_GC",
+            "QUATTRO_PREMIER_XE",
+            "QSTAR",
+            "REVEO",
+            "ROCHE",
+            "SEIRAD",
+            "SOLARIX_HYBRID_QQ_FTMS",
+            "SOMACOUNT",
+            "SOMASCOPE",
+            "SYNAPT_G2_HDMS",
+            "SYNAPT_G2_MS",
+            "SYNAPT_HDMS",
+            "SYNAPT_MS",
+            "TRIPLETOF_5600",
+            "TSQ_QUANTUM_ULTRA",
+            "TSQ_QUANTUM_ACCESS",
+            "TSQ_QUANTUM_ACCESS_MAX",
+            "TSQ_QUANTUM_DISCOVERY_MAX",
+            "TSQ_QUANTUM_GC",
+            "TSQ_QUANTUM_XLS",
+            "TSQ_VANTAGE",
+            "ULTRAFLEXTREME_MALDI_TOF_MS",
+            "VISIGEN_BIO",
+            "XEVO_G2_QTOF",
+            "XEVO_QTOF_MS",
+            "XEVO_TQ_MS",
+            "XEVO_TQ_S",
+            "OTHER_PLATFORM"
+          ]
         }
       },
       "$schema": "http://json-schema.org/draft-04/schema#"
@@ -2425,9 +2718,9 @@
       ],
       "schema:name": "studyAssayOtherPlatform",
       "schema:description": "If Other was selected in Technology Platform, list any other technology platforms that were used in this Dataset.",
-      "pav:createdOn": "2025-10-21T15:23:17Z",
+      "pav:createdOn": "2026-05-06T16:47:11Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:17Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:11Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -2439,7 +2732,7 @@
       "hunLabel": "Other Technology Platform",
       "minItems": 1,
       "maxItems ": 0,
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": true,
           "facetable": true,
@@ -2525,9 +2818,9 @@
       ],
       "schema:name": "studyAssayCellType",
       "schema:description": "The name of the cell line from which the source or sample derives.",
-      "pav:createdOn": "2025-10-21T15:23:17Z",
+      "pav:createdOn": "2026-05-06T16:47:11Z",
       "pav:createdBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
-      "pav:lastUpdatedOn": "2025-10-21T15:23:17Z",
+      "pav:lastUpdatedOn": "2026-05-06T16:47:11Z",
       "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
       "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
@@ -2539,7 +2832,7 @@
       "hunLabel": "Cell Type",
       "minItems": 1,
       "maxItems ": 0,
-      "_arp": {
+      "_ext": {
         "dataverse": {
           "advancedSearchField": true,
           "facetable": true,
@@ -2575,7 +2868,7 @@
   ],
   "schema:name": "Life Sciences Metadata",
   "schema:description": "",
-  "pav:lastUpdatedOn": "2025-10-21T15:23:17Z",
+  "pav:lastUpdatedOn": "2026-05-06T16:47:11Z",
   "oslc:modifiedBy": "https://metadatacenter.org/users/ab2a9696-291f-4705-b5e6-6c262266c506",
   "schema:schemaVersion": "1.6.0",
   "additionalProperties": false,

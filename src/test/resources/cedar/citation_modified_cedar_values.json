@@ -1428,7 +1428,7 @@
               "inputType": "textfield"
             },
             "_valueConstraints": {
-              "requiredValue": true
+              "requiredValue": false
             },
             "properties": {
               "@type": {
@@ -1481,9 +1481,9 @@
             "hunLabel": "Name",
             "_ext": {
               "dataverse": {
-                "watermark": "1) Family Name, Given Name or 2) Organization XYZ",
+                "watermark": "1) Family Name, Given Name or 2) Organization XYZ MODIFIED",
                 "displayFormat": "#VALUE",
-                "advancedSearchField": true,
+                "advancedSearchField": false,
                 "facetable": true,
                 "displayoncreate": true
               }
@@ -2200,7 +2200,7 @@
               "inputType": "email"
             },
             "_valueConstraints": {
-              "requiredValue": true
+              "requiredValue": false
             },
             "properties": {
               "@type": {
@@ -2253,11 +2253,11 @@
             "hunLabel": "E-mail",
             "_ext": {
               "dataverse": {
-                "watermark": "name@email.xyz",
+                "watermark": "name@email.xyz MODIFIED",
                 "displayFormat": "#EMAIL",
-                "advancedSearchField": false,
-                "facetable": false,
-                "displayoncreate": true
+                "advancedSearchField": true,
+                "facetable": true,
+                "displayoncreate": false
               }
             }
           }
@@ -8792,7 +8792,7 @@
             "label": "Daasanach"
           },
           {
-            "label": "Daatsʼíin"
+            "label": "Daatsʼíin"
           },
           {
             "label": "Daba"
@@ -9533,7 +9533,7 @@
             "label": "Duwet"
           },
           {
-            "label": "Dũya"
+            "label": "Dũya"
           },
           {
             "label": "Dwang"
