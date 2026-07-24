@@ -1,0 +1,128 @@
+<ui:composition xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:jsf="http://xmlns.jcp.org/jsf">
+    <p:dialog id="cedarUploadDialog" header="#{bundle['dataverse.cedarUpload.header']}" widgetVar="cedarUploadForm" modal="true"
+              onShow="restoreCedarUploadCredentials()" onHide="cedarUploadReleaseFocus()">
+        <p:fragment>
+            <h:form id="cedarUploadForm" class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">#{bundle['dataverse.cedarUpload.mdb']}</label>
+                    <div class="col-sm-9">
+                        <p class="form-control-static">#{DataversePage.cedarUploadMdbName}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label jsf:for="cedarUploadDirectoryUrl" class="col-sm-3 control-label">#{bundle['dataverse.cedarUpload.directoryUrl']} <span class="glyphicon glyphicon-asterisk text-danger" title="#{bundle.requiredField}"/></label>
+                    <div class="col-sm-9">
+                        <p:inputText id="cedarUploadDirectoryUrl" styleClass="form-control" value="#{DataversePage.cedarUploadDirectoryUrl}"
+                                     autocomplete="url"
+                                     required="#{param['DO_VALIDATION']}" requiredMessage="#{bundle['dataverse.cedarUpload.emptyDirectoryUrl']}"/>
+                        <h:message for="cedarUploadDirectoryUrl" styleClass="bg-danger text-danger"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label jsf:for="cedarUploadApiKey" class="col-sm-3 control-label">#{bundle['dataverse.cedarUpload.apiKey']} <span class="glyphicon glyphicon-asterisk text-danger" title="#{bundle.requiredField}"/></label>
+                    <div class="col-sm-9">
+                        <p:inputText id="cedarUploadApiKey" styleClass="form-control" value="#{DataversePage.cedarUploadApiKey}"
+                                     autocomplete="off"
+                                     required="#{param['DO_VALIDATION']}" requiredMessage="#{bundle['dataverse.cedarUpload.emptyApiKey']}"/>
+                        <h:message for="cedarUploadApiKey" styleClass="bg-danger text-danger"/>
+                    </div>
+                </div>
+                <div class="button-block">
+                    <p:commandButton styleClass="btn btn-default" value="#{bundle['dataverse.cedarUpload.upload']}"
+                                     update="@form,messagePanel,cedarUploadFolderConfirmForm"
+                                     onstart="saveCedarUploadCredentials()"
+                                     oncomplete="saveCedarUploadCredentials(); if (args &amp;&amp; args.folderMismatch) { PF('cedarUploadFolderConfirm').show(); } else if (args &amp;&amp; !args.validationFailed) { PF('cedarUploadForm').hide(); window.scrollTo(0, 0); }"
+                                     actionListener="#{DataversePage.checkCedarUploadFolder}">
+                        <f:param name="DO_VALIDATION" value="true"/>
+                    </p:commandButton>
+                    <button class="btn btn-link" onclick="PF('cedarUploadForm').hide(); return false;" type="button">
+                        #{bundle.cancel}
+                    </button>
+                </div>
+            </h:form>
+            <script>
+                //<![CDATA[
+                var cedarUploadStorageKeys = {
+                    directoryUrl: "dataverse.cedarUpload.directoryUrl",
+                    apiKey: "dataverse.cedarUpload.apiKey"
+                };
+
+                function cedarUploadInput(suffix) {
+                    return document.querySelector("[id$='" + suffix + "']");
+                }
+
+                function cedarUploadReleaseFocus() {
+                    if (document.activeElement && document.activeElement.blur) {
+                        document.activeElement.blur();
+                    }
+                }
+
+                function restoreCedarUploadCredentials() {
+                    var directoryUrl = localStorage.getItem(cedarUploadStorageKeys.directoryUrl);
+                    var apiKey = localStorage.getItem(cedarUploadStorageKeys.apiKey);
+                    var directoryInput = cedarUploadInput("cedarUploadDirectoryUrl");
+                    var apiKeyInput = cedarUploadInput("cedarUploadApiKey");
+                    if (directoryInput) {
+                        directoryInput.value = directoryUrl || "";
+                    }
+                    if (apiKeyInput) {
+                        apiKeyInput.value = apiKey || "";
+                    }
+                    if (directoryInput) {
+                        directoryInput.focus();
+                    }
+                }
+
+                function saveCedarUploadCredentials() {
+                    var directoryInput = cedarUploadInput("cedarUploadDirectoryUrl");
+                    var apiKeyInput = cedarUploadInput("cedarUploadApiKey");
+                    if (directoryInput) {
+                        localStorage.setItem(cedarUploadStorageKeys.directoryUrl, directoryInput.value || "");
+                    }
+                    if (apiKeyInput) {
+                        localStorage.setItem(cedarUploadStorageKeys.apiKey, apiKeyInput.value || "");
+                    }
+                }
+
+                document.addEventListener("input", function (event) {
+                    var target = event.target;
+                    if (!target || !target.id) {
+                        return;
+                    }
+                    if (target.id.endsWith("cedarUploadDirectoryUrl") || target.id.endsWith("cedarUploadApiKey")) {
+                        saveCedarUploadCredentials();
+                    }
+                });
+                //]]>
+            </script>
+        </p:fragment>
+    </p:dialog>
+    <p:dialog id="cedarUploadFolderConfirm" header="#{bundle['dataverse.cedarUpload.folderMismatch.header']}"
+              widgetVar="cedarUploadFolderConfirm" modal="true">
+        <h:form id="cedarUploadFolderConfirmForm">
+            <p class="text-warning">
+                <span class="glyphicon glyphicon-warning-sign"/>
+                #{bundle['dataverse.cedarUpload.folderMismatch.tip']}
+            </p>
+            <p>
+                <a href="#{DataversePage.cedarUploadFolderMismatchUrl}" target="_blank" rel="noopener noreferrer">
+                    #{DataversePage.cedarUploadFolderMismatchPath}
+                </a>
+            </p>
+            <div class="button-block">
+                <p:commandButton styleClass="btn btn-default"
+                                 value="#{bundle['dataverse.cedarUpload.folderMismatch.continue']}"
+                                 update="messagePanel"
+                                 oncomplete="PF('cedarUploadFolderConfirm').hide(); PF('cedarUploadForm').hide(); window.scrollTo(0, 0);"
+                                 actionListener="#{DataversePage.confirmCedarUploadDespiteFolderMismatch}"/>
+                <button class="btn btn-link" onclick="PF('cedarUploadFolderConfirm').hide();" type="button">
+                    #{bundle.cancel}
+                </button>
+            </div>
+        </h:form>
+    </p:dialog>
+</ui:composition>

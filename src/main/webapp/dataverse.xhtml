@@ -362,6 +362,15 @@
                                                                     actionListener="#{DataversePage.showDatasetFieldTypes(mdb.id, false)}">
                                                          <h:outputText value="#{bundle['dataverse.field.set.view']}" />
                                                      </p:commandLink>
+                                                     <p:commandLink id="uploadToCedar" style="margin-left:1em;"
+                                                                    update=":cedarUploadDialog"
+                                                                    process="@this"
+                                                                    oncomplete="PF('cedarUploadForm').show(); restoreCedarUploadCredentials();"
+                                                                    rendered="#{dataverseSession.user.superuser and !mdb.showDatasetFieldTypes and !DataversePage.openMetadataBlock}"
+                                                                    actionListener="#{DataversePage.initCedarUpload}">
+                                                         <f:setPropertyActionListener target="#{DataversePage.cedarUploadMdbName}" value="#{mdb.name}"/>
+                                                         <span class="glyphicon glyphicon-arrow-up"/> <h:outputText value="#{bundle['dataverse.cedarUpload.btn']}"/>
+                                                     </p:commandLink>
                                                 </label>
                                             </div>
                                             <div id="metadataFieldOptionsPanel-Block" jsf:rendered="#{mdb.showDatasetFieldTypes}">

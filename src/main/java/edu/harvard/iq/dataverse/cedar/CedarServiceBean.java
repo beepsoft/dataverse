@@ -179,6 +179,36 @@ public class CedarServiceBean implements java.io.Serializable {
         return cedarTemplate;
     }
 
+    /**
+     * Returns the CEDAR template UUID stored for the given metadata block, if any.
+     * Used by UI upload so the original resource id is kept instead of generateNamedUuid.
+     */
+    public String getCedarUuidForMdb(String mdbName) {
+        JsonObject existingTemplate = getCedarTemplateForMdb(mdbName);
+        if (existingTemplate == null || !existingTemplate.has("@id") || existingTemplate.get("@id").isJsonNull()) {
+            return null;
+        }
+        return extractUuidFromCedarResourceId(existingTemplate.get("@id").getAsString());
+    }
+
+    /**
+     * Extracts the UUID (last path segment) from a CEDAR resource id URL, or returns the
+     * value as-is when it is already a bare UUID.
+     * e.g. https://repo.arp.orgx/templates/ab2a9696-291f-4705-b5e6-6c262266c506
+     *      → ab2a9696-291f-4705-b5e6-6c262266c506
+     */
+    public static String extractUuidFromCedarResourceId(String cedarResourceId) {
+        if (cedarResourceId == null || cedarResourceId.isBlank()) {
+            return null;
+        }
+        String trimmed = cedarResourceId.trim();
+        int slash = trimmed.lastIndexOf('/');
+        if (slash < 0 || slash == trimmed.length() - 1) {
+            return trimmed;
+        }
+        return trimmed.substring(slash + 1);
+    }
+
     public String exportMdbAsTsv(String mdbName) throws JsonProcessingException {
         MetadataBlock mdb = metadataBlockService.findByName(mdbName);
 
@@ -382,37 +412,202 @@ public class CedarServiceBean implements java.io.Serializable {
         return new ObjectMapper().readTree(createFolderResponse.body()).get("@id").textValue();
     }
 
+    /**
+     * Check whether a CEDAR template for the given metadata block already exists and,
+     * if so, whether it lives under {@code cedarParams.folderId}.
+     */
+    public TemplateFolderCheckResult checkTemplateFolder(CedarParams.MdbParam mdbParam, ExportToCedarParams cedarParams) throws Exception {
+        String cedarDomain = cedarParams.cedarDomain;
+        if (cedarDomain == null || cedarDomain.isBlank()) {
+            cedarDomain = cedarConfig.get("CedarDomain");
+            cedarParams.cedarDomain = cedarDomain;
+        }
+        // Prefer explicit cedarUuid (e.g. UI upload passes the original resource id from the stored template).
+        // Other exports that omit cedarUuid still fall back to generateNamedUuid(mdbName).
+        String actualUuid = mdbParam.cedarUuid != null ? mdbParam.cedarUuid : generateNamedUuid(mdbParam.name);
+        HttpClient client = getUnsafeHttpClient();
+        return fetchTemplateFolderCheck(actualUuid, mdbParam.name, cedarParams, client);
+    }
+
     public String exportTemplateToCedar(JsonNode cedarTemplate, String cedarUuid, ExportToCedarParams cedarParams) throws Exception {
+        return exportTemplateToCedar(cedarTemplate, cedarUuid, cedarParams, false);
+    }
+
+    public String exportTemplateToCedar(JsonNode cedarTemplate, String cedarUuid, ExportToCedarParams cedarParams,
+                                        boolean proceedDespiteFolderMismatch) throws Exception {
         //TODO: uncomment the line below and delete the UnsafeHttpClient, that is for testing purposes only, until we have working CEDAR certs
         // HttpClient client = HttpClient.newHttpClient();
         HttpClient client = getUnsafeHttpClient();
-        String templateName = cedarTemplate.get("schema:name").textValue();
-        String parentFolderId = cedarParams.folderId;
-        String apiKey = cedarParams.apiKey;
-        String cedarDomain = cedarParams.cedarDomain;
-        String templateFolderId = checkOrCreateFolder(parentFolderId, templateName, apiKey, cedarDomain, client);
-        return uploadTemplate(cedarTemplate, cedarUuid, cedarParams, templateFolderId, client);
+        return uploadTemplate(cedarTemplate, cedarUuid, cedarParams, client, proceedDespiteFolderMismatch);
     }
 
-    private String uploadTemplate(JsonNode cedarTemplate, String cedarUuid, ExportToCedarParams cedarParams, String templateFolderId, HttpClient client) throws Exception {
-        String encodedFolderId = URLEncoder.encode(templateFolderId, StandardCharsets.UTF_8);
+    static String extractLastFolderIdFromPathInfo(JsonNode pathInfo) {
+        JsonNode lastFolder = extractLastFolderNodeFromPathInfo(pathInfo);
+        if (lastFolder == null || !lastFolder.has("@id") || lastFolder.get("@id").isNull()) {
+            return null;
+        }
+        return lastFolder.get("@id").textValue();
+    }
+
+    static JsonNode extractLastFolderNodeFromPathInfo(JsonNode pathInfo) {
+        if (pathInfo == null || !pathInfo.isArray()) {
+            return null;
+        }
+        JsonNode lastFolder = null;
+        for (JsonNode entry : pathInfo) {
+            if (entry != null && entry.has("resourceType")
+                    && "folder".equals(entry.get("resourceType").asText())
+                    && entry.has("@id") && !entry.get("@id").isNull()) {
+                lastFolder = entry;
+            }
+        }
+        return lastFolder;
+    }
+
+    /**
+     * Parent of the template's containing folder (second-to-last folder in pathInfo).
+     * Used when uploads place the template in a named child of the Directory URL.
+     */
+    static String extractParentOfLastFolderIdFromPathInfo(JsonNode pathInfo) {
+        if (pathInfo == null || !pathInfo.isArray()) {
+            return null;
+        }
+        String previousFolderId = null;
+        String lastFolderId = null;
+        for (JsonNode entry : pathInfo) {
+            if (entry != null && entry.has("resourceType")
+                    && "folder".equals(entry.get("resourceType").asText())
+                    && entry.has("@id") && !entry.get("@id").isNull()) {
+                previousFolderId = lastFolderId;
+                lastFolderId = entry.get("@id").textValue();
+            }
+        }
+        return previousFolderId;
+    }
+
+    static boolean folderIdsEqual(String folderIdA, String folderIdB) {
+        if (folderIdA == null || folderIdB == null) {
+            return folderIdA == null && folderIdB == null;
+        }
+        try {
+            return decodeURLParameter(folderIdA).equals(decodeURLParameter(folderIdB));
+        } catch (UnsupportedEncodingException e) {
+            return folderIdA.equals(folderIdB);
+        }
+    }
+
+    /**
+     * True when Directory URL is the template's current parent folder, or the parent of the
+     * named folder created by {@link #checkOrCreateFolder} under that Directory URL.
+     */
+    static boolean isSameUploadFolder(JsonNode pathInfo, String directoryUrl, String templateName) {
+        String currentFolderId = extractLastFolderIdFromPathInfo(pathInfo);
+        if (folderIdsEqual(currentFolderId, directoryUrl)) {
+            return true;
+        }
+        if (templateName == null || templateName.isBlank()) {
+            return false;
+        }
+        JsonNode lastFolder = extractLastFolderNodeFromPathInfo(pathInfo);
+        if (lastFolder == null || !lastFolder.has("schema:name") || lastFolder.get("schema:name").isNull()) {
+            return false;
+        }
+        if (!templateName.equals(lastFolder.get("schema:name").asText())) {
+            return false;
+        }
+        return folderIdsEqual(extractParentOfLastFolderIdFromPathInfo(pathInfo), directoryUrl);
+    }
+
+    private TemplateFolderCheckResult fetchTemplateFolderCheck(String cedarUuid, String templateName,
+                                                               ExportToCedarParams cedarParams, HttpClient client) throws Exception {
         String cedarDomain = cedarParams.cedarDomain;
         String cedarId = "https://repo." + cedarDomain + "/templates/" + cedarUuid;
-        String cedarIdEncoded = URLEncoder.encode(cedarId);
-        String resUrl = "https://resource." + cedarDomain + "/templates/"+cedarIdEncoded;
+        String cedarIdEncoded = URLEncoder.encode(cedarId, StandardCharsets.UTF_8);
+        String reportUrl = "https://resource." + cedarDomain + "/templates/" + cedarIdEncoded + "/report";
 
-        HttpRequest getTemplateRequest = HttpRequest.newBuilder()
-                .uri(new URI(resUrl))
+        HttpRequest getReportRequest = HttpRequest.newBuilder()
+                .uri(new URI(reportUrl))
                 .headers("Authorization", "apiKey " + cedarParams.apiKey, "Content-Type", "application/json", "Accept", "application/json")
                 .GET()
                 .build();
-        HttpResponse<String> templateExistsResponse = client.send(getTemplateRequest, ofString());
+        HttpResponse<String> reportResponse = client.send(getReportRequest, ofString());
+
+        if (reportResponse.statusCode() == 404) {
+            return TemplateFolderCheckResult.notFound();
+        }
+        if (reportResponse.statusCode() != 200) {
+            throw new Exception("An error occurred while checking the CEDAR template location: " + reportResponse.body());
+        }
+
+        JsonNode report = new ObjectMapper().readTree(reportResponse.body());
+        JsonNode pathInfo = report.get("pathInfo");
+        String currentFolderId = extractLastFolderIdFromPathInfo(pathInfo);
+        String currentPath = extractFolderPathFromReport(report);
+
+        if (isSameUploadFolder(pathInfo, cedarParams.folderId, templateName)) {
+            return new TemplateFolderCheckResult(TemplateFolderCheckResult.Status.SAME_FOLDER, currentFolderId, currentPath);
+        }
+        return new TemplateFolderCheckResult(TemplateFolderCheckResult.Status.DIFFERENT_FOLDER, currentFolderId, currentPath);
+    }
+
+    /**
+     * Folder path for display (without the template name). Prefers report parentPath over path.
+     */
+    static String extractFolderPathFromReport(JsonNode report) {
+        if (report == null) {
+            return null;
+        }
+        if (report.has("parentPath") && !report.get("parentPath").isNull()) {
+            return report.get("parentPath").asText();
+        }
+        if (report.has("path") && !report.get("path").isNull()) {
+            return report.get("path").asText();
+        }
+        return null;
+    }
+
+    private String uploadTemplate(JsonNode cedarTemplate, String cedarUuid, ExportToCedarParams cedarParams,
+                                  HttpClient client, boolean proceedDespiteFolderMismatch) throws Exception {
+        String cedarDomain = cedarParams.cedarDomain;
+        String apiKey = cedarParams.apiKey;
+        String templateName = cedarTemplate.get("schema:name").textValue();
+        String cedarId = "https://repo." + cedarDomain + "/templates/" + cedarUuid;
+        String cedarIdEncoded = URLEncoder.encode(cedarId, StandardCharsets.UTF_8);
+        String templateUrl = "https://resource." + cedarDomain + "/templates/" + cedarIdEncoded;
+        String reportUrl = templateUrl + "/report";
+
+        HttpRequest getReportRequest = HttpRequest.newBuilder()
+                .uri(new URI(reportUrl))
+                .headers("Authorization", "apiKey " + apiKey, "Content-Type", "application/json", "Accept", "application/json")
+                .GET()
+                .build();
+        HttpResponse<String> templateExistsResponse = client.send(getReportRequest, ofString());
 
         // Set the id that we also use in the PUT URL
-        ((ObjectNode)cedarTemplate).put("@id", cedarId);
+        ((ObjectNode) cedarTemplate).put("@id", cedarId);
+
+        HttpRequest getTemplateRequest = HttpRequest.newBuilder()
+                .uri(new URI(templateUrl))
+                .headers("Authorization", "apiKey " + apiKey, "Content-Type", "application/json", "Accept", "application/json")
+                .GET()
+                .build();
 
         // If already exists, update it
         if (templateExistsResponse.statusCode() == 200) {
+            JsonNode report = new ObjectMapper().readTree(templateExistsResponse.body());
+            JsonNode pathInfo = report.get("pathInfo");
+            String currentFolderId = extractLastFolderIdFromPathInfo(pathInfo);
+            String currentPath = extractFolderPathFromReport(report);
+            boolean folderMismatch = !isSameUploadFolder(pathInfo, cedarParams.folderId, templateName);
+            if (folderMismatch && !proceedDespiteFolderMismatch) {
+                throw new Exception("CEDAR template is in another folder ("
+                        + (currentPath != null ? currentPath : currentFolderId)
+                        + "). Confirm to update it in its current folder.");
+            }
+
+            // Resource cannot be duplicated; always update in place under its current parent folder.
+            String templateFolderId = currentFolderId != null ? currentFolderId : cedarParams.folderId;
+
             // TODO! Need to handle existing element vs newly created
             // Update the template with the uploaded elements, to have their real @id
             List<JsonNode> elements = exportElements(cedarTemplate, cedarParams, templateFolderId, client, false);
@@ -426,33 +621,33 @@ public class CedarServiceBean implements java.io.Serializable {
                 }
             });
 
-            // PUT https://resource.arp3.orgx/templates/https%3A%2F%2Frepo.arp3.orgx%2Ftemplates%2Fe5c9c38c-e436-472b-affa-ea835a92aba8?folder_id=https:%2F%2Frepo.arp3.orgx%2Ffolders%2F422b2a95-3796-42ed-983b-6b5a269814f0
+            // PUT https://resource.arp3.orgx/templates/https%3A%2F%2Frepo.arp3.orgx%2Ftemplates%2Fe5c9c38c-e436-472b-affa-ea835a92aba8
             HttpRequest httpRequest = HttpRequest.newBuilder()
-                    .uri(new URI(resUrl))
-                    .headers("Authorization", "apiKey " + cedarParams.apiKey, "Content-Type", "application/json", "Accept", "application/json")
+                    .uri(new URI(templateUrl))
+                    .headers("Authorization", "apiKey " + apiKey, "Content-Type", "application/json", "Accept", "application/json")
                     .PUT(HttpRequest.BodyPublishers.ofString(new ObjectMapper().writeValueAsString(cedarTemplate)))
                     .build();
 
             HttpResponse<String> updateTemplateResponse = client.send(httpRequest, ofString());
             if (updateTemplateResponse.statusCode() != 200) {
-                throw new Exception("An error occurred during uploading the template: " + cedarTemplate.get("schema:name").textValue()+": "+updateTemplateResponse.body());
+                throw new Exception("An error occurred during uploading the template: " + cedarTemplate.get("schema:name").textValue() + ": " + updateTemplateResponse.body());
             }
 
             // The template update doesn't return the complete template, so we need to get it again
             HttpResponse<String> getTemplateAgainResponse = client.send(getTemplateRequest, ofString());
             if (getTemplateAgainResponse.statusCode() != 200) {
-                throw new Exception("An error occurred during uploading the template: " + cedarTemplate.get("schema:name").textValue()+": "+getTemplateAgainResponse.body());
+                throw new Exception("An error occurred during uploading the template: " + cedarTemplate.get("schema:name").textValue() + ": " + getTemplateAgainResponse.body());
             }
 
             // Make the artifact open to be viewed in OpenView
             HttpRequest makeArtifactOpen = HttpRequest.newBuilder()
                     .uri(new URI("https://resource." + cedarDomain + "/command/make-artifact-open"))
-                    .headers("Authorization", "apiKey " + cedarParams.apiKey, "Content-Type", "application/json", "Accept", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString("{\"@id\":\""+cedarId+"\"}"))
+                    .headers("Authorization", "apiKey " + apiKey, "Content-Type", "application/json", "Accept", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString("{\"@id\":\"" + cedarId + "\"}"))
                     .build();
             HttpResponse<String> makeArtifactOpenResponse = client.send(makeArtifactOpen, ofString());
             if (makeArtifactOpenResponse.statusCode() != 200) {
-                throw new Exception("An error occurred during making template open: " + cedarTemplate.get("schema:name").textValue()+": "+makeArtifactOpenResponse.body());
+                throw new Exception("An error occurred during making template open: " + cedarTemplate.get("schema:name").textValue() + ": " + makeArtifactOpenResponse.body());
             }
 
             // Now return the reloaded template JSON
@@ -460,6 +655,9 @@ public class CedarServiceBean implements java.io.Serializable {
         }
         // If not found, create it now
         else if (templateExistsResponse.statusCode() == 404) {
+            String templateFolderId = checkOrCreateFolder(cedarParams.folderId, templateName, apiKey, cedarDomain, client);
+            String encodedFolderId = URLEncoder.encode(templateFolderId, StandardCharsets.UTF_8);
+
             // TODO! Need to handle existing element vs newly created
             // Update the template with the uploaded elements, to have their real @id
             List<JsonNode> elements = exportElements(cedarTemplate, cedarParams, templateFolderId, client, false);
@@ -473,23 +671,23 @@ public class CedarServiceBean implements java.io.Serializable {
                 }
             });
 
-            // PUT https://resource.arp3.orgx/templates/https%3A%2F%2Frepo.arp3.orgx%2Ftemplates%2Fe5c9c38c-e436-472b-affa-ea835a92aba8?folder_id=https:%2F%2Frepo.arp3.orgx%2Ffolders%2F422b2a95-3796-42ed-983b-6b5a269814f0
-            String urlWithFolder = "https://resource." + cedarDomain + "/templates/"+cedarIdEncoded+"?folder_id=" + encodedFolderId;
+            // PUT https://resource.arp3.orgx/templates/...?folder_id=...
+            String urlWithFolder = templateUrl + "?folder_id=" + encodedFolderId;
             HttpRequest httpRequest = HttpRequest.newBuilder()
                     .uri(new URI(urlWithFolder))
-                    .headers("Authorization", "apiKey " + cedarParams.apiKey, "Content-Type", "application/json", "Accept", "application/json")
+                    .headers("Authorization", "apiKey " + apiKey, "Content-Type", "application/json", "Accept", "application/json")
                     .PUT(HttpRequest.BodyPublishers.ofString(new ObjectMapper().writeValueAsString(cedarTemplate)))
                     .build();
 
             HttpResponse<String> uploadTemplateResponse = client.send(httpRequest, ofString());
             if (uploadTemplateResponse.statusCode() != 201 && uploadTemplateResponse.statusCode() != 200) {
-                throw new Exception("An error occurred during uploading the template: " + cedarTemplate.get("schema:name").textValue()+": "+uploadTemplateResponse.body());
+                throw new Exception("An error occurred during uploading the template: " + cedarTemplate.get("schema:name").textValue() + ": " + uploadTemplateResponse.body());
             }
             return uploadTemplateResponse.body();
         }
 
         // Anything else is an error
-        throw new Exception("An error occurred during uploading the template: " + cedarTemplate.get("schema:name").textValue()+": "+templateExistsResponse.body());
+        throw new Exception("An error occurred during uploading the template: " + cedarTemplate.get("schema:name").textValue() + ": " + templateExistsResponse.body());
     }
     
     public List<JsonNode> extractTemplateElements(JsonNode cedarResource, ExportToCedarParams cedarParams) throws Exception {
@@ -1782,25 +1980,59 @@ public class CedarServiceBean implements java.io.Serializable {
         writer.close();
     }
 
+    private String exportMdbTemplateToCedar(CedarParams.MdbParam mdbParam, ExportToCedarParams cedarParams, boolean forceNamespaceUri) throws Exception {
+        return exportMdbTemplateToCedar(mdbParam, cedarParams, forceNamespaceUri, false);
+    }
+
+    private String exportMdbTemplateToCedar(CedarParams.MdbParam mdbParam, ExportToCedarParams cedarParams,
+                                            boolean forceNamespaceUri, boolean proceedDespiteFolderMismatch) throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        String cedarDomain = cedarParams.cedarDomain;
+
+        if (cedarDomain == null || cedarDomain.isBlank()){
+            cedarDomain = cedarConfig.get("CedarDomain");
+        }
+        cedarParams.cedarDomain = cedarDomain;
+
+        var mdb = metadataBlockService.findByName(mdbParam.name);
+        var actualUuid = mdbParam.cedarUuid != null ? mdbParam.cedarUuid : generateNamedUuid(mdbParam.name);
+
+        JsonObject existingTemplate = getCedarTemplateForMdb(mdbParam.name);
+        String cedarTemplateStr = tsvToCedarTemplate(exportMdbAsTsv(mdb.getName()), true, existingTemplate, forceNamespaceUri).toString();
+        // ARP compatibility: just naively replace "_ext" to "_arp" for extension values.
+        cedarTemplateStr = cedarTemplateStr.replaceAll("\"_ext\"", "\"_arp\"");
+        if (existingTemplate != null && existingTemplate.has("@id")) {
+            String existingTemplateId = existingTemplate.get("@id").getAsString();
+            if (existingTemplateId.startsWith("https://repo.")) {
+                String existingDomain = existingTemplateId.substring("https://repo.".length());
+                int slashIndex = existingDomain.indexOf('/');
+                if (slashIndex > 0) {
+                    existingDomain = existingDomain.substring(0, slashIndex);
+                    cedarTemplateStr = cedarTemplateStr.replaceAll(Pattern.quote(existingDomain), cedarDomain);
+                }
+            }
+        }
+        JsonNode cedarTemplate = mapper.readTree(cedarTemplateStr);
+        return exportTemplateToCedar(cedarTemplate, actualUuid, cedarParams, proceedDespiteFolderMismatch);
+    }
+
+    public void uploadMetadataBlockToCedar(CedarParams.MdbParam mdbParam, ExportToCedarParams cedarParams, boolean forceNamespaceUri) {
+        uploadMetadataBlockToCedar(mdbParam, cedarParams, forceNamespaceUri, false);
+    }
+
+    public void uploadMetadataBlockToCedar(CedarParams.MdbParam mdbParam, ExportToCedarParams cedarParams,
+                                           boolean forceNamespaceUri, boolean proceedDespiteFolderMismatch) {
+        try {
+            exportMdbTemplateToCedar(mdbParam, cedarParams, forceNamespaceUri, proceedDespiteFolderMismatch);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Uploading metadatablock '"+mdbParam.name+"' to CEDAR failed: "+e.getLocalizedMessage(),  e);
+        }
+    }
+
     public void syncMetadataBlockWithCedar(CedarParams.MdbParam mdbParam, ExportToCedarParams cedarParams, boolean forceNamespaceUri) {
         try {
-            ObjectMapper mapper = new ObjectMapper();
-            String cedarDomain = cedarParams.cedarDomain;
-
-            if (cedarDomain == null || cedarDomain.isBlank()){
-                cedarDomain = cedarConfig.get("CedarDomain");
-            }
-            cedarParams.cedarDomain = cedarDomain;
-
-            var mdb = metadataBlockService.findByName(mdbParam.name);
-            var actualUuid = mdbParam.cedarUuid != null ? mdbParam.cedarUuid : generateNamedUuid(mdbParam.name);
-
-            JsonObject existingTemplate = getCedarTemplateForMdb(mdbParam.name);
-            String cedarTemplateStr = tsvToCedarTemplate(exportMdbAsTsv(mdb.getName()), true, existingTemplate, forceNamespaceUri).toString();
-            // ARP compatibility: just naively replace "_ext" to "_arp" for extension values.
-            cedarTemplateStr = cedarTemplateStr.replaceAll("\"_ext\"", "\"_arp\"");
-            JsonNode cedarTemplate = mapper.readTree(cedarTemplateStr);
-            String templateJson = exportTemplateToCedar(cedarTemplate, actualUuid, cedarParams);
+            String templateJson = exportMdbTemplateToCedar(mdbParam, cedarParams, forceNamespaceUri);
             createOrUpdateMdbFromCedarTemplate("root", templateJson, false);
         } catch (Exception e) {
             e.printStackTrace();

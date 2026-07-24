@@ -5,8 +5,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.harvard.iq.dataverse.authorization.Permission;
 import edu.harvard.iq.dataverse.authorization.users.AuthenticatedUser;
 import edu.harvard.iq.dataverse.authorization.users.User;
+import edu.harvard.iq.dataverse.api.cedar.CedarParams;
 import edu.harvard.iq.dataverse.cedar.CedarServiceBean;
 import edu.harvard.iq.dataverse.cedar.CedarTemplateErrorsException;
+import edu.harvard.iq.dataverse.cedar.ExportToCedarParams;
+import edu.harvard.iq.dataverse.cedar.TemplateFolderCheckResult;
 import edu.harvard.iq.dataverse.dataaccess.DataAccess;
 import edu.harvard.iq.dataverse.dataset.DatasetUtil;
 import edu.harvard.iq.dataverse.dataverse.DataverseUtil;
@@ -35,6 +38,10 @@ import static edu.harvard.iq.dataverse.util.JsfHelper.JH;
 import edu.harvard.iq.dataverse.util.SystemConfig;
 import java.util.List;
 
+import java.net.URI;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
 import edu.harvard.iq.dataverse.util.cache.CacheFactoryBean;
 import jakarta.ejb.EJB;
 import jakarta.faces.application.FacesMessage;
@@ -57,6 +64,7 @@ import jakarta.faces.component.UIComponent;
 import jakarta.faces.component.UIInput;
 import org.primefaces.model.DualListModel;
 import jakarta.ejb.EJBException;
+import jakarta.faces.event.ActionEvent;
 import jakarta.faces.event.ValueChangeEvent;
 import jakarta.faces.model.SelectItem;
 import org.apache.commons.text.StringEscapeUtils;
@@ -152,6 +160,12 @@ public class DataversePage implements java.io.Serializable {
     private String cedarTemplateIdentifier;
     private String cedarTemplateDescription;
     private String cedarTemplateParseError;
+
+    private String cedarUploadDirectoryUrl;
+    private String cedarUploadApiKey;
+    private String cedarUploadMdbName;
+    private String cedarUploadFolderMismatchPath;
+    private String cedarUploadFolderMismatchUrl;
 
     public List<ControlledVocabularyValue> getSelectedSubjects() {
         return selectedSubjects;
@@ -1484,5 +1498,191 @@ public class DataversePage implements java.io.Serializable {
                     : e.getMessage();
             JsfHelper.addErrorMessage(msg);
         }
+    }
+
+    public String getCedarUploadDirectoryUrl() {
+        return cedarUploadDirectoryUrl;
+    }
+
+    public void setCedarUploadDirectoryUrl(String cedarUploadDirectoryUrl) {
+        this.cedarUploadDirectoryUrl = cedarUploadDirectoryUrl;
+    }
+
+    public String getCedarUploadApiKey() {
+        return cedarUploadApiKey;
+    }
+
+    public void setCedarUploadApiKey(String cedarUploadApiKey) {
+        this.cedarUploadApiKey = cedarUploadApiKey;
+    }
+
+    public String getCedarUploadMdbName() {
+        return cedarUploadMdbName;
+    }
+
+    public void setCedarUploadMdbName(String cedarUploadMdbName) {
+        this.cedarUploadMdbName = cedarUploadMdbName;
+    }
+
+    public String getCedarUploadFolderMismatchPath() {
+        return cedarUploadFolderMismatchPath;
+    }
+
+    public String getCedarUploadFolderMismatchUrl() {
+        return cedarUploadFolderMismatchUrl;
+    }
+
+    public void initCedarUpload(ActionEvent event) {
+        // Credentials are restored from browser localStorage when the dialog opens.
+    }
+
+    public void checkCedarUploadFolder() {
+        if (!validateCedarUploadInputs()) {
+            return;
+        }
+
+        try {
+            ExportToCedarParams cedarParams = buildCedarUploadParams();
+            CedarParams.MdbParam mdbParam = buildCedarUploadMdbParam();
+
+            TemplateFolderCheckResult check = cedarService.checkTemplateFolder(mdbParam, cedarParams);
+            if (check.isDifferentFolder()) {
+                cedarUploadFolderMismatchPath = check.getCurrentPath() != null
+                        ? check.getCurrentPath()
+                        : check.getCurrentFolderId();
+                cedarUploadFolderMismatchUrl = buildCedarFolderDashboardUrl(
+                        cedarParams.cedarDomain, check.getCurrentFolderId());
+                PrimeFaces.current().ajax().addCallbackParam("folderMismatch", true);
+                return;
+            }
+
+            uploadMdbToCedar(false);
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "CEDAR upload folder check failed for metadata block " + cedarUploadMdbName, e);
+            String msg = e.getMessage() == null
+                    ? BundleUtil.getStringFromBundle("dataverse.cedarUpload.failure")
+                    : e.getMessage();
+            JsfHelper.addErrorMessage(msg);
+        }
+    }
+
+    public void confirmCedarUploadDespiteFolderMismatch() {
+        uploadMdbToCedar(true);
+    }
+
+    public void uploadMdbToCedar() {
+        uploadMdbToCedar(false);
+    }
+
+    private void uploadMdbToCedar(boolean proceedDespiteFolderMismatch) {
+        if (!validateCedarUploadInputs()) {
+            return;
+        }
+
+        try {
+            ExportToCedarParams cedarParams = buildCedarUploadParams();
+            CedarParams.MdbParam mdbParam = buildCedarUploadMdbParam();
+
+            cedarService.uploadMetadataBlockToCedar(mdbParam, cedarParams, false, proceedDespiteFolderMismatch);
+
+            String mdbName = cedarUploadMdbName;
+            JsfHelper.addSuccessMessage(BundleUtil.getStringFromBundle("dataverse.cedarUpload.successNamed", List.of(mdbName)));
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "CEDAR upload failed for metadata block " + cedarUploadMdbName, e);
+            String msg = e.getMessage() == null
+                    ? BundleUtil.getStringFromBundle("dataverse.cedarUpload.failure")
+                    : e.getMessage();
+            JsfHelper.addErrorMessage(msg);
+        }
+    }
+
+    private boolean validateCedarUploadInputs() {
+        if (session.getUser() == null || !session.getUser().isSuperuser()) {
+            JsfHelper.addErrorMessage(BundleUtil.getStringFromBundle("dataverse.cedarImport.superuserOnly"));
+            return false;
+        }
+
+        if (cedarUploadMdbName == null || cedarUploadMdbName.isBlank()) {
+            JsfHelper.addErrorMessage(BundleUtil.getStringFromBundle("dataverse.cedarUpload.failure"));
+            return false;
+        }
+
+        if (cedarUploadDirectoryUrl == null || cedarUploadDirectoryUrl.trim().isEmpty()) {
+            JsfHelper.addErrorMessage(BundleUtil.getStringFromBundle("dataverse.cedarUpload.emptyDirectoryUrl"));
+            return false;
+        }
+
+        if (cedarUploadApiKey == null || cedarUploadApiKey.trim().isEmpty()) {
+            JsfHelper.addErrorMessage(BundleUtil.getStringFromBundle("dataverse.cedarUpload.emptyApiKey"));
+            return false;
+        }
+
+        return true;
+    }
+
+    private ExportToCedarParams buildCedarUploadParams() {
+        ExportToCedarParams cedarParams = new ExportToCedarParams();
+        cedarParams.folderId = cedarUploadDirectoryUrl.trim();
+        cedarParams.apiKey = normalizeCedarApiKey(cedarUploadApiKey);
+        cedarParams.cedarDomain = parseCedarDomainFromDirectoryUrl(cedarParams.folderId);
+        return cedarParams;
+    }
+
+    /**
+     * Builds MDB params for UI upload. Passes the original CEDAR resource id when the
+     * metadata block was previously imported/synced from CEDAR, so re-upload updates that
+     * template instead of creating one under generateNamedUuid(mdbName).
+     */
+    private CedarParams.MdbParam buildCedarUploadMdbParam() {
+        CedarParams.MdbParam mdbParam = new CedarParams.MdbParam();
+        mdbParam.name = cedarUploadMdbName;
+        mdbParam.cedarUuid = cedarService.getCedarUuidForMdb(cedarUploadMdbName);
+        return mdbParam;
+    }
+
+    /**
+     * Accepts either a bare CEDAR API key or the Authorization-style value
+     * {@code apiKey <key>}. Returns the bare key so callers can safely prefix
+     * {@code "apiKey "} when building the Authorization header.
+     */
+    static String normalizeCedarApiKey(String apiKey) {
+        if (apiKey == null) {
+            return null;
+        }
+        String trimmed = apiKey.trim();
+        if (trimmed.regionMatches(true, 0, "apiKey ", 0, "apiKey ".length())) {
+            return trimmed.substring("apiKey ".length()).trim();
+        }
+        return trimmed;
+    }
+
+    /**
+     * Builds a CEDAR Workbench URL that opens the given folder in the dashboard.
+     * Example: https://cedar.arp.orgx/dashboard?folderId=https%3A%2F%2Frepo.arp.orgx%2Ffolders%2F...
+     */
+    static String buildCedarFolderDashboardUrl(String cedarDomain, String folderId) {
+        if (cedarDomain == null || cedarDomain.isBlank() || folderId == null || folderId.isBlank()) {
+            return null;
+        }
+        try {
+            String decodedFolderId = CedarServiceBean.decodeURLParameter(folderId);
+            String encodedFolderId = URLEncoder.encode(decodedFolderId, StandardCharsets.UTF_8);
+            return "https://cedar." + cedarDomain + "/dashboard?folderId=" + encodedFolderId;
+        } catch (Exception e) {
+            return "https://cedar." + cedarDomain + "/dashboard?folderId=" + folderId;
+        }
+    }
+
+    private String parseCedarDomainFromDirectoryUrl(String directoryUrl) {
+        try {
+            URI uri = new URI(directoryUrl);
+            String host = uri.getHost();
+            if (host != null && host.startsWith("repo.")) {
+                return host.substring("repo.".length());
+            }
+        } catch (Exception e) {
+            logger.log(Level.FINE, "Could not parse CEDAR domain from directory URL: " + directoryUrl, e);
+        }
+        return null;
     }
 }
